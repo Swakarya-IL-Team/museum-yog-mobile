@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "museum-yog-mobile"
+rootProject.name = "MuseumYog"
 include(":app")
  
