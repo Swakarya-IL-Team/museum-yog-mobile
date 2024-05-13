@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.swakarya.museumyog"
+    namespace = "com.example.museumyog"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.swakarya.museumyog"
-        minSdk = 24
+        applicationId = "com.example.museumyog"
+        minSdk = 29
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -66,4 +66,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation (libs.androidx.graphics.shapes)
+    implementation (libs.androidx.navigation.compose)
+
 }
