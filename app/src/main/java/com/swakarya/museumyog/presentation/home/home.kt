@@ -1,7 +1,9 @@
 package com.swakarya.museumyog.presentation.home
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,6 +30,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -38,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -124,12 +129,19 @@ fun HomePage(
                 Column(
                     modifier = Modifier.padding(top = 66.dp)
                 ) {
-                    TextField(
+                    OutlinedTextField(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp)
-                            .clip(shape = RoundedCornerShape(8.dp))
+                            .border(
+                                BorderStroke(
+                                    0.1.dp,
+                                    SolidColor(MaterialTheme.colorScheme.onSurface)
+                                ),
+                                RoundedCornerShape(8.dp)
+                            )
                             .background(Color.White),
+
                         value = text,
                         onValueChange = {
                             onTextChange(it)
@@ -156,7 +168,7 @@ fun HomePage(
                                     )
                                 } else {
                                     Icon(
-                                        imageVector = Icons.Default.Search,
+                                        painter = painterResource(id = R.drawable.icon_search),
                                         contentDescription = null,
                                         tint = green10,
                                         modifier = modifier.size(22.dp)
@@ -222,7 +234,7 @@ fun HomePage(
                     }
 
                     val ItemLazyCount = imageMuseum.size
-                    for (index in 0 until ItemLazyCount) {
+                    for (index in 0 until 3) {
                         ColumnMuseum(
                             itemIndex = index,
                             painter = imageMuseum,
