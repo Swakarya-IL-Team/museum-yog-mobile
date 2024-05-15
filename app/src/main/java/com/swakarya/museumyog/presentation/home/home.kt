@@ -1,7 +1,9 @@
 package com.swakarya.museumyog.presentation.home
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +12,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -26,8 +29,11 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -38,6 +44,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -61,6 +68,7 @@ import com.swakarya.museumyog.ui.theme.worksansmedium
 import com.swakarya.museumyog.ui.theme.worksanssemibold
 import com.swakarya.museumyog.ui.theme.yellowku
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomePage(
     modifier: Modifier = Modifier,
@@ -124,11 +132,19 @@ fun HomePage(
                 Column(
                     modifier = Modifier.padding(top = 66.dp)
                 ) {
-                    TextField(
+                    OutlinedTextField(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .heightIn(max = 48.dp)
                             .padding(horizontal = 16.dp)
-                            .clip(shape = RoundedCornerShape(8.dp))
+                            .clip(RoundedCornerShape(12.dp))
+                            .border(
+                                BorderStroke(
+                                    1.dp,
+                                    SolidColor(greenku)
+                                ),
+                                RoundedCornerShape(12.dp)
+                            )
                             .background(Color.White),
                         value = text,
                         onValueChange = {
@@ -140,6 +156,12 @@ fun HomePage(
                                 fontSize = 12.sp,
                                 color = greenku)
                         },
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            containerColor = MaterialTheme.colorScheme.surface,
+                            focusedBorderColor = greenku,
+                            unfocusedBorderColor = Color.Transparent,
+                            cursorColor = MaterialTheme.colorScheme.onBackground
+                        ),
                         trailingIcon = {
                             IconButton(onClick = {
                                 if (text.isNotBlank()) {
@@ -151,13 +173,13 @@ fun HomePage(
                                 if (text.isNotBlank()) {
                                     Icon(
                                         imageVector = Icons.Default.Clear,
-                                        contentDescription = null,
+                                        contentDescription = "Icon Clear",
                                         modifier = modifier.size(22.dp)
                                     )
                                 } else {
                                     Icon(
-                                        imageVector = Icons.Default.Search,
-                                        contentDescription = null,
+                                        painter = painterResource(id = R.drawable.icon_search),
+                                        contentDescription = "Icon Search",
                                         tint = green10,
                                         modifier = modifier.size(22.dp)
                                     )

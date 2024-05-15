@@ -19,9 +19,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             MuseumyogmobileTheme {
                 HomePage(
-                    text = "Cari",
+                    text = "",
                     onTextChange = {},
-                    placeHolder = "Cari di Sini",
+                    placeHolder = "Mau ke Museum apa ?",
                     onCloseClicked = {},
                     onMicClicked = {}
                 )
