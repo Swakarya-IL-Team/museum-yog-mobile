@@ -8,10 +8,16 @@
       <entry key="app">
         <State />
       </entry>
-      <entry key="onboarding1">
+      <entry key="login">
         <State />
       </entry>
-      <entry key="splash2">
+      <entry key="singUp">
+        <State />
+      </entry>
+      <entry key="singUp (1)">
+        <State />
+      </entry>
+      <entry key="singUp2">
         <State />
       </entry>
     </value>

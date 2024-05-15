@@ -10,6 +10,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+
 import com.example.museumyog.navigation.Navigation
 import com.example.museumyog.ui.theme.MuseumYogTheme
 
@@ -18,6 +23,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MuseumYogTheme {
+                Navigation()
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -25,6 +31,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Navigation()
                 }
+
             }
         }
     }
