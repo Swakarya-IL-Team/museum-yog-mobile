@@ -1,13 +1,5 @@
 <resources>
-
-    <string name="app_name">museum-yog-mobile</string>
-    <string name="txt_beranda">Beranda</string>
-    <string name="txt_kunjungan">Kunjungan</string>
-    <string name="txt_notifikasi">Notifikasi</string>
-    <string name="txt_akun">Akun</string>
-  
-    
+    <string name="app_name">MuseumYog</string>
     <string name="login">Login</string>
     <string name="singup">Singup</string>
-
 </resources>
