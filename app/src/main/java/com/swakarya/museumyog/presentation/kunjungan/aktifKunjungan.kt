@@ -65,7 +65,7 @@ fun AktifKunjungan(navController: NavController) {
         topBar = {
             TopAppBar(title = {
                 Box(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -80,13 +80,38 @@ fun AktifKunjungan(navController: NavController) {
         },
         bottomBar = { BottomBar() }
     ) { paddingValues ->
-        Column(
+        Box(
             modifier = Modifier
-                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            Box(
-                contentAlignment = Alignment.Center
+            Column(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .padding(top = 90.dp)
+            ) {
+                val ItemLazyCount = imageOrderMuseum.size
+                activeCount = ItemLazyCount
+                for (index in 0 until ItemLazyCount) {
+                    ColumnMuseumAktif(
+                        itemIndex = index,
+                        painter = imageOrderMuseum,
+                        tittle = nameOrderMuseum,
+                        dateOrderMuseum = dateOrderMuseum
+                    )
+                }
+
+            }
+
+
+            Column(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .background(Color.White)
+                    .padding(top = 16.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
                 Row(
                     modifier = Modifier
@@ -94,7 +119,6 @@ fun AktifKunjungan(navController: NavController) {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
@@ -129,37 +153,27 @@ fun AktifKunjungan(navController: NavController) {
                             contentDescription = "",
 
                             )
-                    }
-                    TextButton(onClick = { navController.navigate("riwayat") }) {
-                        Text(
-                            text = "Riwayat",
-                            fontFamily = worksans,
-                            fontSize = 16.sp,
-                            color = Color.Black
 
-                        )
+                        }
+                    TextButton(onClick = { navController.navigate("riwayat") }) {
+                            Text(
+                                text = "Riwayat",
+                                fontFamily = worksans,
+                                fontSize = 16.sp,
+                                color = Color.Black
+
+                            )
                     }
 
                 }
-            }
-            Divider(
-                modifier = Modifier.padding(bottom = 29.dp),
-                color = Color.Gray, thickness = 1.dp
-            )
 
-            val ItemLazyCount = imageOrderMuseum.size
-            activeCount = ItemLazyCount
-            for (index in 0 until ItemLazyCount) {
-                ColumnMuseumAktif(
-                    itemIndex = index,
-                    painter = imageOrderMuseum,
-                    tittle = nameOrderMuseum,
-                    dateOrderMuseum = dateOrderMuseum
+                Divider(
+                    color = Color.Gray, thickness = 1.dp
                 )
             }
-
         }
     }
+
 }
 
 @Composable

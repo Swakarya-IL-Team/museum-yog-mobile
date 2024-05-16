@@ -77,7 +77,7 @@ fun RiwayatKunjungan(navController: NavController) {
         topBar = {
             TopAppBar(title = {
                 Box(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -91,14 +91,60 @@ fun RiwayatKunjungan(navController: NavController) {
         },
         bottomBar = { BottomBar() }
     ) { paddingValues ->
-        Column(
+        Box(
             modifier = Modifier
-                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
                 .padding(paddingValues)
         ) {
+            Column(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .padding(top = 90.dp)
+            ) {
 
-            Box(
-                contentAlignment = Alignment.Center
+                val ItemMuseumAktif = imageOrderMuseum.size
+                activeCount = ItemMuseumAktif
+                for (index in 0 until 0) {
+                    ColumnMuseumAktif(
+                        itemIndex = index,
+                        painter = imageOrderMuseum,
+                        tittle = nameOrderMuseum,
+                        dateOrderMuseum = dateOrderMuseum
+                    )
+                }
+                val ItemMuseumTestimony = imageMuseumTestimony.size
+                for (index in 0 until ItemMuseumTestimony) {
+                    ColumnTestimonyMuseum(
+                        itemIndex = index,
+                        painter = imageMuseumTestimony,
+                        tittle = nameMuseumTestimony,
+                        museumBookingHistory = museumBookingDateTestimony
+                    )
+                }
+
+                val ItemMuseumHistory = imageMuseumOrderHistory.size
+                for (index in 0 until ItemMuseumHistory) {
+                    ColumnRiwayatMuseum(
+                        itemIndex = index,
+                        painter = imageMuseumOrderHistory,
+                        tittle = nameMuseumOrderHistory,
+                        museumBookingHistory = museumBookingDateHistory
+                    )
+                }
+
+
+            }
+
+
+
+            Column(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .background(Color.White)
+                    .padding(top = 16.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
                 Row(
                     modifier = Modifier
@@ -148,44 +194,19 @@ fun RiwayatKunjungan(navController: NavController) {
                     }
 
                 }
-            }
-            Divider(
-                modifier = Modifier.padding(bottom = 29.dp),
-                color = Color.Gray, thickness = 1.dp
-            )
-
-            val ItemMuseumAktif = imageOrderMuseum.size
-            activeCount = ItemMuseumAktif
-            for (index in 0 until 0) {
-                ColumnMuseumAktif(
-                    itemIndex = index,
-                    painter = imageOrderMuseum,
-                    tittle = nameOrderMuseum,
-                    dateOrderMuseum = dateOrderMuseum
-                )
-            }
-            val ItemMuseumTestimony = imageMuseumTestimony.size
-            for (index in 0 until ItemMuseumTestimony) {
-                ColumnTestimonyMuseum(
-                    itemIndex = index,
-                    painter = imageMuseumTestimony,
-                    tittle = nameMuseumTestimony,
-                    museumBookingHistory = museumBookingDateTestimony
-                )
-            }
-
-            val ItemMuseumHistory = imageMuseumOrderHistory.size
-            for (index in 0 until ItemMuseumHistory) {
-                ColumnRiwayatMuseum(
-                    itemIndex = index,
-                    painter = imageMuseumOrderHistory,
-                    tittle = nameMuseumOrderHistory,
-                    museumBookingHistory = museumBookingDateHistory
+                Divider(
+                    modifier = Modifier.padding(bottom = 29.dp),
+                    color = Color.Gray, thickness = 1.dp
                 )
             }
 
 
         }
+
+
+
+
+
     }
 }
 
