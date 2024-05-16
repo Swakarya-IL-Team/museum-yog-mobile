@@ -13,15 +13,9 @@
         android:theme="@style/Theme.MuseumYog"
         tools:targetApi="31">
         <activity
-            android:name=".singUp2"
-            android:exported="false" />
-        <activity
-            android:name=".loginPage2"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:label="MuseumYog"
+            android:label="@string/app_name"
             android:theme="@style/Theme.MuseumYog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

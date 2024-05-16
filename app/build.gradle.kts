@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.museumyog"
+    namespace = "com.swakarya.museumyog"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.museumyog"
+        applicationId = "com.swakarya.museumyog"
         minSdk = 29
         targetSdk = 34
         versionCode = 1
@@ -63,7 +63,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.navigation.compose)
+    implementation (libs.androidx.navigation.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

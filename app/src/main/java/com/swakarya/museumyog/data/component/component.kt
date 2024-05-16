@@ -1,4 +1,4 @@
-package com.example.museumyog.app.component
+package com.swakarya.museumyog.data.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
@@ -16,7 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.museumyog.ui.theme.greyku
+import com.swakarya.museumyog.ui.theme.greyku
 
 @Composable
 fun FieldPassword() {
