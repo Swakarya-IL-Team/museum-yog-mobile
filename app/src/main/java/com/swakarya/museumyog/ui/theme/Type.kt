@@ -2,9 +2,11 @@ package com.swakarya.museumyog.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.swakarya.museumyog.R
 
 // Set of Material typography styles to start with
 val Typography = Typography(
@@ -32,3 +34,9 @@ val Typography = Typography(
     )
     */
 )
+
+val worksans = FontFamily(Font(R.font.work_sans_regular))
+val worksansbold = FontFamily(Font(R.font.work_sans_bold))
+val worksanslight = FontFamily(Font(R.font.work_sans_extralight))
+val worksanssemibold = FontFamily(Font(R.font.work_sans_semibold))
+val worksansmedium = FontFamily(Font(R.font.work_sans_medium))
