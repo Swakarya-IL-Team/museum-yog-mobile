@@ -1,4 +1,4 @@
-package com.example.museumyog.presentation.onboarding
+package com.swakarya.museumyog.presentation.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -18,16 +17,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import com.example.museumyog.R
-import com.example.museumyog.ui.theme.jogja
-import com.example.museumyog.ui.theme.worksans
-import com.example.museumyog.ui.theme.worksansbold
+import com.swakarya.museumyog.ui.theme.jogja
+import com.swakarya.museumyog.ui.theme.worksans
+import com.swakarya.museumyog.ui.theme.worksansbold
+import com.swakarya.museumyog.R
 
 @Composable
 fun onboarding1(navController: NavController) {

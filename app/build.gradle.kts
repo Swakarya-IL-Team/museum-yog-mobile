@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.museumyog"
+    namespace = "com.swakarya.museumyog"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.museumyog"
+        applicationId = "com.swakarya.museumyog"
         minSdk = 29
         targetSdk = 34
         versionCode = 1
