@@ -21,7 +21,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="MuseumYog"
+            android:label="@string/app_name"
             android:theme="@style/Theme.MuseumYog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

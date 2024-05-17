@@ -1,4 +1,4 @@
-package com.swakarya.museumyog.presentation.singup
+package com.example.museumyog.presentation.singup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -24,14 +24,14 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.swakarya.museumyog.app.component.FieldPassword
-import com.swakarya.museumyog.app.component.FieldUsername
-import com.swakarya.museumyog.app.component.Fullname
+import com.example.museumyog.app.component.FieldPassword
+import com.example.museumyog.app.component.FieldUsername
+import com.example.museumyog.app.component.Fullname
+import com.swakarya.museumyog.R
 import com.swakarya.museumyog.ui.theme.coklatku
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
-import com.swakarya.museumyog.R
 
 @Composable
 fun singUp(navController: NavHostController){

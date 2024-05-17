@@ -1,4 +1,4 @@
-package com.swakarya.museumyog.presentation.onboarding
+package com.example.museumyog.presentation.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -20,11 +20,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.swakarya.museumyog.R
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
-import com.swakarya.museumyog.R
 
 @Composable
 fun onboarding2(navController: NavHostController) {

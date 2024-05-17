@@ -47,6 +47,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.BottomBar
 import com.swakarya.museumyog.data.model.imageId
@@ -73,7 +75,8 @@ fun HomePage(
     onTextChange: (String) -> Unit,
     placeHolder: String,
     onCloseClicked: () -> Unit,
-    onMicClicked: () -> Unit
+    onMicClicked: () -> Unit,
+    navController: NavHostController
 ) {
     Scaffold(bottomBar = { BottomBar() }) { paddingValues ->
         Column(
@@ -406,11 +409,5 @@ fun ColumnMuseum(
 @Preview(showBackground = true)
 @Composable
 fun HomePagePreview() {
-    HomePage(
-        text = "",
-        onTextChange = {},
-        placeHolder = "Mau ke Museum apa ?",
-        onCloseClicked = {},
-        onMicClicked = {}
-    )
+
 }

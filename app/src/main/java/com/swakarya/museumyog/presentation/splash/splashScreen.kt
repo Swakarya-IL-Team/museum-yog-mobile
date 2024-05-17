@@ -1,4 +1,4 @@
-package com.swakarya.museumyog.presentation.splash
+package com.example.museumyog.presentation.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,9 +17,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.swakarya.museumyog.R
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
-import com.swakarya.museumyog.R
 import kotlinx.coroutines.delay
 
 @Composable
