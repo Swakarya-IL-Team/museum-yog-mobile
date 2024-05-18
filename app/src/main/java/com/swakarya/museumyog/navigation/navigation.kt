@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.swakarya.museumyog.presentation.home.HomePage
 import com.swakarya.museumyog.presentation.login.login
 import com.swakarya.museumyog.presentation.singup.singUp
