@@ -1,4 +1,4 @@
-package com.example.museumyog.presentation
+package com.swakarya.museumyog.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -32,13 +32,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.museumyog.R
-import com.example.museumyog.component.deskripsi
-import com.example.museumyog.component.judulkoleksi
-import com.example.museumyog.component.koleksi
-import com.example.museumyog.ui.theme.greenku
-import com.example.museumyog.ui.theme.worksans
-import com.example.museumyog.ui.theme.worksansbold
+import com.swakarya.museumyog.R
+import com.swakarya.museumyog.component.deskripsi
+import com.swakarya.museumyog.component.judulkoleksi
+import com.swakarya.museumyog.component.koleksi
+import com.swakarya.museumyog.ui.theme.greenku
+import com.swakarya.museumyog.ui.theme.worksans
+import com.swakarya.museumyog.ui.theme.worksansbold
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)

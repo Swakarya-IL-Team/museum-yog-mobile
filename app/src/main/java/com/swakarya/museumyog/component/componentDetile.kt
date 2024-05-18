@@ -1,6 +1,6 @@
-package com.example.museumyog.component
+package com.swakarya.museumyog.component
 
-import com.example.museumyog.R
+import com.swakarya.museumyog.R
 
 val gambar = arrayOf(
     R.drawable.gambarmuseum2

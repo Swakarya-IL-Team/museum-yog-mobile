@@ -1,12 +1,12 @@
-package com.example.museumyog.navigation
+package com.swakarya.museumyog.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.museumyog.presentation.informationkoleksi
-import com.example.museumyog.presentation.informationpage
-import com.example.museumyog.presentation.review
+import com.swakarya.museumyog.presentation.informationkoleksi
+import com.swakarya.museumyog.presentation.informationpage
+import com.swakarya.museumyog.presentation.review
 
 @Composable
 fun Navigation(){
