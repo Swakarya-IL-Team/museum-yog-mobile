@@ -15,14 +15,22 @@ import com.swakarya.museumyog.presentation.kunjungan.AktifKunjungan
 import com.swakarya.museumyog.navigation.Navigation
 import com.swakarya.museumyog.presentation.home.HomePage
 import com.swakarya.museumyog.ui.theme.MuseumyogmobileTheme
+import com.swakarya.museumyog.navigation.Navigation
+import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MuseumyogmobileTheme {
-                Navigation()
+                MuseumYogTheme {
+                    // A surface container using the 'background' color from the theme
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        Navigation()
+                    }
+                }
             }
         }
     }
-}

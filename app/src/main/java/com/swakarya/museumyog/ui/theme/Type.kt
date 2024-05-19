@@ -34,7 +34,6 @@ val Typography = Typography(
     )
     */
 )
-
 val jogja = FontFamily(Font(R.font.jogjakartype))
 
 val worksans = FontFamily(Font(R.font.work_sans_regular))
