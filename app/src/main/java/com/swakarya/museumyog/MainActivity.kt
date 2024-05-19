@@ -16,7 +16,7 @@ import com.swakarya.museumyog.navigation.Navigation
 import com.swakarya.museumyog.presentation.home.HomePage
 import com.swakarya.museumyog.ui.theme.MuseumyogmobileTheme
 import com.swakarya.museumyog.navigation.Navigation
-import com.swakarya.museumyog.ui.theme.MuseumyogmobileTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
