@@ -1,3 +1,4 @@
+
 package com.swakarya.museumyog.ui.theme
 
 import android.app.Activity
@@ -38,7 +39,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun MuseumYogTheme(
+fun MuseumyogmobileTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

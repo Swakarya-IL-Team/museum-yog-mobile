@@ -1,4 +1,4 @@
-package com.swakarya.museumyog.presentation
+package com.swakarya.museumyog.presentation.informasikoleksi
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image

@@ -1,6 +1,7 @@
-package com.swakarya.museumyog.presentation
+package com.swakarya.museumyog.presentation.informasikoleksi
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,9 +15,12 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -33,9 +37,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.swakarya.museumyog.R
-import com.swakarya.museumyog.component.deskripsi
-import com.swakarya.museumyog.component.judulkoleksi
-import com.swakarya.museumyog.component.koleksi
+import com.swakarya.museumyog.component.komen
+import com.swakarya.museumyog.component.nama
+import com.swakarya.museumyog.component.rating
+import com.swakarya.museumyog.component.tanggal
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
@@ -44,9 +49,9 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 @OptIn(ExperimentalMaterial3Api::class)
 
 @Composable
-fun informationkoleksi(navController: NavHostController) {
+fun review(navController: NavHostController) {
     Scaffold(
-    ) {
+    ){
         Box() {
             Image(painter = painterResource(id = R.drawable.gambarmuseum),
                 contentDescription = "",
@@ -74,7 +79,7 @@ fun informationkoleksi(navController: NavHostController) {
                 }
                 Row(modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround) {
-                    TextButton(onClick = { navController.navigate("information")  }) {
+                    TextButton(onClick = { navController.navigate("information") }) {
                         Text(text = "Deskripsi",
                             fontFamily = worksans,
                             fontSize = 15.sp,
@@ -84,13 +89,14 @@ fun informationkoleksi(navController: NavHostController) {
                         Text(text = "Koleksi",
                             fontFamily = worksans,
                             fontSize = 15.sp,
-                            color = greenku)
+                            color = Color.Black
+                        )
                     }
                     TextButton(onClick = { navController.navigate("review") }) {
                         Text(text = "Penilaian",
                             fontFamily = worksans,
                             fontSize = 15.sp,
-                            color = Color.Black)
+                            color = greenku)
                     }
                 }
                 Divider(color = Color.Gray, thickness = 1.dp)
@@ -100,20 +106,21 @@ fun informationkoleksi(navController: NavHostController) {
                 contentDescription ="",
                 modifier = Modifier
                     .size(104.dp)
-                    .offset(x = 155.dp, y = 295.dp))
+                    .offset(x = 290.dp, y = 295.dp))
 
         }
         Column(modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(modifier = Modifier.height(350.dp))
             LazyColumn() {
-                val ItemCount = koleksi.size
+                val ItemCount = nama.size
                 items(ItemCount) { item ->
-                    ColumnItem(
+                    ColumnItem2(
                         itemIndex = item,
-                        painter = koleksi,
-                        tittle = judulkoleksi,
-                        describe = deskripsi
+                        name = nama,
+                        date = tanggal,
+                        rate = rating,
+                        coment = komen
                     )
                 }
             }
@@ -122,22 +129,46 @@ fun informationkoleksi(navController: NavHostController) {
 }
 
 @Composable
-fun ColumnItem(itemIndex: Int,
-               painter: Array<Int>,
-               tittle: Array<String>,
-               describe: Array<String>) {
-        Column(modifier = Modifier.fillMaxWidth()
-            .padding(horizontal = 20.dp, vertical = 0.dp)) {
-            Image(painter = painterResource(id = painter[itemIndex]),
-                contentDescription =tittle[itemIndex],
-                modifier = Modifier.fillMaxWidth()
-                    .size(180.dp))
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(text = tittle[itemIndex],
-                fontFamily = worksansbold,
-                fontSize = 15.sp)
-            Text(text = describe[itemIndex],
-                fontFamily = worksans)
-            Spacer(modifier = Modifier.height(20.dp))
+fun ColumnItem2(itemIndex: Int,
+                name: Array<String>,
+                date: Array<String>,
+                rate: Array<String>,
+                coment: Array<String>) {
+    Card(modifier = Modifier
+        .padding(10.dp)
+        .wrapContentSize()
+        ,colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+        border = BorderStroke(1.dp, greenku),
+        elevation = CardDefaults.cardElevation(10.dp)){
+        Box(modifier = Modifier.fillMaxSize()
+            .padding(10.dp),
+            Alignment.TopEnd){
+            Row(horizontalArrangement = Arrangement.End) {
+                Icon(imageVector = Icons.Default.Star,
+                    contentDescription ="",
+                    tint = Color.Yellow)
+                Text(text = rate[itemIndex],
+                    fontFamily = worksans)
+            }
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(text = name[itemIndex],
+                        fontFamily = worksans)
+
+                }
+                Text(text = date[itemIndex],
+                    fontFamily = worksans)
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(text = coment[itemIndex],
+                    fontFamily = worksans)
+            }
         }
+
+
+    }
+
 }
