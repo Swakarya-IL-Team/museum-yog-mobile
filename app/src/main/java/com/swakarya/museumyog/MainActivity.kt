@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.swakarya.museumyog.navigation.Navigation
+import com.swakarya.museumyog.presentation.kunjungan.AktifKunjungan
+import com.swakarya.museumyog.navigation.Navigation
 import com.swakarya.museumyog.presentation.home.HomePage
 import com.swakarya.museumyog.ui.theme.MuseumyogmobileTheme
 

@@ -32,18 +32,18 @@ fun Navigation() {
         composable(route = "singup") {
             singUp(navController)
         }
-            composable(route = "splashScreen") {
-                splashScreen(navController)
-            }
-            composable(route = "onboarding1") {
-                onboarding1(navController)
-            }
-            composable(route = "onboarding2") {
-                onboarding2(navController)
-            }
-            composable(route = "onboarding3") {
-                onboarding3(navController)
-            }
+        composable(route = "splashScreen") {
+            splashScreen(navController)
+        }
+        composable(route = "onboarding1") {
+            onboarding1(navController)
+        }
+        composable(route = "onboarding2") {
+            onboarding2(navController)
+        }
+        composable(route = "onboarding3") {
+            onboarding3(navController)
+        }
         composable(route="home"){
             HomePage(
                 text = "",
