@@ -40,14 +40,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.BottomBar
 import com.swakarya.museumyog.data.model.dateOrderMuseum
 import com.swakarya.museumyog.data.model.imageOrderMuseum
 import com.swakarya.museumyog.data.model.nameOrderMuseum
+import com.swakarya.museumyog.presentation.Payment.listPayment
+import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.orenku
 import com.swakarya.museumyog.ui.theme.worksans
@@ -79,7 +83,9 @@ fun AktifKunjungan(navController: NavController) {
             })
         },
         bottomBar = { BottomBar() }
-    ) { paddingValues ->
+    )
+
+    { paddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -251,5 +257,12 @@ fun ColumnMuseumAktif(
                 }
             }
         }
+    }
+}
+@Preview
+@Composable
+private fun kunjungan() {
+    MuseumYogTheme {
+        AktifKunjungan(navController = rememberNavController())
     }
 }

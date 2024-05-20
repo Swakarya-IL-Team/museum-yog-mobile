@@ -20,7 +20,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
+import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
 import kotlinx.coroutines.delay
@@ -56,4 +58,11 @@ fun splashScreen(navController: NavController){
 
 
 
+}
+@Preview
+@Composable
+private fun splash() {
+    MuseumYogTheme {
+        splashScreen(navController = rememberNavController())
+    }
 }

@@ -33,14 +33,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.component.komen
 import com.swakarya.museumyog.component.nama
 import com.swakarya.museumyog.component.rating
 import com.swakarya.museumyog.component.tanggal
+import com.swakarya.museumyog.presentation.Payment.listPayment
+import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
@@ -171,4 +175,11 @@ fun ColumnItem2(itemIndex: Int,
 
     }
 
+}
+@Preview
+@Composable
+private fun ulas() {
+    MuseumYogTheme {
+        review(navController = rememberNavController())
+    }
 }

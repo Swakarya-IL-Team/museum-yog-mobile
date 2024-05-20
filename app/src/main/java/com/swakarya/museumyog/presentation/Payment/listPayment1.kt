@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -42,10 +43,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
+import com.swakarya.museumyog.app.component.BottomBar
 import com.swakarya.museumyog.component.SharedVariables.anak
 import com.swakarya.museumyog.component.SharedVariables.dewasa
 import com.swakarya.museumyog.component.SharedVariables.mhs
@@ -56,6 +60,7 @@ import com.swakarya.museumyog.component.SharedVariables.wekndaysdewasa
 import com.swakarya.museumyog.component.SharedVariables.wekndaysmhs
 import com.swakarya.museumyog.component.SharedVariables.weknddewasa
 import com.swakarya.museumyog.component.SharedVariables.wekndmhs
+import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
@@ -194,14 +199,13 @@ fun listPayment(navController: NavHostController) {
                     modifier = Modifier
                         .size(30.dp)
                         .clickable {
-                            if ((anak != 0) and  (weekend)) {
+                            if ((anak != 0) and (weekend)) {
                                 anak--
                                 total -= wekndanak
-                            } else if((anak != 0) and (!weekend)){
+                            } else if ((anak != 0) and (!weekend)) {
                                 anak--
                                 total -= wekndaysanak
-                            }
-                            else {
+                            } else {
                                 anak = 0
                             }
                         })
@@ -213,9 +217,10 @@ fun listPayment(navController: NavHostController) {
                         .size(height = 40.dp, width = 60.dp),
                     shape = RoundedCornerShape(10.dp)) {
                     Row(horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxWidth()) {
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxSize()) {
                         Text(text = "$anak",
-                            fontSize = 30.sp)
+                            fontSize = 25.sp)
                     }
                 }
                 Image(painter = painterResource(id = R.drawable.plusbutton),
@@ -272,9 +277,10 @@ fun listPayment(navController: NavHostController) {
                         .size(height = 40.dp, width = 60.dp),
                     shape = RoundedCornerShape(10.dp)) {
                     Row(horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxWidth()) {
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxSize()) {
                         Text(text ="$mhs",
-                            fontSize = 30.sp)
+                            fontSize = 25.sp)
                     }
                 }
                 Image(painter = painterResource(id = R.drawable.plusbutton),
@@ -331,9 +337,10 @@ fun listPayment(navController: NavHostController) {
                         .size(height = 40.dp, width = 60.dp),
                     shape = RoundedCornerShape(10.dp)) {
                     Row(horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxWidth()) {
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxSize()) {
                         Text(text ="$dewasa",
-                            fontSize = 30.sp)
+                            fontSize = 25.sp)
                     }
                 }
                 Image(painter = painterResource(id = R.drawable.plusbutton),
@@ -362,3 +369,10 @@ fun listPayment(navController: NavHostController) {
     }
 }
 
+@Preview
+@Composable
+private fun list() {
+    MuseumYogTheme {
+        listPayment(navController = rememberNavController())
+    }
+}

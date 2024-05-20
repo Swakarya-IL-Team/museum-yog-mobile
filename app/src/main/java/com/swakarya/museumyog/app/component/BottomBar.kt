@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.data.model.BottomBarItem
-import com.swakarya.museumyog.ui.theme.MuseumyogmobileTheme
+import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 
 @Composable
 fun BottomBar(
@@ -81,7 +81,7 @@ fun BottomBar(
 @Preview
 @Composable
 private fun ButtonBarPreview() {
-    MuseumyogmobileTheme {
+    MuseumYogTheme {
         BottomBar()
     }
 }

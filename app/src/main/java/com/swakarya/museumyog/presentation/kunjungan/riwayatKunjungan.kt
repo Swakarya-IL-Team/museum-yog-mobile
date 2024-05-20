@@ -45,9 +45,11 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.BottomBar
 import com.swakarya.museumyog.data.model.dateOrderMuseum
@@ -59,6 +61,8 @@ import com.swakarya.museumyog.data.model.museumBookingDateTestimony
 import com.swakarya.museumyog.data.model.nameMuseumOrderHistory
 import com.swakarya.museumyog.data.model.nameMuseumTestimony
 import com.swakarya.museumyog.data.model.nameOrderMuseum
+import com.swakarya.museumyog.presentation.Payment.listPayment
+import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku1
 import com.swakarya.museumyog.ui.theme.orenku
@@ -400,5 +404,12 @@ fun ColumnTestimonyMuseum(
 
             }
         }
+    }
+}
+@Preview
+@Composable
+private fun riwayat() {
+    MuseumYogTheme {
+        RiwayatKunjungan(navController = rememberNavController())
     }
 }

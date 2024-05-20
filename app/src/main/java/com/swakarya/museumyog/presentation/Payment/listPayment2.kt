@@ -35,9 +35,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.component.CircularCheckbox
 import com.swakarya.museumyog.component.SharedVariables
@@ -46,6 +48,7 @@ import com.swakarya.museumyog.component.SharedVariables.checked1
 import com.swakarya.museumyog.component.SharedVariables.family
 import com.swakarya.museumyog.component.SharedVariables.student
 import com.swakarya.museumyog.component.SharedVariables.total
+import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
@@ -217,5 +220,13 @@ fun listpayment2(navController: NavHostController) {
                 fontFamily = worksansbold,
                 modifier = Modifier.padding(10.dp))
         }
+    }
+}
+
+@Preview
+@Composable
+private fun list() {
+    MuseumYogTheme {
+        listpayment2(navController = rememberNavController())
     }
 }
