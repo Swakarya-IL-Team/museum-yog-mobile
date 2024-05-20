@@ -59,7 +59,7 @@ import com.swakarya.museumyog.data.model.placeMuseum
 import com.swakarya.museumyog.data.model.rangeMuseum
 import com.swakarya.museumyog.data.model.rateMuseum
 import com.swakarya.museumyog.data.model.visitorMuseum
-import com.swakarya.museumyog.ui.theme.MuseumyogmobileTheme
+import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.green10
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.worksans
@@ -330,7 +330,7 @@ fun ColumnMuseum(
 @Preview
 @Composable
 fun ListMusuemPreview() {
-    MuseumyogmobileTheme {
+    MuseumYogTheme {
         ListMuseum(
             navController = rememberNavController(),
             onSearchTextChange = {},
