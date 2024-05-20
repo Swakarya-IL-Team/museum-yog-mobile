@@ -52,7 +52,12 @@ fun Navigation() {
                 onCloseClicked = {},
                 onMicClicked = {},
                 navController = navController
+        composable(route="listMuseum"){
+            ListMuseum(
+                navController = navController,
+                onSearchTextChange = {},
+                placeHolder = "Mau ke Museum apa ?",
             )
-        }
+        })
     }
-}
+}}

@@ -32,6 +32,14 @@ import com.swakarya.museumyog.ui.theme.coklatku
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
+import com.swakarya.museumyog.R
+import com.swakarya.museumyog.app.component.FieldPassword
+import com.swakarya.museumyog.app.component.FieldUsername
+import com.swakarya.museumyog.app.component.Fullname
+import com.swakarya.museumyog.ui.theme.coklatku
+import com.swakarya.museumyog.ui.theme.greenku
+import com.swakarya.museumyog.ui.theme.worksans
+import com.swakarya.museumyog.ui.theme.worksansbold
 
 @Composable
 fun singUp(navController: NavHostController){

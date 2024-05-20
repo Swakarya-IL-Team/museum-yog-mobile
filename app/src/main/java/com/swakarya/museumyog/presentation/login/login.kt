@@ -1,4 +1,4 @@
-package com.swakarya.museumyog.presentation.login
+package com.example.museumyog.presentation.login
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -88,7 +88,7 @@ fun login(navController: NavHostController) {
                 Text(text = "Masuk")
             }
             Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = { navController.navigate("home")  },
+            Button(onClick = { /*TODO*/ },
                 border = BorderStroke(2.dp, color = greenku),
                 colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black),
                 shape = RoundedCornerShape(10.dp),
