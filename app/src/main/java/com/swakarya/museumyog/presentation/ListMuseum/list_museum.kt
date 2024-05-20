@@ -15,22 +15,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,8 +34,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,10 +46,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.data.model.imageMuseum
 import com.swakarya.museumyog.data.model.nameMuseum
@@ -72,13 +71,14 @@ import com.swakarya.museumyog.ui.theme.yellowku
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListMuseum(
+    navController: NavHostController,
+    onSearchTextChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    text: String,
-    onTextChange: (String) -> Unit,
     placeHolder: String,
-    onCloseClicked: () -> Unit,
-    onMicClicked: () -> Unit
 ) {
+    var searchText by remember {
+        mutableStateOf("")
+    }
     Column {
         TopAppBar(
             title = {
@@ -88,11 +88,19 @@ fun ListMuseum(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Start
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.KeyboardArrowLeft,
-                        contentDescription = "Icon Back",
-                        tint = greenku
-                    )
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Box(
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.KeyboardArrowLeft,
+                                contentDescription = "Icon Back",
+                                tint = greenku
+                            )
+                        }
+
+                    }
+
                     Spacer(modifier = Modifier.width(5.dp))
 
                     Box(
@@ -112,10 +120,8 @@ fun ListMuseum(
                             modifier = modifier
                                 .fillMaxWidth()
                                 .heightIn(max = 48.dp),
-                            value = text,
-                            onValueChange = {
-                                onTextChange(it)
-                            },
+                            value = searchText,
+                            onValueChange = { searchText = it },
                             placeholder = {
                                 Text(
                                     text = placeHolder,
@@ -124,35 +130,34 @@ fun ListMuseum(
                                     color = greenku,
                                 )
                             },
+                            textStyle = TextStyle(
+                                fontFamily = worksans,
+                                fontSize = 12.sp
+                            ),
                             colors = TextFieldDefaults.outlinedTextFieldColors(
                                 containerColor = MaterialTheme.colorScheme.surface,
-                                focusedBorderColor = greenku,
+                                focusedBorderColor = Color.Transparent,
                                 unfocusedBorderColor = Color.Transparent,
                                 cursorColor = MaterialTheme.colorScheme.onBackground
                             ),
                             trailingIcon = {
-                                IconButton(onClick = {
-                                    if (text.isNotBlank()) {
-                                        onCloseClicked()
-                                    } else {
-                                        onMicClicked
-                                    }
-                                }) {
-                                    if (text.isNotBlank()) {
+                                if (searchText.isNotBlank()) {
+                                    IconButton(onClick = {
+                                        searchText = ""
+                                    }) {
                                         Icon(
                                             imageVector = Icons.Default.Clear,
-                                            contentDescription = "Icon Close",
-                                            tint = greenku,
-                                            modifier = modifier.size(22.dp)
-                                        )
-                                    } else {
-                                        Icon(
-                                            painter = painterResource(id = R.drawable.icon_search),
-                                            contentDescription = null,
+                                            contentDescription = "Icon Clear",
                                             tint = greenku,
                                             modifier = modifier.size(22.dp)
                                         )
                                     }
+                                }
+                                else {
+                                    Icon(painter = painterResource(id = R.drawable.icon_search),
+                                        contentDescription = "Icon Search",
+                                        tint = greenku,
+                                        modifier = modifier.size(22.dp))
                                 }
                             }
                         )
@@ -322,17 +327,15 @@ fun ColumnMuseum(
 
 }
 
-
 @Preview
 @Composable
-fun ListMuseumPreview() {
+fun ListMusuemPreview() {
     MuseumyogmobileTheme {
         ListMuseum(
-            text = "",
-            onTextChange = {},
+            navController = rememberNavController(),
+            onSearchTextChange = {},
             placeHolder = "Mau ke Museum apa ?",
-            onCloseClicked = {},
-            onMicClicked = {}
         )
     }
 }
+

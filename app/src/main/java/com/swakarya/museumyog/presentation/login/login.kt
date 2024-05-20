@@ -1,4 +1,4 @@
-package com.example.museumyog.presentation.login
+package com.swakarya.museumyog.presentation.login
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -25,13 +25,13 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.museumyog.R
-import com.example.museumyog.app.component.FieldPassword
-import com.example.museumyog.app.component.FieldUsername
-import com.example.museumyog.ui.theme.greenku
-import com.example.museumyog.ui.theme.greyku
-import com.example.museumyog.ui.theme.worksans
-import com.example.museumyog.ui.theme.worksansbold
+import com.swakarya.museumyog.R
+import com.swakarya.museumyog.app.component.FieldPassword
+import com.swakarya.museumyog.app.component.FieldUsername
+import com.swakarya.museumyog.ui.theme.greenku
+import com.swakarya.museumyog.ui.theme.greyku
+import com.swakarya.museumyog.ui.theme.worksans
+import com.swakarya.museumyog.ui.theme.worksansbold
 
 @Composable
 fun login(navController: NavHostController) {
@@ -88,7 +88,7 @@ fun login(navController: NavHostController) {
                 Text(text = "Masuk")
             }
             Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = { /*TODO*/ },
+            Button(onClick = { navController.navigate("home")  },
                 border = BorderStroke(2.dp, color = greenku),
                 colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black),
                 shape = RoundedCornerShape(10.dp),

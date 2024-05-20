@@ -13,13 +13,7 @@
         android:theme="@style/Theme.MuseumYog"
         tools:targetApi="31">
         <activity
-            android:name=".singUp2"
-            android:exported="false" />
-        <activity
-            android:name=".loginPage2"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:label="MuseumYog"
             android:theme="@style/Theme.MuseumYog">
