@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
+import java.time.LocalDate
 
 object SharedVariables {
     var anak by mutableStateOf(0)
@@ -38,5 +39,7 @@ object SharedVariables {
     var checked by mutableStateOf(false)
     var pay by mutableStateOf(false)
     var bankpay by mutableStateOf(false)
+    val SelectedDate = mutableStateOf(LocalDate.now())
+    val date = mutableStateOf(LocalDate.now())
 }
 

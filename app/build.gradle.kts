@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.swakarya.museumyog"
-        minSdk = 24
+        minSdk = 29
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -67,4 +67,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.navigation.compose)
+    implementation("com.maxkeppeler.sheets-compose-dialogs:core:1.2.0")
+    implementation("com.maxkeppeler.sheets-compose-dialogs:calendar:1.2.0")
 }
