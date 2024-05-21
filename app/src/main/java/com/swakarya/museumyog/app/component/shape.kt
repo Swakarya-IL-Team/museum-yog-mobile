@@ -3,8 +3,12 @@ package com.swakarya.museumyog.app.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,6 +25,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.geometry.Size
 import com.swakarya.museumyog.ui.theme.greenku
+import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksansbold
 
 class TicketShape : Shape {
@@ -52,10 +57,9 @@ private fun drawTicketPath(size: androidx.compose.ui.geometry.Size): Path {
             forceMoveTo = false
         )
         lineTo(x = size.width, y = 0F)
-        // Bottom right arc
 
         lineTo(x = size.width, y = size.height)
-        // Bottom left arc
+
         lineTo(seperempat.plus(cornerRadius), y = size.height)
         arcTo(
             rect = Rect(
@@ -82,13 +86,41 @@ fun prev(){
             .clip(TicketShape())
             .background(Color.Transparent)
             .size(width = 200.dp, height = 100.dp)
-            .border(3.dp, greenku, TicketShape())
+            .border(2.dp, greenku, TicketShape())
     ){
         Text(text = "Tiket",
             modifier = Modifier.offset(x=0.dp,40.dp)
                 .rotate(-90f),
             fontFamily = worksansbold,
             color = greenku)
+        Divider(
+            color = greenku,
+            modifier = Modifier
+                .height(10.dp)
+                .width(2.dp)
+                .offset( x =49.dp, y = 15.dp)
+        )
+        Divider(
+            color = greenku,
+            modifier = Modifier
+                .height(10.dp)
+                .width(2.dp)
+                .offset( x =49.dp, y = 35.dp)
+        )
+        Divider(
+            color = greenku,
+            modifier = Modifier
+                .height(10.dp)
+                .width(2.dp)
+                .offset( x =49.dp, y = 55.dp)
+        )
+        Divider(
+            color = greenku,
+            modifier = Modifier
+                .height(10.dp)
+                .width(2.dp)
+                .offset( x =49.dp, y = 75.dp)
+        )
 
     }
 }

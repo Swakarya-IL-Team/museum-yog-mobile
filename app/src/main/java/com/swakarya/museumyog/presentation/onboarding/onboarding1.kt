@@ -1,6 +1,8 @@
 package com.swakarya.museumyog.presentation.onboarding
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,7 +18,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -24,7 +28,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
+import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.jogja
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
@@ -40,8 +46,9 @@ fun onboarding1(navController: NavController) {
                 modifier = Modifier.size(120.dp))
         }
     }
-    Box(modifier = Modifier.fillMaxSize()
-        .clickable {navController.navigate("onboarding2")},
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .clickable { navController.navigate("onboarding2") },
         contentAlignment = Alignment.TopCenter){
         Column {
             Spacer(modifier = Modifier.height(70.dp))
@@ -52,9 +59,9 @@ fun onboarding1(navController: NavController) {
         }
         Column{
             Spacer(modifier = Modifier.height(462.dp))
-            Image(painter = painterResource(id = R.drawable.kotak),
-                contentDescription ="Kotak",
-                modifier = Modifier.fillMaxSize())
+            Box(modifier = Modifier.fillMaxSize()
+                .clip(RectangleShape)
+                .background(greenku))
         }
         Column {
             Spacer(modifier = Modifier.height(160.dp))
@@ -63,7 +70,7 @@ fun onboarding1(navController: NavController) {
                 modifier = Modifier.size(450.dp))
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Spacer(modifier = Modifier.height(590.dp))
+            Spacer(modifier = Modifier.height(560.dp))
             Text(text = "Yogyakarta",
                 color = Color.White,
                 fontSize = 50.sp,
@@ -136,4 +143,10 @@ fun onboarding1(navController: NavController) {
                 modifier = Modifier.size(80.dp))
         }
     }
+}
+
+@Preview
+@Composable
+fun p(){
+    onboarding1(navController = rememberNavController())
 }
