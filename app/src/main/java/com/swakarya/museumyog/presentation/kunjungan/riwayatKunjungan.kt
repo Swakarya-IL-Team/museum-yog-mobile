@@ -61,7 +61,6 @@ import com.swakarya.museumyog.data.model.museumBookingDateTestimony
 import com.swakarya.museumyog.data.model.nameMuseumOrderHistory
 import com.swakarya.museumyog.data.model.nameMuseumTestimony
 import com.swakarya.museumyog.data.model.nameOrderMuseum
-import com.swakarya.museumyog.presentation.Payment.listPayment
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku1
@@ -93,7 +92,7 @@ fun RiwayatKunjungan(navController: NavController) {
 
             })
         },
-        bottomBar = { BottomBar() }
+        bottomBar = { BottomBar(navController = navController) }
     ) { paddingValues ->
         Box(
             modifier = Modifier
@@ -156,7 +155,7 @@ fun RiwayatKunjungan(navController: NavController) {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    TextButton(onClick = { navController.navigate("aktif") }) {
+                    TextButton(onClick = { navController.navigate("aktifkunjungan") }) {
                         Box(
                             modifier = Modifier
                                 .background(greenku, CircleShape)
@@ -182,7 +181,7 @@ fun RiwayatKunjungan(navController: NavController) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        TextButton(onClick = { navController.navigate("riwayat") }) {
+                        TextButton(onClick = { navController.navigate("riwayatkunjungan") }) {
                             Text(
                                 text = "Riwayat",
                                 fontFamily = worksanssemibold,

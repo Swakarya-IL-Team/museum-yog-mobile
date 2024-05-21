@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.swakarya.museumyog.R
-import com.swakarya.museumyog.data.component.FieldPassword
-import com.swakarya.museumyog.data.component.FieldUsername
+import com.swakarya.museumyog.app.component.FieldPassword
+import com.swakarya.museumyog.app.component.FieldUsername
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
@@ -88,7 +88,7 @@ fun login(navController: NavHostController) {
                 Text(text = "Masuk")
             }
             Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = { /*TODO*/ },
+            Button(onClick = { navController.navigate(route = "home")},
                 border = BorderStroke(2.dp, color = greenku),
                 colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black),
                 shape = RoundedCornerShape(10.dp),

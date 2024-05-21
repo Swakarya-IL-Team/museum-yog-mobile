@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -220,7 +221,8 @@ fun ListMuseum(
                     rangeMuseum = rangeMuseum,
                     placeMuseum = placeMuseum,
                     rateMuseum = rateMuseum,
-                    visitorMuseum = visitorMuseum
+                    visitorMuseum = visitorMuseum,
+                    navController = navController
                 )
             }
         }
@@ -236,7 +238,8 @@ fun ColumnMuseum(
     rangeMuseum: Array<String>,
     placeMuseum: Array<String>,
     rateMuseum: Array<String>,
-    visitorMuseum: Array<String>
+    visitorMuseum: Array<String>,
+    navController: NavHostController
 ) {
     Card(
         modifier = Modifier
@@ -254,6 +257,7 @@ fun ColumnMuseum(
                     .size(width = 132.dp, height = 111.dp)
                     .clip(RoundedCornerShape(8.dp))
                     .background(Color.LightGray)
+                    .clickable { navController.navigate(route = "informasi/$itemIndex") }
             ) {
                 Image(
                     painter = painterResource(id = painter[itemIndex]),

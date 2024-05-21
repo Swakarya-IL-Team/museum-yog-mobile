@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,7 +24,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material3.Card
@@ -81,7 +81,7 @@ fun HomePage(
     onMicClicked: () -> Unit,
     navController: NavHostController
 ) {
-    Scaffold(bottomBar = { BottomBar() }) { paddingValues ->
+    Scaffold(bottomBar = { BottomBar(navController = navController)}) { paddingValues ->
         Column(
             modifier = modifier
                 .verticalScroll(rememberScrollState())
@@ -232,7 +232,7 @@ fun HomePage(
                         }
 
 
-                        TextButton(onClick = { }) {
+                        TextButton(onClick = { navController.navigate(route = "listMuseum")}) {
                             Text(
                                 text = "Lihat Lainnya",
                                 fontFamily = worksansbold,
@@ -255,7 +255,9 @@ fun HomePage(
                             rangeMuseum = rangeMuseum,
                             placeMuseum = placeMuseum,
                             rateMuseum = rateMuseum,
-                            visitorMuseum = visitorMuseum
+                            visitorMuseum = visitorMuseum,
+                            navController = navController
+
                         )
                     }
                 }
@@ -272,7 +274,7 @@ fun HomePage(
 fun RowEvent(
     itemIndex: Int,
     painter: Array<Int>,
-    tittle: Array<String>,
+    tittle: Array<String>
 ) {
     Card(
         modifier = Modifier
@@ -316,7 +318,8 @@ fun ColumnMuseum(
     rangeMuseum: Array<String>,
     placeMuseum: Array<String>,
     rateMuseum: Array<String>,
-    visitorMuseum: Array<String>
+    visitorMuseum: Array<String>,
+    navController: NavHostController
 ) {
     Card(
         modifier = Modifier
@@ -334,6 +337,8 @@ fun ColumnMuseum(
                     .size(width = 132.dp, height = 111.dp)
                     .clip(RoundedCornerShape(8.dp))
                     .background(Color.LightGray)
+                    .clickable {navController.navigate(route = "informasi/$itemIndex")
+                    }
             ) {
                 Image(
                     painter = painterResource(id = painter[itemIndex]),

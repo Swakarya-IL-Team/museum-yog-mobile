@@ -39,11 +39,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
-import com.swakarya.museumyog.component.komen
-import com.swakarya.museumyog.component.nama
-import com.swakarya.museumyog.component.rating
-import com.swakarya.museumyog.component.tanggal
-import com.swakarya.museumyog.presentation.Payment.listPayment
+import com.swakarya.museumyog.app.component.komen
+import com.swakarya.museumyog.app.component.nama
+import com.swakarya.museumyog.app.component.rating
+import com.swakarya.museumyog.app.component.tanggal
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.worksans
@@ -53,22 +52,26 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 @OptIn(ExperimentalMaterial3Api::class)
 
 @Composable
-fun review(navController: NavHostController) {
+fun review(photos: Array<Int> ,
+           name : Array<String>,
+           rate : Array<String>,
+           itemIndex: Int?,
+           navController: NavHostController) {
     Scaffold(
     ){
         Box() {
-            Image(painter = painterResource(id = R.drawable.gambarmuseum),
+            Image(painter = painterResource(id = photos[itemIndex!!]),
                 contentDescription = "",
                 modifier = Modifier.size(400.dp),
                 Alignment.TopCenter)
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navController.navigate(route = "home") }) {
                 Image(painter = painterResource(id = R.drawable.back),
                     contentDescription ="",
                     modifier = Modifier.size(40.dp))
             }
             Column(modifier = Modifier.offset(x = 0.dp, y = 230.dp)) {
                 Row(modifier = Modifier.fillMaxWidth()){
-                    Text(text = "Museum Keraton \nNgayogyakarta Hadiningrat",
+                    Text(text = name[itemIndex],
                         fontFamily = worksansbold,
                         fontSize = 20.sp,
                         modifier = Modifier.padding(8.dp))
@@ -77,26 +80,26 @@ fun review(navController: NavHostController) {
                         contentDescription ="",
                         tint = Color.Yellow,
                         modifier = Modifier.size(30.dp))
-                    Text(text = "5.0",
+                    Text(text = rate[itemIndex],
                         fontFamily = worksansbold,
                         fontSize = 20.sp)
                 }
                 Row(modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround) {
-                    TextButton(onClick = { navController.navigate("information") }) {
+                    TextButton(onClick = { navController.navigate(route = "informasi/$itemIndex")}) {
                         Text(text = "Deskripsi",
                             fontFamily = worksans,
                             fontSize = 15.sp,
                             color = Color.Black)
                     }
-                    TextButton(onClick = { navController.navigate("koleksi") }) {
+                    TextButton(onClick = { navController.navigate(route = "koleksi/$itemIndex") }) {
                         Text(text = "Koleksi",
                             fontFamily = worksans,
                             fontSize = 15.sp,
                             color = Color.Black
                         )
                     }
-                    TextButton(onClick = { navController.navigate("review") }) {
+                    TextButton(onClick = { navController.navigate("review/$itemIndex") }) {
                         Text(text = "Penilaian",
                             fontFamily = worksans,
                             fontSize = 15.sp,
@@ -175,11 +178,4 @@ fun ColumnItem2(itemIndex: Int,
 
     }
 
-}
-@Preview
-@Composable
-private fun ulas() {
-    MuseumYogTheme {
-        review(navController = rememberNavController())
-    }
 }

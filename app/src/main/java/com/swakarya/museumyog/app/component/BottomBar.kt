@@ -22,6 +22,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.data.model.BottomBarItem
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
@@ -32,7 +35,8 @@ fun BottomBar(
     iconSize: Dp = 24.dp,
     titleSize: TextUnit = 8.sp,
     iconColor: Color = Color.White,
-    titleColor: Color = Color.White
+    titleColor: Color = Color.White,
+    navController: NavController
 ) {
     NavigationBar(
         modifier = modifier
@@ -46,25 +50,29 @@ fun BottomBar(
         val bottomNavigation = listOf(
             BottomBarItem(
                 title = stringResource(id = R.string.txt_beranda),
-                icon = painterResource(id = R.drawable.icon_beranda)
+                icon = painterResource(id = R.drawable.icon_beranda),
+                route = "home"
             ),
             BottomBarItem(
                 title = stringResource(id = R.string.txt_kunjungan),
-                icon = painterResource(id = R.drawable.icon_kunjungan)
+                icon = painterResource(id = R.drawable.icon_kunjungan),
+                route = "aktifkunjungan"
             ),
             BottomBarItem(
                 title = stringResource(id = R.string.txt_notifikasi),
-                icon = painterResource(id = R.drawable.icon_notifikasi)
+                icon = painterResource(id = R.drawable.icon_notifikasi),
+                route ="notif"
             ),
             BottomBarItem(
                 title = stringResource(id = R.string.txt_akun),
-                icon = painterResource(id = R.drawable.icon_akun)
+                icon = painterResource(id = R.drawable.icon_akun),
+                route = "profil"
             )
         )
         bottomNavigation.map {
             NavigationBarItem(
                 selected = false,
-                onClick = { },
+                onClick = {navController.navigate(it.route) },
                 icon = {
                     Icon(
                         painter = it.icon,
@@ -82,6 +90,6 @@ fun BottomBar(
 @Composable
 private fun ButtonBarPreview() {
     MuseumYogTheme {
-        BottomBar()
+        BottomBar(navController = rememberNavController())
     }
 }

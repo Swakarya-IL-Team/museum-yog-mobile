@@ -5,7 +5,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,9 +22,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
@@ -42,29 +39,27 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.swakarya.museumyog.component.SharedVariables.admin
-import com.swakarya.museumyog.component.SharedVariables.bankpay
-import com.swakarya.museumyog.component.SharedVariables.pay
-import com.swakarya.museumyog.component.SharedVariables.total
-import com.swakarya.museumyog.component.SharedVariables.total1
-import com.swakarya.museumyog.component.TicketShape
-import com.swakarya.museumyog.component.dropdown
-import com.swakarya.museumyog.component.getDummyList
-import com.swakarya.museumyog.component.voucher
+import com.swakarya.museumyog.app.component.SharedVariables
+import com.swakarya.museumyog.app.component.SharedVariables.admin
+import com.swakarya.museumyog.app.component.SharedVariables.bankpay
+import com.swakarya.museumyog.app.component.SharedVariables.pay
+import com.swakarya.museumyog.app.component.SharedVariables.total
+import com.swakarya.museumyog.app.component.SharedVariables.total1
+import com.swakarya.museumyog.app.component.TicketShape
+import com.swakarya.museumyog.app.component.calender
+import com.swakarya.museumyog.app.component.getDummyList
+import com.swakarya.museumyog.app.component.tiket
+import com.swakarya.museumyog.app.component.tittle
+import com.swakarya.museumyog.app.component.voucher
+import com.swakarya.museumyog.data.model.nameMuseum
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.orenku
@@ -122,7 +117,8 @@ fun listpayment3(navController: NavHostController) {
             LazyColumn(contentPadding = PaddingValues(20.dp),
                 state = rememberLazyListState()) {
                 items(getDummyList().filter { it.banyak > 0},key = {it.id}){ tiket->
-                    ItemList(judul = tiket.title,
+                    ItemList(
+                        judul = tiket.title,
                         banyak = tiket.banyak,
                         ket = tiket.ket)
 
@@ -135,7 +131,10 @@ fun listpayment3(navController: NavHostController) {
                         modifier = Modifier.padding(10.dp))
                     Box(modifier = Modifier.fillMaxWidth(),
                         Alignment.Center) {
-                        dropdown()
+                        calender(
+                            value = SharedVariables.date.value,
+                            onValueChange = { SharedVariables.date.value = it}
+                        )
                     }
                     Spacer(modifier = Modifier.height(20.dp))
                     Row(modifier = Modifier.padding(10.dp)) {
@@ -237,9 +236,11 @@ fun listpayment3(navController: NavHostController) {
 }
 
 @Composable
-fun ItemList(judul: String,
-             banyak : Int,
-             ket: String) {
+fun ItemList(
+    judul: String,
+    banyak: Int,
+    ket: String
+    ) {
     Card(modifier = Modifier
         .padding(10.dp)
         .wrapContentSize()
@@ -264,7 +265,7 @@ fun ItemList(judul: String,
             Column(modifier = Modifier
                 .offset(x = 120.dp, y = 20.dp)
                 .fillMaxWidth()) {
-                Text(text = "Museum Keraton Ngayogyakarta \n Hadiningrat",
+                Text(text = "Museum",
                     fontFamily = worksansbold,
                     fontSize = 14.sp)
                 Text(text = ket,
@@ -284,11 +285,4 @@ fun ItemList(judul: String,
         }
     }
 
-}
-
-@Preview
-@Composable
-fun pre(){
-    val navController = rememberNavController()
-    listpayment3(navController)
 }

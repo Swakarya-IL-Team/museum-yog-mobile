@@ -1,14 +1,12 @@
-package com.swakarya.museumyog.component
+package com.swakarya.museumyog.app.component
 
 import com.swakarya.museumyog.R
-import com.swakarya.museumyog.component.SharedVariables.anak
-import com.swakarya.museumyog.component.SharedVariables.checked
-import com.swakarya.museumyog.component.SharedVariables.checked1
-import com.swakarya.museumyog.component.SharedVariables.dewasa
-import com.swakarya.museumyog.component.SharedVariables.family
-import com.swakarya.museumyog.component.SharedVariables.mhs
-import com.swakarya.museumyog.component.SharedVariables.student
-import com.swakarya.museumyog.component.SharedVariables.weekend
+import com.swakarya.museumyog.app.component.SharedVariables.anak
+import com.swakarya.museumyog.app.component.SharedVariables.checked
+import com.swakarya.museumyog.app.component.SharedVariables.checked1
+import com.swakarya.museumyog.app.component.SharedVariables.dewasa
+import com.swakarya.museumyog.app.component.SharedVariables.mhs
+import com.swakarya.museumyog.app.component.SharedVariables.weekend
 
 data class tiket(
     val id:Int,
@@ -26,6 +24,7 @@ fun getDummyList(): List<tiket> {
         tiket(5,"Students", if(checked1) 1 else 0,""+if(weekend) "weekend" else "Weekdays")
     )
 }
+
 data class bank(
     val id:Int,
     val gambar : Int

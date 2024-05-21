@@ -49,17 +49,16 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
-import com.swakarya.museumyog.app.component.BottomBar
-import com.swakarya.museumyog.component.SharedVariables.anak
-import com.swakarya.museumyog.component.SharedVariables.dewasa
-import com.swakarya.museumyog.component.SharedVariables.mhs
-import com.swakarya.museumyog.component.SharedVariables.total
-import com.swakarya.museumyog.component.SharedVariables.wekndanak
-import com.swakarya.museumyog.component.SharedVariables.wekndaysanak
-import com.swakarya.museumyog.component.SharedVariables.wekndaysdewasa
-import com.swakarya.museumyog.component.SharedVariables.wekndaysmhs
-import com.swakarya.museumyog.component.SharedVariables.weknddewasa
-import com.swakarya.museumyog.component.SharedVariables.wekndmhs
+import com.swakarya.museumyog.app.component.SharedVariables.anak
+import com.swakarya.museumyog.app.component.SharedVariables.dewasa
+import com.swakarya.museumyog.app.component.SharedVariables.mhs
+import com.swakarya.museumyog.app.component.SharedVariables.total
+import com.swakarya.museumyog.app.component.SharedVariables.wekndanak
+import com.swakarya.museumyog.app.component.SharedVariables.wekndaysanak
+import com.swakarya.museumyog.app.component.SharedVariables.wekndaysdewasa
+import com.swakarya.museumyog.app.component.SharedVariables.wekndaysmhs
+import com.swakarya.museumyog.app.component.SharedVariables.weknddewasa
+import com.swakarya.museumyog.app.component.SharedVariables.wekndmhs
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
@@ -369,10 +368,3 @@ fun listPayment(navController: NavHostController) {
     }
 }
 
-@Preview
-@Composable
-private fun list() {
-    MuseumYogTheme {
-        listPayment(navController = rememberNavController())
-    }
-}

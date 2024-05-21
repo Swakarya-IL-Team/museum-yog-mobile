@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -39,7 +38,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,16 +45,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.swakarya.museumyog.component.SharedVariables.bankpay
-import com.swakarya.museumyog.component.SharedVariables.pay
-import com.swakarya.museumyog.component.SharedVariables.total1
-import com.swakarya.museumyog.component.getDummyList
-import com.swakarya.museumyog.component.getDummybankList
-import com.swakarya.museumyog.presentation.Payment.ItemList
-import com.swakarya.museumyog.presentation.Payment.listpayment3
+import com.swakarya.museumyog.app.component.SharedVariables.bankpay
+import com.swakarya.museumyog.app.component.SharedVariables.pay
+import com.swakarya.museumyog.app.component.SharedVariables.total1
+import com.swakarya.museumyog.app.component.getDummybankList
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
-import com.swakarya.museumyog.ui.theme.orenku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -139,7 +133,7 @@ fun method(navController: NavHostController){
                         fontSize = 12.sp)
                     Spacer(modifier = Modifier.height(20.dp))
                 }
-                items(getDummybankList(),key = {it.id}){bank ->
+                items(getDummybankList(),key = {it.id}){ bank ->
                     Itembank(gambar = bank.gambar,
                         navController = navController)
                 }

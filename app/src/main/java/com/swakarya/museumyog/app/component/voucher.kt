@@ -1,4 +1,4 @@
-package com.swakarya.museumyog.component
+package com.swakarya.museumyog.app.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
@@ -33,4 +33,3 @@ fun voucher() {
         placeholder = { Text(text = "") }
     )
 }
-

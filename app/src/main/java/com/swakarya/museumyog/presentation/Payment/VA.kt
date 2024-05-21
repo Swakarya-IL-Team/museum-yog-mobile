@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.Divider
@@ -38,7 +36,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
-import com.swakarya.museumyog.component.SharedVariables.total1
+import com.swakarya.museumyog.app.component.SharedVariables.total1
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
@@ -63,7 +61,7 @@ fun VA(navController: NavHostController) {
                             tint = greenku,
                             modifier = Modifier
                                 .size(30.dp)
-                                .clickable { })
+                                .clickable { navController.navigate("home") })
                     }
                 },)
         }

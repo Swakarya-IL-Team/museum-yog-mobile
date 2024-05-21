@@ -1,4 +1,4 @@
-package com.swakarya.museumyog.component
+package com.swakarya.museumyog.app.component
 
 import com.swakarya.museumyog.R
 

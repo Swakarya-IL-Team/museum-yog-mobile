@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.swakarya.museumyog.R
-import com.swakarya.museumyog.data.component.FieldPassword
-import com.swakarya.museumyog.data.component.FieldUsername
-import com.swakarya.museumyog.data.component.Fullname
+import com.swakarya.museumyog.app.component.FieldPassword
+import com.swakarya.museumyog.app.component.FieldUsername
+import com.swakarya.museumyog.app.component.Fullname
 import com.swakarya.museumyog.ui.theme.coklatku
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.worksans

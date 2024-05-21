@@ -82,7 +82,7 @@ fun AktifKunjungan(navController: NavController) {
 
             })
         },
-        bottomBar = { BottomBar() }
+        bottomBar = { BottomBar(navController = navController) }
     )
 
     { paddingValues ->
@@ -129,7 +129,7 @@ fun AktifKunjungan(navController: NavController) {
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        TextButton(onClick = { navController.navigate("aktif") }) {
+                        TextButton(onClick = { navController.navigate("aktifkunjungan") }) {
 
                             Box(
                                 modifier = Modifier
@@ -161,7 +161,7 @@ fun AktifKunjungan(navController: NavController) {
                             )
 
                         }
-                    TextButton(onClick = { navController.navigate("riwayat") }) {
+                    TextButton(onClick = { navController.navigate("riwayatkunjungan") }) {
                             Text(
                                 text = "Riwayat",
                                 fontFamily = worksans,

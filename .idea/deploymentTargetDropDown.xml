@@ -8,10 +8,16 @@
       <entry key="MainActivity">
         <State />
       </entry>
-      <entry key="app">
+      <entry key="MainActivity (2)">
         <State />
       </entry>
-      <entry key="museum-yog-mobile.MuseumYog.app">
+      <entry key="NotificationItemPreview">
+        <State />
+      </entry>
+      <entry key="NotificationScreen">
+        <State />
+      </entry>
+      <entry key="app">
         <State />
       </entry>
     </value>

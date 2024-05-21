@@ -2,6 +2,7 @@ package com.swakarya.museumyog.presentation.Notifikasi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -31,19 +32,31 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.app.component.BottomBar
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
+import com.swakarya.museumyog.ui.theme.worksansbold
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NotificationScreen() {
+fun NotificationScreen(navController: NavHostController) {
     Scaffold(topBar = {
         TopAppBar(
-            title = { Text(text = "Notifikasi", fontSize = 20.sp) }
+            title = {
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = "Notifikasi",
+                        fontFamily = worksansbold,
+                        fontSize = 20.sp)
+                }
+            }
 
         )
     },
-            bottomBar = { BottomBar() }
+            bottomBar = { BottomBar(navController = navController) }
     )
 
     { paddingValues ->
@@ -56,17 +69,16 @@ fun NotificationScreen() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(10.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.End
             ) {
-                Text(text = "Notifikasi", style = MaterialTheme.typography.headlineMedium)
                 TextButton(onClick = { /* TODO: Handle clear all notifications */ }) {
                     Text(text = "Hapus semua", color = Color.Gray)
                 }
             }
             LazyColumn(
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(10.dp)
             ) {
                 items(4) { index ->
                     NotificationItem(
