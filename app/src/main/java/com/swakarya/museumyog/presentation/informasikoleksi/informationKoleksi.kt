@@ -66,18 +66,22 @@ fun informationkoleksi(photos: Array<Int> ,
             }
             Column(modifier = Modifier.offset(x = 0.dp, y = 230.dp)) {
                 Row(modifier = Modifier.fillMaxWidth()){
-                    Text(text = name[itemIndex],
-                        fontFamily = worksansbold,
-                        fontSize = 20.sp,
-                        modifier = Modifier.padding(8.dp))
-                    Spacer(modifier = Modifier.width(30.dp))
-                    Icon(imageVector = Icons.Default.Star,
-                        contentDescription ="",
-                        tint = Color.Yellow,
-                        modifier = Modifier.size(30.dp))
-                    Text(text = rate[itemIndex],
-                        fontFamily = worksansbold,
-                        fontSize = 20.sp)
+                    Row(horizontalArrangement = Arrangement.Start,
+                        modifier = Modifier.size(width = 300.dp , height = 70.dp)) {
+                        Text(text = name[itemIndex],
+                            fontFamily = worksansbold,
+                            fontSize = 20.sp,
+                            modifier = Modifier.padding(8.dp))
+                    }
+                    Row(horizontalArrangement = Arrangement.End) {
+                        Icon(imageVector = Icons.Default.Star,
+                            contentDescription ="",
+                            tint = Color.Yellow,
+                            modifier = Modifier.size(30.dp))
+                        Text(text = rate[itemIndex],
+                            fontFamily = worksansbold,
+                            fontSize = 20.sp)
+                    }
                 }
                 Row(modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround) {
@@ -133,18 +137,18 @@ fun ColumnItem(itemIndex: Int,
                painter: Array<Int>,
                tittle: Array<String>,
                describe: Array<String>) {
-        Column(modifier = Modifier.fillMaxWidth()
-            .padding(horizontal = 20.dp, vertical = 0.dp)) {
-            Image(painter = painterResource(id = painter[itemIndex]),
-                contentDescription =tittle[itemIndex],
-                modifier = Modifier.fillMaxWidth()
-                    .size(180.dp))
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(text = tittle[itemIndex],
-                fontFamily = worksansbold,
-                fontSize = 15.sp)
-            Text(text = describe[itemIndex],
-                fontFamily = worksans)
-            Spacer(modifier = Modifier.height(20.dp))
-        }
+    Column(modifier = Modifier.fillMaxWidth()
+        .padding(horizontal = 20.dp, vertical = 0.dp)) {
+        Image(painter = painterResource(id = painter[itemIndex]),
+            contentDescription =tittle[itemIndex],
+            modifier = Modifier.fillMaxWidth()
+                .size(180.dp))
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(text = tittle[itemIndex],
+            fontFamily = worksansbold,
+            fontSize = 15.sp)
+        Text(text = describe[itemIndex],
+            fontFamily = worksans)
+        Spacer(modifier = Modifier.height(20.dp))
+    }
 }

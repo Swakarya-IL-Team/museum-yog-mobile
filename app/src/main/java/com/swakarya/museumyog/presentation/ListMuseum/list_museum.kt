@@ -89,7 +89,7 @@ fun ListMuseum(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Start
                 ) {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { navController.navigate(route = "home")}) {
                         Box(
                             modifier = Modifier.fillMaxWidth()
                         ) {

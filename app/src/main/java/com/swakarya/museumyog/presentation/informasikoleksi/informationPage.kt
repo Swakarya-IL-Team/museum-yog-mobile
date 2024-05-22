@@ -69,7 +69,7 @@ fun informationpage(photos: Array<Int> ,
                 Row(modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center) {
-                    Button(onClick = { navController.navigate(route = "pay1")},
+                    Button(onClick = { navController.navigate(route = "pay1/$itemIndex")},
                         colors = ButtonDefaults.buttonColors(greenku),
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier.size(width = 350.dp, height = 60.dp)) {
@@ -92,18 +92,22 @@ fun informationpage(photos: Array<Int> ,
             }
             Column(modifier = Modifier.offset(x = 0.dp, y = 230.dp)) {
                 Row(modifier = Modifier.fillMaxWidth()){
-                    Text(text = name[itemIndex],
-                        fontFamily = worksansbold,
-                        fontSize = 20.sp,
-                        modifier = Modifier.padding(8.dp))
-                    Spacer(modifier = Modifier.width(30.dp))
-                    Icon(imageVector = Icons.Default.Star,
-                        contentDescription ="",
-                        tint = Color.Yellow,
-                        modifier = Modifier.size(30.dp))
-                    Text(text = rate[itemIndex],
-                        fontFamily = worksansbold,
-                        fontSize = 20.sp)
+                    Row(horizontalArrangement = Arrangement.Start,
+                        modifier = Modifier.size(width = 300.dp , height = 70.dp)) {
+                        Text(text = name[itemIndex],
+                            fontFamily = worksansbold,
+                            fontSize = 20.sp,
+                            modifier = Modifier.padding(8.dp))
+                    }
+                    Row(horizontalArrangement = Arrangement.End) {
+                        Icon(imageVector = Icons.Default.Star,
+                            contentDescription ="",
+                            tint = Color.Yellow,
+                            modifier = Modifier.size(30.dp))
+                        Text(text = rate[itemIndex],
+                            fontFamily = worksansbold,
+                            fontSize = 20.sp)
+                    }
                 }
                 Row(modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround) {

@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.swakarya.museumyog.app.component.SharedVariables.username
 import com.swakarya.museumyog.data.model.imageMuseum
 import com.swakarya.museumyog.data.model.nameMuseum
 import com.swakarya.museumyog.data.model.rateMuseum
@@ -72,7 +73,7 @@ fun Navigation() {
         }
         composable(route="home"){
             HomePage(
-                text = "",
+                text = "$username",
                 onTextChange = {},
                 placeHolder = "Mau ke Museum apa ?",
                 onCloseClicked = {},
@@ -112,7 +113,8 @@ fun Navigation() {
                     type = NavType.IntType
                 }
             )) {index ->
-            informationpage(photos = imageMuseum,
+            informationpage(
+                photos = imageMuseum,
                 name = nameMuseum,
                 rate = rateMuseum,
                 itemIndex = index.arguments?.getInt("index"),
@@ -132,16 +134,37 @@ fun Navigation() {
                 navController
             )
         }
+        composable(route = "pay1/{index}",
+            arguments = listOf(
+                navArgument(name = "index"){
+                    type = NavType.IntType
+                }
+            )) {index ->
+            listPayment(navController,
+                itemIndex = index.arguments?.getInt("index")
+            )
+        }
+        composable(route = "pay2/{index}",
+            arguments = listOf(
+                navArgument(name = "index"){
+                    type = NavType.IntType
+                }
+            )) {index ->
+            listpayment2(navController,
+                itemIndex = index.arguments?.getInt("index")
+            )
+        }
+        composable(route = "pay3/{index}",
+            arguments = listOf(
+                navArgument(name = "index"){
+                    type = NavType.IntType
+                }
+            )) {index ->
+            listpayment3(navController,
+                itemIndex = index.arguments?.getInt("index")
+            )
+        }
 
-        composable(route="pay1"){
-            listPayment(navController =navController )
-        }
-        composable(route="pay2"){
-            listpayment2(navController =navController )
-        }
-        composable(route="pay3"){
-            listpayment3(navController =navController )
-        }
         composable(route="profil"){
             ProfileMenu(navController =navController )
         }

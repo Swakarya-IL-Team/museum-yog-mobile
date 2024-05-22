@@ -68,7 +68,8 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun listPayment(navController: NavHostController) {
+fun listPayment(navController: NavHostController,
+                itemIndex: Int?) {
     var weekend by remember { mutableStateOf(false) }
     val color = if(weekend) greenku else Color.Black
     val color1 = if(weekend) Color.Black else greenku
@@ -78,7 +79,7 @@ fun listPayment(navController: NavHostController) {
                 Row(modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center) {
-                    Button(onClick = { navController.navigate("pay3")},
+                    Button(onClick = { navController.navigate("pay3/$itemIndex")},
                         colors = ButtonDefaults.buttonColors(greenku),
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier.size(width = 350.dp, height = 60.dp)) {
@@ -97,7 +98,7 @@ fun listPayment(navController: NavHostController) {
             }
             },
                 navigationIcon =  {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = { navController.navigate(route = "informasi/$itemIndex")}) {
                         Icon(imageVector = Icons.Default.KeyboardArrowLeft,
                             contentDescription = "",
                             tint = greenku,
@@ -113,13 +114,13 @@ fun listPayment(navController: NavHostController) {
                     .offset(x = 0.dp, y = 60.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceAround) {
-                    TextButton(onClick = { navController.navigate("pay1") }) {
+                    TextButton(onClick = { navController.navigate("pay1/$itemIndex") }) {
                         Text(text = "Tiket Satuan",
                             fontFamily = worksansbold,
                             color = greenku)
 
                     }
-                    TextButton(onClick = { navController.navigate("pay2")}) {
+                    TextButton(onClick = { navController.navigate("pay2/$itemIndex")}) {
                         Text(text = "Paket",
                             fontFamily = worksans,
                             color = greyku)

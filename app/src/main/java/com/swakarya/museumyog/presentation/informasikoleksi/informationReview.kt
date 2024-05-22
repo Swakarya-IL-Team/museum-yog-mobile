@@ -50,7 +50,6 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
-
 @Composable
 fun review(photos: Array<Int> ,
            name : Array<String>,
@@ -71,18 +70,22 @@ fun review(photos: Array<Int> ,
             }
             Column(modifier = Modifier.offset(x = 0.dp, y = 230.dp)) {
                 Row(modifier = Modifier.fillMaxWidth()){
-                    Text(text = name[itemIndex],
-                        fontFamily = worksansbold,
-                        fontSize = 20.sp,
-                        modifier = Modifier.padding(8.dp))
-                    Spacer(modifier = Modifier.width(30.dp))
-                    Icon(imageVector = Icons.Default.Star,
-                        contentDescription ="",
-                        tint = Color.Yellow,
-                        modifier = Modifier.size(30.dp))
-                    Text(text = rate[itemIndex],
-                        fontFamily = worksansbold,
-                        fontSize = 20.sp)
+                    Row(horizontalArrangement = Arrangement.Start,
+                        modifier = Modifier.size(width = 300.dp , height = 70.dp)) {
+                        Text(text = name[itemIndex],
+                            fontFamily = worksansbold,
+                            fontSize = 20.sp,
+                            modifier = Modifier.padding(8.dp))
+                    }
+                    Row(horizontalArrangement = Arrangement.End) {
+                        Icon(imageVector = Icons.Default.Star,
+                            contentDescription ="",
+                            tint = Color.Yellow,
+                            modifier = Modifier.size(30.dp))
+                        Text(text = rate[itemIndex],
+                            fontFamily = worksansbold,
+                            fontSize = 20.sp)
+                    }
                 }
                 Row(modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround) {

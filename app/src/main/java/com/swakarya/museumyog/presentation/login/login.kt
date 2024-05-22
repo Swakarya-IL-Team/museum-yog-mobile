@@ -1,5 +1,7 @@
 package com.swakarya.museumyog.presentation.login
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -20,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -28,6 +31,8 @@ import androidx.navigation.NavHostController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.FieldPassword
 import com.swakarya.museumyog.app.component.FieldUsername
+import com.swakarya.museumyog.app.component.SharedVariables.password
+import com.swakarya.museumyog.app.component.SharedVariables.username
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
@@ -35,6 +40,7 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 
 @Composable
 fun login(navController: NavHostController) {
+    val context = LocalContext.current
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopCenter){
         Image(painter = painterResource(id = R.drawable.laki_dan_backgroud),
@@ -80,7 +86,10 @@ fun login(navController: NavHostController) {
             FieldPassword()
 
             Spacer(modifier = Modifier.height(60.dp))
-            Button(onClick = { /*TODO*/ },
+            Button(onClick = { if (username.isEmpty() || password.isEmpty()){
+                                 Toast.makeText(context, "username atau password belum terisis", Toast.LENGTH_SHORT).show()
+                             } else {navController.navigate(route = "home")}
+                             } ,
                 colors = ButtonDefaults.buttonColors(greenku),
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier.size(width = 350.dp, height = 60.dp))
@@ -88,7 +97,8 @@ fun login(navController: NavHostController) {
                 Text(text = "Masuk")
             }
             Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = { navController.navigate(route = "home")},
+            Button(onClick = { navController.navigate(route = "home")
+                             username = ""},
                 border = BorderStroke(2.dp, color = greenku),
                 colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black),
                 shape = RoundedCornerShape(10.dp),

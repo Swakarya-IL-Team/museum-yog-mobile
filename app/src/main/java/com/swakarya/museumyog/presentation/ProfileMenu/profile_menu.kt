@@ -42,6 +42,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.BottomBar
+import com.swakarya.museumyog.app.component.SharedVariables.username
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 
 var notificationSwitchState by mutableStateOf(false)
@@ -83,7 +84,7 @@ fun ProfileMenu(
                     Text(
                         modifier = Modifier
                             .padding(top = 12.dp),
-                        text = "Eren Aydin",
+                        text = "$username",
                         color = Color(0xfff2f2f2),
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Normal,
@@ -188,7 +189,7 @@ fun ProfileMenu(
                             text = "Keluar",
                             icon = painterResource(id = R.drawable.icon_leave),
                             textColor = Color(0xFFC57557),
-                            route = "",
+                            route = "login",
                             navController = navController
                         )
 //                            onClick = {
@@ -212,7 +213,8 @@ fun IconWithText(
     navController: NavController
 ) {
     Row(verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable {navController.navigate(route) }) {
+        modifier = Modifier.clickable {navController.navigate(route) }
+    ) {
         Image(
             painter = icon,
             contentDescription = text,

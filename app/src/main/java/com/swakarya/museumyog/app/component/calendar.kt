@@ -78,7 +78,7 @@ fun calender(
     )
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun CustomDatePickerPreview(){
     calender(

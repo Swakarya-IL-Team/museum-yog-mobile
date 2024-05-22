@@ -56,8 +56,6 @@ import com.swakarya.museumyog.app.component.SharedVariables.total1
 import com.swakarya.museumyog.app.component.TicketShape
 import com.swakarya.museumyog.app.component.calender
 import com.swakarya.museumyog.app.component.getDummyList
-import com.swakarya.museumyog.app.component.tiket
-import com.swakarya.museumyog.app.component.tittle
 import com.swakarya.museumyog.app.component.voucher
 import com.swakarya.museumyog.data.model.nameMuseum
 import com.swakarya.museumyog.ui.theme.greenku
@@ -69,7 +67,8 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun listpayment3(navController: NavHostController) {
+fun listpayment3(navController: NavHostController,
+                 itemIndex: Int?) {
     val colorbutton = if(pay) greenku else greyku
     val textbank = if(bankpay)"Tranfer Bank" else "OTS"
     val textcolor = if(pay) Color.White else orenku
@@ -82,7 +81,7 @@ fun listpayment3(navController: NavHostController) {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center) {
                     Button(onClick = { if(pay)navController.navigate("va")
-                    else navController.navigate("pay3") },
+                    else navController.navigate("pay3/$itemIndex") },
                         colors = ButtonDefaults.buttonColors(colorbutton),
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier.size(width = 350.dp, height = 60.dp)) {
@@ -101,7 +100,7 @@ fun listpayment3(navController: NavHostController) {
             }
             },
                 navigationIcon =  {
-                    IconButton(onClick = { navController.navigate("pay2")}) {
+                    IconButton(onClick = { navController.navigate("pay2/$itemIndex")}) {
                         Icon(imageVector = Icons.Default.KeyboardArrowLeft,
                             contentDescription = "",
                             tint = greenku,
@@ -120,7 +119,8 @@ fun listpayment3(navController: NavHostController) {
                     ItemList(
                         judul = tiket.title,
                         banyak = tiket.banyak,
-                        ket = tiket.ket)
+                        ket = tiket.ket,
+                        item = itemIndex)
 
                 }
                 item{
@@ -239,7 +239,8 @@ fun listpayment3(navController: NavHostController) {
 fun ItemList(
     judul: String,
     banyak: Int,
-    ket: String
+    ket: String,
+    item: Int?
     ) {
     Card(modifier = Modifier
         .padding(10.dp)
@@ -265,7 +266,7 @@ fun ItemList(
             Column(modifier = Modifier
                 .offset(x = 120.dp, y = 20.dp)
                 .fillMaxWidth()) {
-                Text(text = "Museum",
+                Text(text = nameMuseum[item!!],
                     fontFamily = worksansbold,
                     fontSize = 14.sp)
                 Text(text = ket,
