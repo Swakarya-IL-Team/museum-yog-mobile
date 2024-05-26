@@ -19,11 +19,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.LocationOn
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -39,6 +43,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,6 +59,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
+import com.swakarya.museumyog.app.component.PopUpMenuContent
 import com.swakarya.museumyog.data.model.imageMuseum
 import com.swakarya.museumyog.data.model.nameMuseum
 import com.swakarya.museumyog.data.model.placeMuseum
@@ -68,8 +74,9 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 import com.swakarya.museumyog.ui.theme.worksansmedium
 import com.swakarya.museumyog.ui.theme.worksanssemibold
 import com.swakarya.museumyog.ui.theme.yellowku
+import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun ListMuseum(
     navController: NavHostController,
@@ -77,157 +84,173 @@ fun ListMuseum(
     modifier: Modifier = Modifier,
     placeHolder: String,
 ) {
-    var searchText by remember {
-        mutableStateOf("")
-    }
-    Column {
-        TopAppBar(
-            title = {
-                Row(
-                    modifier = Modifier
-                        .padding(top = 16.dp, end = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Start
-                ) {
-                    IconButton(onClick = { navController.navigate(route = "home")}) {
-                        Box(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.KeyboardArrowLeft,
-                                contentDescription = "Icon Back",
-                                tint = greenku
-                            )
+    val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+    val scope = rememberCoroutineScope()
+    var searchText by remember { mutableStateOf("") }
+    ModalBottomSheetLayout(
+        sheetState = bottomSheetState,
+        sheetContent = {
+            PopUpMenuContent {
+                scope.launch {
+                    bottomSheetState.hide()
+                }
+            }
+        },
+        sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+        sheetBackgroundColor = Color.White
+    ){
+        Column {
+            TopAppBar(
+                title = {
+                    Row(
+                        modifier = Modifier
+                            .padding(top = 16.dp, end = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        IconButton(onClick = { navController.navigate(route = "home")}) {
+                            Box(
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.KeyboardArrowLeft,
+                                    contentDescription = "Icon Back",
+                                    tint = greenku
+                                )
+                            }
+
                         }
 
-                    }
+                        Spacer(modifier = Modifier.width(5.dp))
 
-                    Spacer(modifier = Modifier.width(5.dp))
-
-                    Box(
-                        modifier = modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(12.dp))
-                            .border(
-                                BorderStroke(
-                                    1.dp,
-                                    SolidColor(greenku)
-                                ),
-                                RoundedCornerShape(12.dp)
-                            ),
-                        contentAlignment = Alignment.CenterStart
-                    ) {
-                        OutlinedTextField(
+                        Box(
                             modifier = modifier
                                 .fillMaxWidth()
-                                .heightIn(max = 48.dp),
-                            value = searchText,
-                            onValueChange = { searchText = it },
-                            placeholder = {
-                                Text(
-                                    text = placeHolder,
+                                .clip(RoundedCornerShape(12.dp))
+                                .border(
+                                    BorderStroke(
+                                        1.dp,
+                                        SolidColor(greenku)
+                                    ),
+                                    RoundedCornerShape(12.dp)
+                                ),
+                            contentAlignment = Alignment.CenterStart
+                        ) {
+                            OutlinedTextField(
+                                modifier = modifier
+                                    .fillMaxWidth()
+                                    .heightIn(max = 48.dp),
+                                value = searchText,
+                                onValueChange = { searchText = it },
+                                placeholder = {
+                                    Text(
+                                        text = placeHolder,
+                                        fontFamily = worksans,
+                                        fontSize = 12.sp,
+                                        color = greenku,
+                                    )
+                                },
+                                textStyle = TextStyle(
                                     fontFamily = worksans,
-                                    fontSize = 12.sp,
-                                    color = greenku,
-                                )
-                            },
-                            textStyle = TextStyle(
-                                fontFamily = worksans,
-                                fontSize = 12.sp
-                            ),
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                containerColor = MaterialTheme.colorScheme.surface,
-                                focusedBorderColor = Color.Transparent,
-                                unfocusedBorderColor = Color.Transparent,
-                                cursorColor = MaterialTheme.colorScheme.onBackground
-                            ),
-                            trailingIcon = {
-                                if (searchText.isNotBlank()) {
-                                    IconButton(onClick = {
-                                        searchText = ""
-                                    }) {
-                                        Icon(
-                                            imageVector = Icons.Default.Clear,
-                                            contentDescription = "Icon Clear",
+                                    fontSize = 12.sp
+                                ),
+                                colors = TextFieldDefaults.outlinedTextFieldColors(
+                                    containerColor = MaterialTheme.colorScheme.surface,
+                                    focusedBorderColor = Color.Transparent,
+                                    unfocusedBorderColor = Color.Transparent,
+                                    cursorColor = MaterialTheme.colorScheme.onBackground
+                                ),
+                                trailingIcon = {
+                                    if (searchText.isNotBlank()) {
+                                        IconButton(onClick = {
+                                            searchText = ""
+                                        }) {
+                                            Icon(
+                                                imageVector = Icons.Default.Clear,
+                                                contentDescription = "Icon Clear",
+                                                tint = greenku,
+                                                modifier = modifier.size(22.dp)
+                                            )
+                                        }
+                                    }
+                                    else {
+                                        Icon(painter = painterResource(id = R.drawable.icon_search),
+                                            contentDescription = "Icon Search",
                                             tint = greenku,
-                                            modifier = modifier.size(22.dp)
-                                        )
+                                            modifier = modifier.size(22.dp))
                                     }
                                 }
-                                else {
-                                    Icon(painter = painterResource(id = R.drawable.icon_search),
-                                        contentDescription = "Icon Search",
-                                        tint = greenku,
-                                        modifier = modifier.size(22.dp))
-                                }
-                            }
-                        )
+                            )
+                        }
                     }
+
+                })
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 15.dp, end = 16.dp, top = 13.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Row {
+                    Icon(
+                        modifier = Modifier.size(21.dp),
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Icon Bintang",
+                        tint = yellowku
+                    )
+
+                    Spacer(modifier = Modifier.width(5.5.dp))
+
+                    Text(
+                        text = "Terpopuler Pekan Ini",
+                        fontFamily = worksansbold,
+                        fontSize = 14.sp,
+                        color = green10,
+                    )
                 }
 
-            })
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 15.dp, end = 16.dp, top = 13.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Row {
-                Icon(
-                    modifier = Modifier.size(21.dp),
-                    imageVector = Icons.Default.Star,
-                    contentDescription = "Icon Bintang",
-                    tint = yellowku
-                )
+                TextButton(onClick = { scope.launch {
+                    bottomSheetState.show()
+                }}) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.icon_filter),
+                        contentDescription = "Icon Filter",
+                        modifier = Modifier.size(20.dp),
+                        tint = greenku)
 
-                Spacer(modifier = Modifier.width(5.5.dp))
+                    Spacer(modifier = Modifier.width(8.dp))
 
-                Text(
-                    text = "Terpopuler Pekan Ini",
-                    fontFamily = worksansbold,
-                    fontSize = 14.sp,
-                    color = green10,
-                )
+                    Text(
+                        text = "Filter",
+                        fontFamily = worksansbold,
+                        fontSize = 12.sp,
+                        color = green10,
+                    )
+                }
+            }
+            val ItemLazyCount = imageMuseum.size
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(start = 16.dp)
+            ) {
+                items(ItemLazyCount) { item ->
+                    ColumnMuseum(
+                        itemIndex = item,
+                        painter = imageMuseum,
+                        tittle = nameMuseum,
+                        rangeMuseum = rangeMuseum,
+                        placeMuseum = placeMuseum,
+                        rateMuseum = rateMuseum,
+                        visitorMuseum = visitorMuseum,
+                        navController = navController
+                    )
+                }
             }
 
-            TextButton(onClick = { }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.icon_filter),
-                    contentDescription = "Icon Filter",
-                    modifier = Modifier.size(20.dp),
-                    tint = greenku)
-
-                Spacer(modifier = Modifier.width(8.dp))
-
-                Text(
-                    text = "Filter",
-                    fontFamily = worksansbold,
-                    fontSize = 12.sp,
-                    color = green10,
-                )
-            }
         }
-        val ItemLazyCount = imageMuseum.size
-        LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
-            contentPadding = PaddingValues(start = 16.dp)
-        ) {
-            items(ItemLazyCount) { item ->
-                ColumnMuseum(
-                    itemIndex = item,
-                    painter = imageMuseum,
-                    tittle = nameMuseum,
-                    rangeMuseum = rangeMuseum,
-                    placeMuseum = placeMuseum,
-                    rateMuseum = rateMuseum,
-                    visitorMuseum = visitorMuseum,
-                    navController = navController
-                )
-            }
-        }
-
     }
+
 }
 
 @Composable
