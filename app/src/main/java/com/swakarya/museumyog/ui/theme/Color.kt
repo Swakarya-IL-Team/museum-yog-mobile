@@ -16,4 +16,7 @@ val yellowku = Color(0xFFFED330)
 val greenku = Color(0xFF728969)
 val greyku = Color(0xFF686868)
 val coklatku = Color(0xFFCF8E72)
+val green8= Color(0xFF7F9275)
+val green5 = Color(0xFFA8B29E)
+val Neutral1 = Color(0xFFF2F2F2)
 

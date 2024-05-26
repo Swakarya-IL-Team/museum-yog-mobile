@@ -10,27 +10,37 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.swakarya.museumyog.navigation.Navigation
-import com.swakarya.museumyog.presentation.kunjungan.AktifKunjungan
-import com.swakarya.museumyog.navigation.Navigation
-import com.swakarya.museumyog.presentation.home.HomePage
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
-import com.swakarya.museumyog.navigation.Navigation
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MuseumYogTheme {
-                    // A surface container using the 'background' color from the theme
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
-                    ) {
-                        Navigation()
-                    }
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    Greeting("Android")
                 }
             }
         }
     }
+}
+
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    MuseumYogTheme {
+        Greeting("Android")
+    }
+}
