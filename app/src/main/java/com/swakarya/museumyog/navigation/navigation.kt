@@ -35,6 +35,10 @@ import com.swakarya.museumyog.presentation.onboarding.onboarding1
 import com.swakarya.museumyog.presentation.onboarding.onboarding2
 import com.swakarya.museumyog.presentation.onboarding.onboarding3
 import com.swakarya.museumyog.presentation.splash.splashScreen
+import com.swakarya.museumyog.presentation.ReviewUsers.ReviewUsers
+import com.swakarya.museumyog.presentation.informationkoleksi
+import com.swakarya.museumyog.presentation.informationpage
+import com.swakarya.museumyog.presentation.review
 
 
 @SuppressLint("ComposableDestinationInComposeScope")
@@ -182,6 +186,9 @@ fun Navigation() {
         }
         composable(route="notif"){
             NotificationScreen(navController =navController )
+        }
+        composable(route = "reviewUser") {
+            ReviewUsers(navController)
         }
 
     }

@@ -20,3 +20,8 @@ val green8= Color(0xFF7F9275)
 val green5 = Color(0xFFA8B29E)
 val Neutral1 = Color(0xFFF2F2F2)
 
+
+val yellowku = Color(0xFFFED330)
+val green10 = Color(0xFF5B6D54)
+val abuku = Color(0xFFA7AEBE)
+val greenku1 = Color(0xFF6C6C6C)
