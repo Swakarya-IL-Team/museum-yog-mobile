@@ -1,4 +1,4 @@
-package com.example.museumyog.ui.theme;
+package com.swakarya.museumyog.ui.theme;
 
 import android.app.Activity;
 
