@@ -52,11 +52,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
-import com.swakarya.museumyog.component.StarRatingBar
-import com.swakarya.museumyog.component.komen
-import com.swakarya.museumyog.component.nama
-import com.swakarya.museumyog.component.rating
-import com.swakarya.museumyog.component.tanggal
+import com.swakarya.museumyog.app.component.StarRatingBar
+import com.swakarya.museumyog.app.component.komen
+import com.swakarya.museumyog.app.component.nama
+import com.swakarya.museumyog.app.component.rating
+import com.swakarya.museumyog.app.component.tanggal
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.abuku
 import com.swakarya.museumyog.ui.theme.green10

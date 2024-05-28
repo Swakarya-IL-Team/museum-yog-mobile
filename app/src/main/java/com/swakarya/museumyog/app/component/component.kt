@@ -1,6 +1,5 @@
 package com.swakarya.museumyog.app.component
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,7 +19,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.swakarya.museumyog.app.component.SharedVariables.password
 import com.swakarya.museumyog.app.component.SharedVariables.username
-import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 @Preview
 @Composable

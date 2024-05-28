@@ -69,6 +69,7 @@ import com.swakarya.museumyog.data.model.visitorMuseum
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.green10
 import com.swakarya.museumyog.ui.theme.greenku
+import com.swakarya.museumyog.ui.theme.yellowku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
 import com.swakarya.museumyog.ui.theme.worksansmedium

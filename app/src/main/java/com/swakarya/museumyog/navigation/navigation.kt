@@ -36,9 +36,6 @@ import com.swakarya.museumyog.presentation.onboarding.onboarding2
 import com.swakarya.museumyog.presentation.onboarding.onboarding3
 import com.swakarya.museumyog.presentation.splash.splashScreen
 import com.swakarya.museumyog.presentation.ReviewUsers.ReviewUsers
-import com.swakarya.museumyog.presentation.informationkoleksi
-import com.swakarya.museumyog.presentation.informationpage
-import com.swakarya.museumyog.presentation.review
 
 
 @SuppressLint("ComposableDestinationInComposeScope")
