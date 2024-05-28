@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.swakarya.museumyog.presentation.ReviewUsers.ReviewUsers
 import com.swakarya.museumyog.presentation.informationkoleksi
 import com.swakarya.museumyog.presentation.informationpage
 import com.swakarya.museumyog.presentation.review
@@ -22,6 +23,9 @@ fun Navigation(){
         }
         composable(route = "review") {
             review(navController)
+        }
+        composable(route = "reviewUser") {
+            ReviewUsers(navController)
         }
 
     }
