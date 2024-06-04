@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.AlertDialogDefaults.shape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
@@ -33,16 +32,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
+import com.swakarya.museumyog.data.model.imageMuseum
+import com.swakarya.museumyog.data.model.nameMuseum
 import com.swakarya.museumyog.ui.theme.coklatku
 import com.swakarya.museumyog.ui.theme.greenku
-import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
 
-@Preview
 @Composable
-fun tiket(){
+fun tiket(navController: NavHostController,
+          name : Array<String>,
+          itemIndex: Int?) {
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopCenter){
         Column {
@@ -60,7 +63,7 @@ fun tiket(){
             contentDescription = "",
             modifier = Modifier
                 .size(width = 400.dp, height = 750.dp)
-                .shadow(15.dp))
+                .shadow(100.dp))
         Icon(imageVector = Icons.Default.Check,
             contentDescription = "",
             modifier = Modifier
@@ -80,8 +83,7 @@ fun tiket(){
         }
         Column(modifier = Modifier.offset(x = 0.dp, y = 364.dp),
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Museum Keraton\n" +
-                    "Ngayogyakarta Hadiningrat",
+            Text(text = name[itemIndex!!],
                 fontFamily = worksansbold,
                 fontSize = 20.sp,
                 color = Color.Black,
@@ -135,9 +137,10 @@ fun tiket(){
                     .height(1.dp)
                     .width(300.dp))
         }
-        Button(onClick = { /*TODO*/ },
-            modifier = Modifier.size(width = 350.dp, height = 60.dp)
-                .offset(x=  0.dp, y = 770.dp),
+        Button(onClick = { navController.navigate(route = "home") },
+            modifier = Modifier
+                .size(width = 350.dp, height = 60.dp)
+                .offset(x = 0.dp, y = 770.dp),
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(greenku)) {
             Text(text = "Selesai",
@@ -145,4 +148,13 @@ fun tiket(){
                 fontSize = 25.sp)
         }
     }
+}
+
+@Preview
+@Composable
+fun prevvv(){
+    val index = 3
+    tiket(navController = rememberNavController(),
+        name = nameMuseum,
+        itemIndex = index )
 }

@@ -248,7 +248,7 @@ fun HomePage(
                     }
 
                     val ItemLazyCount = imageMuseum.size
-                    for (index in 0 until ItemLazyCount) {
+                    for (index in 0 until 5) {
                         ColumnMuseum(
                             itemIndex = index,
                             painter = imageMuseum,

@@ -53,11 +53,13 @@ import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.BottomBar
 import com.swakarya.museumyog.data.model.dateOrderMuseum
+import com.swakarya.museumyog.data.model.imageMuseum
 import com.swakarya.museumyog.data.model.imageMuseumOrderHistory
 import com.swakarya.museumyog.data.model.imageMuseumTestimony
 import com.swakarya.museumyog.data.model.imageOrderMuseum
 import com.swakarya.museumyog.data.model.museumBookingDateHistory
 import com.swakarya.museumyog.data.model.museumBookingDateTestimony
+import com.swakarya.museumyog.data.model.nameMuseum
 import com.swakarya.museumyog.data.model.nameMuseumOrderHistory
 import com.swakarya.museumyog.data.model.nameMuseumTestimony
 import com.swakarya.museumyog.data.model.nameOrderMuseum
@@ -119,9 +121,10 @@ fun RiwayatKunjungan(navController: NavController) {
                 for (index in 0 until ItemMuseumTestimony) {
                     ColumnTestimonyMuseum(
                         itemIndex = index,
-                        painter = imageMuseumTestimony,
-                        tittle = nameMuseumTestimony,
-                        museumBookingHistory = museumBookingDateTestimony
+                        painter = imageMuseum,
+                        tittle = nameMuseum,
+                        museumBookingHistory = museumBookingDateTestimony,
+                        navController = navController
                     )
                 }
 
@@ -311,7 +314,8 @@ fun ColumnTestimonyMuseum(
     itemIndex: Int,
     painter: Array<Int>,
     tittle: Array<String>,
-    museumBookingHistory: Array<String>
+    museumBookingHistory: Array<String>,
+    navController: NavController
 ) {
     Card(
         modifier = Modifier
@@ -378,7 +382,7 @@ fun ColumnTestimonyMuseum(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     OutlinedButton(
-                        onClick = { },
+                        onClick = {navController.navigate(route = "reviewUser/$itemIndex") },
                         modifier = Modifier
                             .padding(bottom = 6.dp)
                             .heightIn(30.dp),

@@ -58,6 +58,7 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun listpayment2(navController: NavHostController,
+                 name : Array<String>,
                  itemIndex: Int?) {
 
     val color = if(checked) greenku else greyku
@@ -81,7 +82,7 @@ fun listpayment2(navController: NavHostController,
         topBar = {
             TopAppBar(title = { Box(modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.Center){
-                Text(text = "Museum Keraton Ngayogyakarta",
+                Text(text =name[itemIndex!!],
                     fontFamily = worksansbold,
                     fontSize = 18.sp)
             }

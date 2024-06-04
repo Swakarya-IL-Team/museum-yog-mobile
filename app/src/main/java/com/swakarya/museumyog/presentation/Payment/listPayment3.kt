@@ -80,7 +80,7 @@ fun listpayment3(navController: NavHostController,
                 Row(modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center) {
-                    Button(onClick = { if(pay)navController.navigate("va")
+                    Button(onClick = { if(pay)navController.navigate("va/$itemIndex")
                     else navController.navigate("pay3/$itemIndex") },
                         colors = ButtonDefaults.buttonColors(colorbutton),
                         shape = RoundedCornerShape(10.dp),
@@ -171,7 +171,7 @@ fun listpayment3(navController: NavHostController,
                                 shape = RoundedCornerShape(20)
                             )
                             .background(boxcolor)
-                            .clickable { navController.navigate("method") }
+                            .clickable { navController.navigate("method/$itemIndex") }
                         ){
                             Box(modifier = Modifier.fillMaxSize().padding(start = 5.dp),
                                 Alignment.CenterStart){

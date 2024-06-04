@@ -44,7 +44,8 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VA(navController: NavHostController) {
+fun VA(navController: NavHostController,
+       itemIndex: Int?) {
     Scaffold(
         topBar = {
             TopAppBar(title = { Box(modifier = Modifier.fillMaxWidth(),
@@ -61,7 +62,7 @@ fun VA(navController: NavHostController) {
                             tint = greenku,
                             modifier = Modifier
                                 .size(30.dp)
-                                .clickable { navController.navigate("home") })
+                                .clickable { navController.navigate("tiket/$itemIndex") })
                     }
                 },)
         }
@@ -123,10 +124,4 @@ fun VA(navController: NavHostController) {
 
         }
     }
-}
-@Preview
-@Composable
-fun p(){
-    val navController = rememberNavController()
-    VA(navController)
 }

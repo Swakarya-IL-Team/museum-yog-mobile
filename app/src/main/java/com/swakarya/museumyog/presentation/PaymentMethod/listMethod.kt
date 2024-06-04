@@ -55,7 +55,8 @@ import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)@Composable
-fun method(navController: NavHostController){
+fun method(navController: NavHostController,
+           itemIndex: Int?){
     val colorboxots = if(bankpay) greyku else greenku
     Scaffold(
         bottomBar = {
@@ -63,7 +64,7 @@ fun method(navController: NavHostController){
                 Row(modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center) {
-                    Button(onClick = { navController.navigate("pay3") },
+                    Button(onClick = { navController.navigate("pay3/$itemIndex") },
                         colors = ButtonDefaults.buttonColors(greenku),
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier.size(width = 350.dp, height = 60.dp)) {
@@ -176,11 +177,4 @@ fun Itembank(gambar: Int,
 
     }
 
-}
-
-@Preview
-@Composable
-fun pre1(){
-    val navController = rememberNavController()
-    method(navController)
 }

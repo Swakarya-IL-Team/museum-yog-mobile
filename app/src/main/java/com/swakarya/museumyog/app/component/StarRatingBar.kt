@@ -1,5 +1,5 @@
-package com.swakarya.museumyog.app.component
-import androidx.compose.ui.platform.LocalDensity
+package com.swakarya.museumyog.component
+
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.swakarya.museumyog.R
+
 @Composable
 fun StarRatingBar(
     maxStars: Int = 5,

@@ -36,6 +36,7 @@ import com.swakarya.museumyog.presentation.onboarding.onboarding2
 import com.swakarya.museumyog.presentation.onboarding.onboarding3
 import com.swakarya.museumyog.presentation.splash.splashScreen
 import com.swakarya.museumyog.presentation.ReviewUsers.ReviewUsers
+import com.swakarya.museumyog.presentation.tiket.tiket
 
 
 @SuppressLint("ComposableDestinationInComposeScope")
@@ -66,11 +67,25 @@ fun Navigation() {
             onboarding3(navController)
         }
 
-        composable(route = "method") {
-            method(navController)
+        composable(route = "method/{index}",
+            arguments = listOf(
+                navArgument(name = "index"){
+                    type = NavType.IntType
+                }
+            )) {index ->
+            method(navController,
+                itemIndex = index.arguments?.getInt("index")
+            )
         }
-        composable(route = "va") {
-            VA(navController)
+        composable(route = "va/{index}",
+            arguments = listOf(
+                navArgument(name = "index"){
+                    type = NavType.IntType
+                }
+            )) {index ->
+            VA(navController,
+                itemIndex = index.arguments?.getInt("index")
+            )
         }
         composable(route="home"){
             HomePage(
@@ -142,6 +157,7 @@ fun Navigation() {
                 }
             )) {index ->
             listPayment(navController,
+                name = nameMuseum,
                 itemIndex = index.arguments?.getInt("index")
             )
         }
@@ -152,6 +168,7 @@ fun Navigation() {
                 }
             )) {index ->
             listpayment2(navController,
+                name = nameMuseum,
                 itemIndex = index.arguments?.getInt("index")
             )
         }
@@ -184,8 +201,30 @@ fun Navigation() {
         composable(route="notif"){
             NotificationScreen(navController =navController )
         }
-        composable(route = "reviewUser") {
-            ReviewUsers(navController)
+        composable(route = "reviewUser/{index}",
+            arguments = listOf(
+                navArgument(name = "index"){
+                    type = NavType.IntType
+                }
+            )) {index ->
+            ReviewUsers(
+                photos = imageMuseum,
+                name = nameMuseum,
+                rate = rateMuseum,
+                itemIndex = index.arguments?.getInt("index"),
+                navController
+            )
+        }
+        composable(route = "tiket/{index}",
+            arguments = listOf(
+                navArgument(name = "index"){
+                    type = NavType.IntType
+                }
+            )) {index ->
+            tiket(navController,
+                name = nameMuseum,
+                itemIndex = index.arguments?.getInt("index")
+            )
         }
 
     }
