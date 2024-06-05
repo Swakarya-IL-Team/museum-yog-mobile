@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.swakarya.museumyog.app.component.SharedVariables.fullname
 import com.swakarya.museumyog.app.component.SharedVariables.password
 import com.swakarya.museumyog.app.component.SharedVariables.username
 import com.swakarya.museumyog.ui.theme.greyku
@@ -52,14 +53,13 @@ fun FieldUsername() {
 }
 @Composable
 fun Fullname() {
-    var name by remember { mutableStateOf("") }
     OutlinedTextField(
-        value = name,
+        value = fullname,
         modifier = Modifier
             .size(width = 350.dp, height = 60.dp)
             .border(2.dp, greyku, RoundedCornerShape(20)),
         shape = RoundedCornerShape(20),
-        onValueChange = { name = it },
+        onValueChange = { fullname = it },
         placeholder = { Text(text = "Username") }
     )
 }

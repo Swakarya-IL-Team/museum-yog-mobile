@@ -42,6 +42,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.BottomBar
+import com.swakarya.museumyog.app.component.SharedVariables.fullname
 import com.swakarya.museumyog.app.component.SharedVariables.username
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 
@@ -84,7 +85,7 @@ fun ProfileMenu(
                     Text(
                         modifier = Modifier
                             .padding(top = 12.dp),
-                        text = "$username",
+                        text = "$fullname",
                         color = Color(0xfff2f2f2),
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Normal,

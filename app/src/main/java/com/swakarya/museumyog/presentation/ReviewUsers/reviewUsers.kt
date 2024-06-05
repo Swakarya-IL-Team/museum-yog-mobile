@@ -352,7 +352,7 @@ fun ReviewUsers(photos: Array<Int> ,
                 ) {
                     TextButton(
                         modifier = Modifier,
-                        onClick = { navController.navigate("review") },
+                        onClick = { navController.navigate("review/$itemIndex") },
                         shape = RoundedCornerShape(8.dp),
                         colors = ButtonDefaults.buttonColors(greenku)
                     ) {

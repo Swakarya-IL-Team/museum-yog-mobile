@@ -43,6 +43,7 @@ object SharedVariables {
     val date = mutableStateOf(LocalDate.now())
     var username by mutableStateOf("")
     var password by mutableStateOf("")
+    var fullname by mutableStateOf("")
     var terdekat by mutableStateOf(false)
 }
 

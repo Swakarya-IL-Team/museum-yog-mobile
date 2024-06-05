@@ -27,6 +27,8 @@ import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.FieldPassword
 import com.swakarya.museumyog.app.component.FieldUsername
 import com.swakarya.museumyog.app.component.Fullname
+import com.swakarya.museumyog.app.component.SharedVariables.password
+import com.swakarya.museumyog.app.component.SharedVariables.username
 import com.swakarya.museumyog.ui.theme.coklatku
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.worksans
@@ -81,12 +83,14 @@ fun singUp(navController: NavHostController){
             Spacer(modifier = Modifier.height(10.dp))
             FieldPassword()
             Spacer(modifier = Modifier.height(40.dp))
-            Button(onClick = {  },
+            Button(onClick = {  navController.navigate("login")
+                username = ""
+                password = ""},
                 colors = ButtonDefaults.buttonColors(greenku),
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier.size(width = 350.dp, height = 60.dp))
             {
-                Text(text = "Masuk")
+                Text(text = "Daftar")
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Atau daftar dengan")
@@ -119,7 +123,9 @@ fun singUp(navController: NavHostController){
             Spacer(modifier = Modifier.height(790.dp))
             Row (verticalAlignment = Alignment.CenterVertically){
                 Text(text = "Sudah punya akun?")
-                TextButton(onClick = { navController.navigate("login")}) {
+                TextButton(onClick = { navController.navigate("login")
+                username = ""
+                password = ""}) {
                     Text(text = "Masuk",
                         color = greenku,
                         textDecoration = TextDecoration.Underline)

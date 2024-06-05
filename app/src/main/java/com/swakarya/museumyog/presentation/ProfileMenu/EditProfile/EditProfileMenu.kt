@@ -42,6 +42,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
+import com.swakarya.museumyog.app.component.SharedVariables.fullname
+import com.swakarya.museumyog.app.component.SharedVariables.username
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.green5
 import com.swakarya.museumyog.ui.theme.greenku
@@ -52,8 +54,6 @@ import com.swakarya.museumyog.ui.theme.worksansmedium
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditProfileMenu(modifier: Modifier = Modifier, navController: NavHostController) {
-    var fullname by remember { mutableStateOf("") }
-    var username by remember { mutableStateOf("") }
     var selectedGender by remember { mutableStateOf<Gender?>(null) }
     var phoneNumber by remember { mutableStateOf("") }
     Column {

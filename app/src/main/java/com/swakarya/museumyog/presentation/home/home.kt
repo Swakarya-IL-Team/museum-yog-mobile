@@ -52,6 +52,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.BottomBar
+import com.swakarya.museumyog.app.component.SharedVariables.fullname
 import com.swakarya.museumyog.app.component.SharedVariables.username
 import com.swakarya.museumyog.data.model.imageId
 import com.swakarya.museumyog.data.model.imageMuseum
@@ -102,7 +103,7 @@ fun HomePage(
                         fontSize = 14.sp,
                         color = Color.White
                     )
-                    Text(text = "$username",
+                    Text(text = "$fullname",
                         fontFamily = worksanssemibold,
                         fontSize = 20.sp,
                         color = Color.White)
