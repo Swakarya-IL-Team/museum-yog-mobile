@@ -43,11 +43,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.SharedVariables.anak
 import com.swakarya.museumyog.app.component.SharedVariables.dewasa
@@ -59,144 +57,200 @@ import com.swakarya.museumyog.app.component.SharedVariables.wekndaysdewasa
 import com.swakarya.museumyog.app.component.SharedVariables.wekndaysmhs
 import com.swakarya.museumyog.app.component.SharedVariables.weknddewasa
 import com.swakarya.museumyog.app.component.SharedVariables.wekndmhs
-import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
+import com.swakarya.museumyog.ui.theme.worksanssemibold
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun listPayment(navController: NavHostController,
-                name : Array<String>,
-                itemIndex: Int?) {
+fun listPayment(
+    navController: NavHostController,
+    name: Array<String>,
+    itemIndex: Int?
+) {
     var weekend by remember { mutableStateOf(false) }
-    val color = if(weekend) greenku else Color.Black
-    val color1 = if(weekend) Color.Black else greenku
+    val color = if (weekend) greenku else Color.Black
+    val color1 = if (weekend) Color.Black else greenku
     Scaffold(
         bottomBar = {
             BottomAppBar {
-                Row(modifier = Modifier.fillMaxWidth(),
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center) {
-                    Button(onClick = { navController.navigate("pay3/$itemIndex")},
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Button(
+                        onClick = { navController.navigate("pay3/$itemIndex") },
                         colors = ButtonDefaults.buttonColors(greenku),
                         shape = RoundedCornerShape(10.dp),
-                        modifier = Modifier.size(width = 350.dp, height = 60.dp)) {
-                        Text(text ="Pesan Tiket")
+                        modifier = Modifier.size(width = 350.dp, height = 60.dp)
+                    ) {
+                        Text(text = "Pesan Tiket")
                     }
 
                 }
             }
         },
         topBar = {
-            TopAppBar(title = { Box(modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center){
-                Text(text = name[itemIndex!!],
-                    fontFamily = worksansbold,
-                    fontSize = 18.sp)
-            }
-            },
-                navigationIcon =  {
-                    IconButton(onClick = { navController.navigate(route = "informasi/$itemIndex")}) {
-                        Icon(imageVector = Icons.Default.KeyboardArrowLeft,
+            TopAppBar(
+                title = {
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = name[itemIndex!!],
+                            fontFamily = worksansbold,
+                            fontSize = 18.sp
+                        )
+                    }
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.navigate(route = "informasi/$itemIndex") }) {
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowLeft,
                             contentDescription = "",
                             tint = greenku,
-                            modifier = Modifier.size(30.dp))
+                            modifier = Modifier.size(30.dp)
+                        )
                     }
-                },)
+                },
+            )
         }
     ) {
         Column {
             Box(modifier = Modifier.fillMaxWidth()) {
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .offset(x = 0.dp, y = 60.dp),
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .offset(x = 0.dp, y = 60.dp),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceAround) {
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
                     TextButton(onClick = { navController.navigate("pay1/$itemIndex") }) {
-                        Text(text = "Tiket Satuan",
+                        Text(
+                            text = "Tiket Satuan",
                             fontFamily = worksansbold,
-                            color = greenku)
+                            color = greenku
+                        )
 
                     }
-                    TextButton(onClick = { navController.navigate("pay2/$itemIndex")}) {
-                        Text(text = "Paket",
+                    TextButton(onClick = { navController.navigate("pay2/$itemIndex") }) {
+                        Text(
+                            text = "Paket",
                             fontFamily = worksans,
-                            color = greyku)
+                            color = greyku
+                        )
 
                     }
                 }
-                Divider(color = greyku, thickness = 1.dp,
-                    modifier = Modifier.offset(x = 0.dp, y = 100.dp))
-                Image(painter = painterResource(id = R.drawable.line),
-                    contentDescription ="",
+                Divider(
+                    color = greyku, thickness = 1.dp,
+                    modifier = Modifier.offset(x = 0.dp, y = 100.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.line),
+                    contentDescription = "",
                     modifier = Modifier
                         .offset(x = 63.dp, y = 52.dp)
-                        .size(100.dp))
+                        .size(100.dp)
+                )
             }
             Spacer(modifier = Modifier.height(20.dp))
-            Text(text = "Mau berkunjung waktu apa?",
+            Text(
+                text = "Mau berkunjung waktu apa?",
                 fontFamily = worksansbold,
                 fontSize = 20.sp,
-                modifier = Modifier.padding(10.dp))
+                modifier = Modifier
+                    .padding(vertical = 10.dp)
+                    .padding(start = 16.dp)
+            )
             Spacer(modifier = Modifier.height(10.dp))
-            Row(verticalAlignment = Alignment.CenterVertically,
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceAround,
-                modifier = Modifier.fillMaxWidth()) {
-                OutlinedButton(onClick = { weekend=false
-                                            total=0
-                                            anak=0
-                                            mhs=0
-                                            dewasa=0
-                                            total=0},
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                OutlinedButton(
+                    onClick = {
+                        weekend = false
+                        total = 0
+                        anak = 0
+                        mhs = 0
+                        dewasa = 0
+                        total = 0
+                    },
                     border = BorderStroke(1.dp, color1),
                     shape = RoundedCornerShape(10.dp),
                     modifier = Modifier.size(width = 150.dp, height = 60.dp)
                 ) {
-                    Text(text = "Weekdays\n(senin-jumat)",
+                    Text(
+                        text = "Weekdays\n(senin-jumat)",
                         color = color1,
-                        textAlign = TextAlign.Center)
+                        textAlign = TextAlign.Center
+                    )
                 }
-                OutlinedButton(onClick = { weekend=true
-                                         total=0
-                                         anak=0
-                                         mhs=0
-                                         dewasa=0
-                                         total=0},
-                    border = BorderStroke(1.dp, color) ,
+                OutlinedButton(
+                    onClick = {
+                        weekend = true
+                        total = 0
+                        anak = 0
+                        mhs = 0
+                        dewasa = 0
+                        total = 0
+                    },
+                    border = BorderStroke(1.dp, color),
                     shape = RoundedCornerShape(10.dp),
                     modifier = Modifier.size(width = 150.dp, height = 60.dp)
                 ) {
-                    Text(text = "Weekends\n(Sabtu-Minggu)",
+                    Text(
+                        text = "Weekends\n(Sabtu-Minggu)",
                         color = color,
-                        textAlign = TextAlign.Center)
+                        textAlign = TextAlign.Center
+                    )
                 }
             }
             Spacer(modifier = Modifier.height(20.dp))
-            Text(text = "Pilih Jenis Tiket",
+            Text(
+                text = "Pilih Jenis Tiket",
                 fontFamily = worksansbold,
                 fontSize = 20.sp,
-                modifier = Modifier.padding(10.dp))
-            Row (verticalAlignment = Alignment.CenterVertically){
-                Spacer(modifier = Modifier.width(10.dp))
+                modifier = Modifier
+                    .padding(vertical = 10.dp)
+                    .padding(start = 16.dp)
+            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Column {
                     Spacer(modifier = Modifier.height(20.dp))
-                    Text(text = "Anak-anak",
+                    Text(
+                        text = "Anak-anak",
                         fontFamily = worksansbold,
-                        fontSize = 20.sp)
-                    Text(text = "(0-10 tahun)",
+                        fontSize = 20.sp
+                    )
+                    Text(
+                        text = "(0-10 tahun)",
                         fontFamily = worksans,
-                        fontSize = 12.sp)
-                    Text(text = "Rp"+if(weekend) "$wekndanak" else "$wekndaysanak",
+                        fontSize = 12.sp
+                    )
+                    Text(
+                        text = "Rp" + if (weekend) "$wekndanak" else "$wekndaysanak",
                         fontFamily = worksans,
                         fontSize = 15.sp,
-                        color= greenku)
+                        color = greenku
+                    )
                 }
                 Spacer(modifier = Modifier.width(125.dp))
                 Image(painter = painterResource(id = R.drawable.minusbutton),
-                    contentDescription ="",
+                    contentDescription = "",
                     modifier = Modifier
                         .size(30.dp)
                         .clickable {
@@ -210,161 +264,212 @@ fun listPayment(navController: NavHostController,
                                 anak = 0
                             }
                         })
-                Card(colors = CardDefaults.cardColors(
-                    containerColor = Color.White),
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color.White
+                    ),
                     border = BorderStroke(1.dp, Color.Black),
                     modifier = Modifier
                         .padding(4.dp)
                         .size(height = 40.dp, width = 60.dp),
-                    shape = RoundedCornerShape(10.dp)) {
-                    Row(horizontalArrangement = Arrangement.Center,
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxSize()) {
-                        Text(text = "$anak",
-                            fontSize = 25.sp)
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Text(
+                            text = "$anak",
+                            fontSize = 25.sp
+                        )
                     }
                 }
                 Image(painter = painterResource(id = R.drawable.plusbutton),
-                    contentDescription ="",
+                    contentDescription = "",
                     modifier = Modifier
                         .size(30.dp)
                         .clickable {
                             if (weekend) {
                                 anak++
                                 total += wekndanak
-                            } else if(!weekend){
+                            } else if (!weekend) {
                                 anak++
                                 total += wekndaysanak
                             }
                         })
             }
-            Row (verticalAlignment = Alignment.CenterVertically){
-                Spacer(modifier = Modifier.width(10.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Column {
                     Spacer(modifier = Modifier.height(20.dp))
-                    Text(text = "Mahasiswa",
+                    Text(
+                        text = "Mahasiswa",
                         fontFamily = worksansbold,
-                        fontSize = 20.sp)
-                    Text(text = "(wajib menunjukkan KTM)",
+                        fontSize = 20.sp
+                    )
+                    Text(
+                        text = "(wajib menunjukkan KTM)",
                         fontFamily = worksans,
-                        fontSize = 12.sp)
-                    Text(text = "Rp"+if(weekend) "$wekndmhs" else "$wekndaysmhs",
+                        fontSize = 12.sp
+                    )
+                    Text(
+                        text = "Rp" + if (weekend) "$wekndmhs" else "$wekndaysmhs",
                         fontFamily = worksans,
                         fontSize = 15.sp,
-                        color= greenku)
+                        color = greenku
+                    )
                 }
                 Spacer(modifier = Modifier.width(75.dp))
                 Image(painter = painterResource(id = R.drawable.minusbutton),
-                    contentDescription ="",
+                    contentDescription = "",
                     modifier = Modifier
                         .size(30.dp)
                         .clickable {
-                            if ((mhs != 0) and  (weekend)) {
+                            if ((mhs != 0) and (weekend)) {
                                 mhs--
                                 total -= wekndmhs
-                            } else if((mhs != 0) and (!weekend)){
+                            } else if ((mhs != 0) and (!weekend)) {
                                 mhs--
                                 total -= wekndaysmhs
-                            }
-                            else {
+                            } else {
                                 mhs = 0
                             }
                         })
-                Card(colors = CardDefaults.cardColors(
-                    containerColor = Color.White),
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color.White
+                    ),
                     border = BorderStroke(1.dp, Color.Black),
                     modifier = Modifier
                         .padding(4.dp)
                         .size(height = 40.dp, width = 60.dp),
-                    shape = RoundedCornerShape(10.dp)) {
-                    Row(horizontalArrangement = Arrangement.Center,
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxSize()) {
-                        Text(text ="$mhs",
-                            fontSize = 25.sp)
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Text(
+                            text = "$mhs",
+                            fontSize = 25.sp
+                        )
                     }
                 }
                 Image(painter = painterResource(id = R.drawable.plusbutton),
-                    contentDescription ="",
+                    contentDescription = "",
                     modifier = Modifier
                         .size(30.dp)
                         .clickable {
                             if (weekend) {
                                 mhs++
                                 total += wekndmhs
-                            } else if(!weekend){
+                            } else if (!weekend) {
                                 mhs++
                                 total += wekndaysmhs
                             }
                         })
             }
-            Row (verticalAlignment = Alignment.CenterVertically){
-                Spacer(modifier = Modifier.width(10.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Column {
                     Spacer(modifier = Modifier.height(20.dp))
-                    Text(text = "Dewasa",
+                    Text(
+                        text = "Dewasa",
                         fontFamily = worksansbold,
-                        fontSize = 20.sp)
-                    Text(text = "",
-                        fontFamily = worksans,
-                        fontSize = 12.sp)
-                    Text(text = "Rp"+if(weekend) "$weknddewasa" else "$wekndaysdewasa",
+                        fontSize = 20.sp
+                    )
+
+                    Text(
+                        text = "Rp" + if (weekend) "$weknddewasa" else "$wekndaysdewasa",
                         fontFamily = worksans,
                         fontSize = 15.sp,
-                        color= greenku)
+                        color = greenku
+                    )
                 }
                 Spacer(modifier = Modifier.width(155.dp))
                 Image(painter = painterResource(id = R.drawable.minusbutton),
-                    contentDescription ="",
+                    contentDescription = "",
                     modifier = Modifier
                         .size(30.dp)
                         .clickable {
-                            if ((dewasa != 0) and  (weekend)) {
+                            if ((dewasa != 0) and (weekend)) {
                                 dewasa--
                                 total -= weknddewasa
-                            } else if((dewasa != 0) and (!weekend)){
+                            } else if ((dewasa != 0) and (!weekend)) {
                                 dewasa--
                                 total -= wekndaysdewasa
-                            }
-                            else {
+                            } else {
                                 dewasa = 0
                             }
                         })
-                Card(colors = CardDefaults.cardColors(
-                    containerColor = Color.White),
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color.White
+                    ),
                     border = BorderStroke(1.dp, Color.Black),
                     modifier = Modifier
                         .padding(4.dp)
                         .size(height = 40.dp, width = 60.dp),
-                    shape = RoundedCornerShape(10.dp)) {
-                    Row(horizontalArrangement = Arrangement.Center,
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxSize()) {
-                        Text(text ="$dewasa",
-                            fontSize = 25.sp)
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Text(
+                            text = "$dewasa",
+                            fontSize = 25.sp
+                        )
                     }
                 }
                 Image(painter = painterResource(id = R.drawable.plusbutton),
-                    contentDescription ="",
+                    contentDescription = "",
                     modifier = Modifier
                         .size(30.dp)
                         .clickable {
                             if (weekend) {
                                 dewasa++
                                 total += weknddewasa
-                            } else if(!weekend){
+                            } else if (!weekend) {
                                 dewasa++
                                 total += wekndaysdewasa
                             }
                         })
             }
-            Spacer(modifier = Modifier.height(100.dp))
-            Text(text = "Jumlah Tiket",
-                fontFamily = worksansbold,
-                modifier = Modifier.padding(10.dp))
-            Text(text = "Total Rp $total",
-                fontFamily = worksansbold,
-                modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.height(150.dp))
+            Text(
+                text = "Jumlah Tiket",
+                fontFamily = worksanssemibold,
+                modifier = Modifier.padding(start = 16.dp)
+            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Total: ",
+                    fontFamily = worksanssemibold,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+                Text(
+                    text = "Rp.$total",
+                    fontFamily = worksansbold,
+                    fontSize = 20.sp
+                )
+            }
+
         }
 
     }
