@@ -77,4 +77,6 @@ dependencies {
     implementation ("androidx.compose.ui:ui:1.4.3")
     implementation ("androidx.compose.ui:ui-tooling-preview:1.4.3")
     implementation ("androidx.activity:activity-compose:1.6.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.5.0")
 }
