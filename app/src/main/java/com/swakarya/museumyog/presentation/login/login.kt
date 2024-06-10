@@ -4,11 +4,13 @@ import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -25,14 +27,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.FieldPassword
 import com.swakarya.museumyog.app.component.FieldUsername
 import com.swakarya.museumyog.app.component.SharedVariables.password
 import com.swakarya.museumyog.app.component.SharedVariables.username
+import com.swakarya.museumyog.presentation.splash.splashScreen
+import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
@@ -84,8 +90,19 @@ fun login(navController: NavHostController) {
             FieldUsername()
             Spacer(modifier = Modifier.height(8.dp))
             FieldPassword()
-
-            Spacer(modifier = Modifier.height(60.dp))
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(end = 10.dp),
+                horizontalArrangement = Arrangement.End) {
+                TextButton(onClick = { /*TODO*/ }) {
+                    Text(
+                        text = "Lupa password?",
+                        color = greyku,
+                        textDecoration = TextDecoration.Underline
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(5.dp))
             Button(onClick = { if (username.isEmpty() || password.isEmpty()){
                                  Toast.makeText(context, "username atau password belum terisis", Toast.LENGTH_SHORT).show()
                              } else {navController.navigate(route = "home")}
@@ -110,26 +127,17 @@ fun login(navController: NavHostController) {
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Atau masuk dengan")
-        }
-        Box(modifier = Modifier.fillMaxSize(),
-            Alignment.TopCenter){
-            Column {
-                Spacer(modifier = Modifier.height(670.dp))
-                Row(verticalAlignment = Alignment.Top) {
-                    TextButton(onClick = { /*TODO*/ }) {
-                        Image(painter = painterResource(id = R.drawable.google),
-                            contentDescription =null,
-                            modifier = Modifier
-                                .size(150.dp))
-                    }
-                    Spacer(modifier = Modifier.width(10.dp))
-                    TextButton(onClick = { /*TODO*/ }) {
-                        Image(painter = painterResource(id = R.drawable.facebook),
-                            contentDescription =null ,
-                            modifier = Modifier
-                                .size(150.dp))
-                    }
-                }
+            Row(modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.CenterVertically){
+                Image(painter = painterResource(id = R.drawable.google),
+                    contentDescription ="foto gugel",
+                    modifier = Modifier.size(150.dp)
+                        .padding(bottom = 60.dp))
+                Image(painter = painterResource(id = R.drawable.facebook),
+                    contentDescription ="foto facebook",
+                    modifier = Modifier.size(150.dp)
+                        .padding(bottom = 60.dp))
             }
         }
         Box(modifier = Modifier.fillMaxSize(),
@@ -146,16 +154,12 @@ fun login(navController: NavHostController) {
                 }
             }
         }
-        Box(modifier = Modifier.fillMaxSize(),
-            Alignment.CenterEnd){
-            Column {
-                Spacer(modifier = Modifier.height(180.dp))
-                TextButton(onClick = { /*TODO*/ }) {
-                    Text(text = "Lupa password?",
-                        color = greyku,
-                        textDecoration = TextDecoration.Underline)
-                }
-            }
-        }
+    }
+}
+@Preview(showBackground = true)
+@Composable
+private fun login() {
+    MuseumYogTheme {
+        login(navController = rememberNavController())
     }
 }

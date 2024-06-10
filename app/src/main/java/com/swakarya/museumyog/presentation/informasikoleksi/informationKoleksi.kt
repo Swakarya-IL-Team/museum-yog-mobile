@@ -153,9 +153,11 @@ fun informationkoleksi(photos: Array<Int> ,
                                         color = greenku
                                     )
                                 }
-                                Image(
-                                    painter = painterResource(id = R.drawable.line),
-                                    contentDescription = "",
+                                Divider(
+                                    color = greenku,
+                                    modifier = Modifier
+                                        .height(2.dp)
+                                        .width(100.dp)
                                 )
                             }
                             TextButton(onClick = { navController.navigate("review/$itemIndex") }) {

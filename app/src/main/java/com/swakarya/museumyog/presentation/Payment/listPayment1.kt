@@ -43,9 +43,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.SharedVariables.anak
 import com.swakarya.museumyog.app.component.SharedVariables.dewasa
@@ -252,7 +254,7 @@ fun listPayment(
                 Image(painter = painterResource(id = R.drawable.minusbutton),
                     contentDescription = "",
                     modifier = Modifier
-                        .size(30.dp)
+                        .size(35.dp)
                         .clickable {
                             if ((anak != 0) and (weekend)) {
                                 anak--
@@ -271,8 +273,8 @@ fun listPayment(
                     border = BorderStroke(1.dp, Color.Black),
                     modifier = Modifier
                         .padding(4.dp)
-                        .size(height = 40.dp, width = 60.dp),
-                    shape = RoundedCornerShape(10.dp)
+                        .size(height = 35.dp, width = 50.dp),
+                    shape = RoundedCornerShape(5.dp)
                 ) {
                     Row(
                         horizontalArrangement = Arrangement.Center,
@@ -288,7 +290,7 @@ fun listPayment(
                 Image(painter = painterResource(id = R.drawable.plusbutton),
                     contentDescription = "",
                     modifier = Modifier
-                        .size(30.dp)
+                        .size(35.dp)
                         .clickable {
                             if (weekend) {
                                 anak++
@@ -329,7 +331,7 @@ fun listPayment(
                 Image(painter = painterResource(id = R.drawable.minusbutton),
                     contentDescription = "",
                     modifier = Modifier
-                        .size(30.dp)
+                        .size(35.dp)
                         .clickable {
                             if ((mhs != 0) and (weekend)) {
                                 mhs--
@@ -348,8 +350,8 @@ fun listPayment(
                     border = BorderStroke(1.dp, Color.Black),
                     modifier = Modifier
                         .padding(4.dp)
-                        .size(height = 40.dp, width = 60.dp),
-                    shape = RoundedCornerShape(10.dp)
+                        .size(height = 35.dp, width = 50.dp),
+                    shape = RoundedCornerShape(5.dp)
                 ) {
                     Row(
                         horizontalArrangement = Arrangement.Center,
@@ -365,7 +367,7 @@ fun listPayment(
                 Image(painter = painterResource(id = R.drawable.plusbutton),
                     contentDescription = "",
                     modifier = Modifier
-                        .size(30.dp)
+                        .size(35.dp)
                         .clickable {
                             if (weekend) {
                                 mhs++
@@ -402,7 +404,7 @@ fun listPayment(
                 Image(painter = painterResource(id = R.drawable.minusbutton),
                     contentDescription = "",
                     modifier = Modifier
-                        .size(30.dp)
+                        .size(35.dp)
                         .clickable {
                             if ((dewasa != 0) and (weekend)) {
                                 dewasa--
@@ -421,8 +423,8 @@ fun listPayment(
                     border = BorderStroke(1.dp, Color.Black),
                     modifier = Modifier
                         .padding(4.dp)
-                        .size(height = 40.dp, width = 60.dp),
-                    shape = RoundedCornerShape(10.dp)
+                        .size(height = 35.dp, width = 50.dp),
+                    shape = RoundedCornerShape(5.dp)
                 ) {
                     Row(
                         horizontalArrangement = Arrangement.Center,
@@ -438,7 +440,7 @@ fun listPayment(
                 Image(painter = painterResource(id = R.drawable.plusbutton),
                     contentDescription = "",
                     modifier = Modifier
-                        .size(30.dp)
+                        .size(35.dp)
                         .clickable {
                             if (weekend) {
                                 dewasa++
@@ -474,4 +476,12 @@ fun listPayment(
 
     }
 }
-
+@Preview
+@Composable
+fun ListPaymentPreview() {
+    listPayment(
+        navController = rememberNavController(),
+        name = arrayOf("Payment 1"),
+        itemIndex = 0
+    )
+}

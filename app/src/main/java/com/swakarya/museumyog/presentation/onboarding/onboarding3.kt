@@ -19,10 +19,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
+import com.swakarya.museumyog.presentation.splash.splashScreen
+import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
@@ -177,5 +181,12 @@ fun onboarding3(navController: NavHostController) {
             )
 
         }
+    }
+}
+@Preview(showBackground = true)
+@Composable
+private fun on3() {
+    MuseumYogTheme {
+        onboarding3(navController = rememberNavController())
     }
 }

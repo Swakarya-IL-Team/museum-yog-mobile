@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -43,10 +44,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.gambar
 import com.swakarya.museumyog.app.component.rating
@@ -68,7 +72,6 @@ fun informationpage(photos: Array<Int> ,
                     itemIndex: Int?,
     navController: NavHostController) {
     Scaffold(
-
         bottomBar = {
             BottomAppBar {
                 Row(
@@ -165,9 +168,11 @@ fun informationpage(photos: Array<Int> ,
                                         color = greenku
                                     )
                                 }
-                                Image(
-                                    painter = painterResource(id = R.drawable.line),
-                                    contentDescription = "",
+                                Divider(
+                                    color = greenku,
+                                    modifier = Modifier
+                                        .height(2.dp)
+                                        .width(100.dp)
                                 )
                             }
                             TextButton(onClick = { navController.navigate("koleksi/$itemIndex") }) {
@@ -207,23 +212,25 @@ fun informationpage(photos: Array<Int> ,
                                         Row(
                                             modifier = Modifier
                                                 .fillMaxWidth()
-                                                .padding(top = 16.dp),
+                                                .padding(top = 5.dp),
                                             horizontalArrangement = Arrangement.SpaceBetween,
                                             verticalAlignment = Alignment.CenterVertically
                                         ) {
                                             Row {
                                                 OutlinedCard(
-                                                    colors = CardDefaults.cardColors(greenku)
+                                                    colors = CardDefaults.cardColors(greenku),
+                                                    modifier = Modifier.size(height = 32.dp, width = 70.dp),
+                                                    shape = RoundedCornerShape(15.dp)
                                                 ) {
-                                                    Text(
-                                                        modifier = Modifier.padding(
-                                                            horizontal = 8.dp,
-                                                            vertical = 2.dp
-                                                        ),
-                                                        text = "Buka",
-                                                        fontFamily = worksans,
-                                                        color = Color.White
-                                                    )
+                                                    Box(contentAlignment = Alignment.Center,
+                                                        modifier = Modifier.fillMaxSize()){
+                                                        Text(
+                                                            text = "Buka",
+                                                            fontFamily = worksanssemibold,
+                                                            color = Color.White,
+                                                            fontSize = 16.sp
+                                                        )
+                                                    }
                                                 }
                                             }
                                             Text(
@@ -236,10 +243,14 @@ fun informationpage(photos: Array<Int> ,
                                         Spacer(modifier = Modifier.height(14.dp))
                                         Text(
                                             text = "Keraton Yogyakarta sebagai salah satu pilar utama berdirinya Republik Indonesia tentunya memiliki sejarah panjang perjuangannya dari era Kolonial hingga sekarang ini. Sejarah panjang tersebut tentunya berguna bagi masa depan generasi muda untuk bisa mengetahui serta memahani perjuangan yang telah dilakukan. Oleh karena itu Keraton Yogyakarta sebagai institusi budaya dan perjuangan bangsa berkewajiban mendokumentasikan perjuangannya kepada masyarakat dengan membangun wisata museum sebagai pusat dokumentasi sejarah perjuangan Keraton Yogyakarta.",
-                                            fontFamily = worksans
+                                            fontFamily = worksans,
+                                            fontSize = 15.sp,
+                                            textAlign = TextAlign.Justify,
+                                            modifier = Modifier.padding(5.dp),
+                                            lineHeight = 21.sp
                                         )
-                                        Spacer(modifier = Modifier.height(20.dp))
-                                        Row(verticalAlignment = Alignment.Top) {
+                                        Spacer(modifier = Modifier.height(10.dp))
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
                                             Icon(
                                                 imageVector = Icons.Default.LocationOn,
                                                 contentDescription = "",
@@ -250,48 +261,48 @@ fun informationpage(photos: Array<Int> ,
                                                     text = "Jl. Rotowijayan, Kadipaten, Kecamatan Kraton, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55132",
                                                     color = Color.Black,
                                                     fontFamily = worksans,
-                                                    fontSize = 12.sp
+                                                    fontSize = 14.sp
                                                 )
                                             }
                                         }
-                                        Spacer(modifier = Modifier.height(9.dp))
+                                        Spacer(modifier = Modifier.height(10.dp))
                                         Row(verticalAlignment = Alignment.CenterVertically) {
                                             Icon(
                                                 imageVector = Icons.Default.Phone,
                                                 contentDescription = "",
                                                 tint = greenku
                                             )
-                                            Spacer(modifier = Modifier.width(12.dp))
+                                            Spacer(modifier = Modifier.width(10.dp))
                                             Text(
                                                 text = "082226373138",
                                                 color = Color.Black,
                                                 fontFamily = worksans,
-                                                fontSize = 12.sp
+                                                fontSize = 14.sp
                                             )
                                         }
-                                        Spacer(modifier = Modifier.height(9.dp))
-                                        Row(verticalAlignment = Alignment.Top) {
+                                        Spacer(modifier = Modifier.height(10.dp))
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
                                             Icon(
                                                 painter = painterResource(id = R.drawable.watch),
                                                 contentDescription = "",
                                                 tint = greenku
                                             )
-                                            Spacer(modifier = Modifier.width(12.dp))
+                                            Spacer(modifier = Modifier.width(10.dp))
                                             Text(
                                                 text = "Buka setiap hari: 08.00 - 13.30 WIB\n" +
                                                         "Khusus hari jumat: 08.00 - 13.00 WIB\n" +
                                                         "Libur pada upacara kebesaran Keraton",
                                                 color = Color.Black,
                                                 fontFamily = worksans,
-                                                fontSize = 12.sp
+                                                fontSize = 14.sp
                                             )
                                         }
-                                        Spacer(modifier = Modifier.height(12.dp))
+                                        Spacer(modifier = Modifier.height(10.dp))
                                         Text(
                                             text = "Transport",
                                             fontFamily = worksansbold
                                         )
-                                        Spacer(modifier = Modifier.height(12.dp))
+                                        Spacer(modifier = Modifier.height(10.dp))
                                         Row(
                                             modifier = Modifier.fillMaxWidth(),
                                             verticalAlignment = Alignment.CenterVertically,
@@ -305,7 +316,7 @@ fun informationpage(photos: Array<Int> ,
                                                     contentDescription = "",
                                                     tint = greenku
                                                 )
-                                                Spacer(modifier = Modifier.width(12.dp))
+                                                Spacer(modifier = Modifier.width(10.dp))
                                                 Text(
                                                     text = "Stasiun Lempuyangan",
                                                     color = Color.Black,
@@ -320,7 +331,7 @@ fun informationpage(photos: Array<Int> ,
                                                 fontSize = 12.sp
                                             )
                                         }
-                                        Spacer(modifier = Modifier.height(12.dp))
+                                        Spacer(modifier = Modifier.height(10.dp))
                                         Row(
                                             modifier = Modifier.fillMaxWidth(),
                                             verticalAlignment = Alignment.CenterVertically,
@@ -334,7 +345,7 @@ fun informationpage(photos: Array<Int> ,
                                                     contentDescription = "",
                                                     tint = greenku
                                                 )
-                                                Spacer(modifier = Modifier.width(12.dp))
+                                                Spacer(modifier = Modifier.width(10.dp))
                                                 Text(
                                                     text = "Stasiun Yogyakarta",
                                                     color = Color.Black,
@@ -349,19 +360,19 @@ fun informationpage(photos: Array<Int> ,
                                                 fontSize = 12.sp
                                             )
                                         }
-                                        Spacer(modifier = Modifier.height(12.dp))
+                                        Spacer(modifier = Modifier.height(10.dp))
                                         Text(
                                             text = "Fasilitas",
                                             fontFamily = worksansbold
                                         )
-                                        Spacer(modifier = Modifier.height(12.dp))
+                                        Spacer(modifier = Modifier.height(10.dp))
                                         Row(verticalAlignment = Alignment.CenterVertically) {
                                             Icon(
                                                 painter = painterResource(id = R.drawable.mosque),
                                                 contentDescription = "",
                                                 tint = greenku
                                             )
-                                            Spacer(modifier = Modifier.width(12.dp))
+                                            Spacer(modifier = Modifier.width(10.dp))
                                             Text(
                                                 text = "Mushola",
                                                 color = Color.Black,
@@ -489,4 +500,15 @@ fun RowItem(
             }
         }
     }
+}
+@Preview
+@Composable
+fun InformationPagePreview() {
+    informationpage(
+        photos = arrayOf(1, 2, 3),
+        name = arrayOf("Name 1", "Name 2", "Name 3"),
+        rate = arrayOf("Rate 1", "Rate 2", "Rate 3"),
+        itemIndex = 0,
+        navController = rememberNavController()
+    )
 }

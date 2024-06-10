@@ -17,11 +17,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
+import com.swakarya.museumyog.presentation.splash.splashScreen
+import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
@@ -126,39 +130,22 @@ fun onboarding2(navController: NavHostController) {
                 padding(start = 20.dp, top = 0.dp, end = 0.dp, bottom = 50.dp))
         }
     }
-    Box(modifier = Modifier.fillMaxSize(),
+    Box(modifier = Modifier.fillMaxSize()
+        .padding(10.dp),
         Alignment.TopCenter){
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(modifier = Modifier.height(580.dp))
-            Text(text = "Booking Tiket & Rasakan ",
+            Text(text = "Booking Tiket & Rasakan Event Seru di Museum!",
                 color = greenku,
-                fontSize = 25.sp,
-                fontFamily = worksansbold
-            )
-            Text(text = "Event Seru di Museum!",
-                color = greenku,
-                fontSize = 25.sp,
-                fontFamily = worksansbold
+                fontSize = 24.sp,
+                fontFamily = worksansbold,
+                textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "Dengan MuseumYog, Booking tiket",            color = greyku,
-                fontSize = 17.sp,
-                fontFamily = worksans
-            )
-            Text(text = "dengan mudah dan dapatkan info",
-                color = greyku,
-                fontSize = 17.sp,
-                fontFamily = worksans
-            )
-            Text(text = "terupdate event seru di seluruh",
-                color = greyku,
-                fontSize = 17.sp,
-                fontFamily = worksans
-            )
-            Text(text = "Museum Yogyakarta!",
-                color = greyku,
-                fontSize = 17.sp,
-                fontFamily = worksans
+            Text(text = "Dengan MuseumYog, Booking tiket dengan mudah dan dapatkan info terupdate event seru di seluruh Museum Yogyakarta!",            color = greyku,
+                fontSize = 16.sp,
+                fontFamily = worksans,
+                textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(25.dp))
             Row(horizontalArrangement = Arrangement.Center,
@@ -187,5 +174,12 @@ fun onboarding2(navController: NavHostController) {
             )
 
         }
+    }
+}
+@Preview(showBackground = true)
+@Composable
+private fun on() {
+    MuseumYogTheme {
+        onboarding2(navController = rememberNavController())
     }
 }
