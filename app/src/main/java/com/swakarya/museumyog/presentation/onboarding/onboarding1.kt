@@ -22,6 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -34,6 +35,7 @@ import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.jogja
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
+import com.swakarya.museumyog.ui.theme.worksanssemibold
 
 @Composable
 fun onboarding1(navController: NavController) {
@@ -69,33 +71,25 @@ fun onboarding1(navController: NavController) {
                 contentDescription ="Museum",
                 modifier = Modifier.size(450.dp))
         }
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Spacer(modifier = Modifier.height(560.dp))
+        Column(horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.size(width = 300.dp, height = 1000.dp)) {
+            Spacer(modifier = Modifier.height(550.dp))
             Text(text = "Yogyakarta",
                 color = Color.White,
-                fontSize = 50.sp,
+                fontSize = 45.sp,
                 fontFamily = jogja
             )
             Text(text = "Penuh Dengan Cerita!",
                 color = Color.White,
                 fontSize = 20.sp,
-                fontFamily = worksansbold
+                fontFamily = worksanssemibold
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "Temukan museum terpopuler dan",
+            Text(text = "Temukan museum terpopuler dan historis  Yogyakarta di sekitarmu dengan mudah dan lengkap!",
                 color = Color.White,
                 fontSize = 15.sp,
-                fontFamily = worksans
-            )
-            Text(text = "historis  Yogyakarta di sekitarmu",
-                color = Color.White,
-                fontSize = 15.sp,
-                fontFamily = worksans
-            )
-            Text(text = "dengan mudah dan lengkap! ",
-                color = Color.White,
-                fontSize = 15.sp,
-                fontFamily = worksans
+                fontFamily = worksans,
+                textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(35.dp))
             Row(horizontalArrangement = Arrangement.Center,
@@ -115,10 +109,12 @@ fun onboarding1(navController: NavController) {
             Spacer(modifier = Modifier.height(15.dp))
             Text(text = "CopyRight By Swakarya 2024",
                 color = Color.White,
+                fontSize = 14.sp,
                 fontFamily = worksans
             )
             Spacer(modifier = Modifier.height(2.dp))
             Text(text = "Version 1.0.0",
+                fontSize = 14.sp,
                 color = Color.White,
                 fontFamily = worksans
             )

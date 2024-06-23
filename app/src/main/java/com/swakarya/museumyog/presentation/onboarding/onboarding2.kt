@@ -47,13 +47,13 @@ fun onboarding2(navController: NavHostController) {
         .clickable { navController.navigate("onboarding3") },
         Alignment.TopCenter){
         Column {
-            Spacer(modifier = Modifier.height(70.dp))
+            Spacer(modifier = Modifier.height(65.dp))
             Image(painter = painterResource(id = R.drawable.siluet_museum),
                 contentDescription ="Siluet Museum",
                 modifier = Modifier.size(450.dp))
         }
         Column {
-            Spacer(modifier = Modifier.height(144.dp))
+            Spacer(modifier = Modifier.height(140.dp))
             Image(painter = painterResource(id = R.drawable.pasar),
                 contentDescription ="pasar gak sie?",
                 modifier = Modifier.size(450.dp))
@@ -90,7 +90,7 @@ fun onboarding2(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopCenter){
         Column {
-            Spacer(modifier = Modifier.height(400.dp))
+            Spacer(modifier = Modifier.height(390.dp))
             Image(
                 painter = painterResource(id = R.drawable.bayangan),
                 contentDescription = "bayangan",
@@ -100,18 +100,18 @@ fun onboarding2(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopCenter) {
         Column {
-            Spacer(modifier = Modifier.height(200.dp))
+            Spacer(modifier = Modifier.height(160.dp))
             Image(
                 painter = painterResource(id = R.drawable.laki_perempuan),
                 contentDescription = "lanang wadon",
-                modifier = Modifier.size(350.dp))
+                modifier = Modifier.size(380.dp))
 
         }
     }
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopEnd){
         Column {
-            Spacer(modifier = Modifier.height(460.dp))
+            Spacer(modifier = Modifier.height(450.dp))
             Image(
                 painter = painterResource(id = R.drawable.tanaman4),
                 contentDescription = "tanaman",
@@ -122,7 +122,7 @@ fun onboarding2(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopStart){
         Column {
-            Spacer(modifier = Modifier.height(500.dp))
+            Spacer(modifier = Modifier.height(490.dp))
             Image(
                 painter = painterResource(id = R.drawable.tanaman3),
                 contentDescription = "tanaman",
@@ -133,8 +133,9 @@ fun onboarding2(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize()
         .padding(10.dp),
         Alignment.TopCenter){
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Spacer(modifier = Modifier.height(580.dp))
+        Column(horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.size(width = 350.dp, height = 1000.dp)) {
+            Spacer(modifier = Modifier.height(560.dp))
             Text(text = "Booking Tiket & Rasakan Event Seru di Museum!",
                 color = greenku,
                 fontSize = 24.sp,
@@ -147,7 +148,7 @@ fun onboarding2(navController: NavHostController) {
                 fontFamily = worksans,
                 textAlign = TextAlign.Center
             )
-            Spacer(modifier = Modifier.height(25.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             Row(horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically){
                 Image(painter = painterResource(id = R.drawable.lingkaran),
@@ -164,11 +165,13 @@ fun onboarding2(navController: NavHostController) {
             }
             Spacer(modifier = Modifier.height(10.dp))
             Text(text = "CopyRight By Swakarya 2024",
+                fontSize = 14.sp,
                 color = greyku,
                 fontFamily = worksans
             )
             Spacer(modifier = Modifier.height(2.dp))
             Text(text = "Version 1.0.0",
+                fontSize = 14.sp,
                 color = greyku,
                 fontFamily = worksans
             )

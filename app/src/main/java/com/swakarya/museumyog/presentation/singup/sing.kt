@@ -20,19 +20,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.FieldPassword
 import com.swakarya.museumyog.app.component.FieldUsername
 import com.swakarya.museumyog.app.component.Fullname
 import com.swakarya.museumyog.app.component.SharedVariables.password
 import com.swakarya.museumyog.app.component.SharedVariables.username
+import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.coklatku
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
+import com.swakarya.museumyog.ui.theme.worksanssemibold
 
 @Composable
 fun singUp(navController: NavHostController){
@@ -67,22 +71,22 @@ fun singUp(navController: NavHostController){
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopCenter){
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Spacer(modifier = Modifier.height(330.dp))
+            Spacer(modifier = Modifier.height(320.dp))
             Text(text = "Daftar Sekarang!",
                 color = coklatku,
                 fontFamily = worksansbold,
-                fontSize = 30.sp)
+                fontSize = 24.sp)
             Text(text = "Dapatkan pengalaman lebih seru bersama kami!",
                 color= Color.Black,
                 fontFamily = worksans,
-                fontSize = 15.sp)
+                fontSize = 12.sp)
             Spacer(modifier = Modifier.height(10.dp))
             Fullname()
             Spacer(modifier = Modifier.height(10.dp))
             FieldUsername()
             Spacer(modifier = Modifier.height(10.dp))
             FieldPassword()
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             Button(onClick = {  navController.navigate("login")
                 username = ""
                 password = ""},
@@ -90,29 +94,33 @@ fun singUp(navController: NavHostController){
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier.size(width = 350.dp, height = 60.dp))
             {
-                Text(text = "Daftar")
+                Text(text = "Daftar",
+                    fontFamily = worksanssemibold,
+                    fontSize = 16.sp)
             }
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "Atau daftar dengan")
+            Spacer(modifier = Modifier.height(15.dp))
+            Text(text = "Atau daftar dengan",
+                fontFamily = worksans,
+                fontSize = 14.sp)
         }
     }
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopCenter){
         Column {
-            Spacer(modifier = Modifier.height(690.dp))
-            Row(verticalAlignment = Alignment.Top) {
+            Spacer(modifier = Modifier.height(710.dp))
+            Row() {
                 TextButton(onClick = { /*TODO*/ }) {
                     Image(painter = painterResource(id = R.drawable.google),
                         contentDescription =null,
                         modifier = Modifier
-                            .size(150.dp))
+                            .size(height = 42.dp, width = 127.dp))
                 }
                 Spacer(modifier = Modifier.width(10.dp))
                 TextButton(onClick = { /*TODO*/ }) {
                     Image(painter = painterResource(id = R.drawable.facebook),
                         contentDescription =null ,
                         modifier = Modifier
-                            .size(150.dp))
+                            .size(height = 42.dp, width = 147.dp))
                 }
             }
         }
@@ -120,17 +128,28 @@ fun singUp(navController: NavHostController){
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopCenter){
         Column {
-            Spacer(modifier = Modifier.height(790.dp))
+            Spacer(modifier = Modifier.height(770.dp))
             Row (verticalAlignment = Alignment.CenterVertically){
-                Text(text = "Sudah punya akun?")
+                Text(text = "Sudah punya akun?",
+                    fontFamily = worksans,
+                    fontSize = 14.sp)
                 TextButton(onClick = { navController.navigate("login")
                 username = ""
                 password = ""}) {
                     Text(text = "Masuk",
                         color = greenku,
+                        fontFamily = worksans,
+                        fontSize = 14.sp,
                         textDecoration = TextDecoration.Underline)
                 }
             }
         }
+    }
+}
+@Preview(showBackground = true)
+@Composable
+private fun sing() {
+    MuseumYogTheme {
+        singUp(navController = rememberNavController())
     }
 }

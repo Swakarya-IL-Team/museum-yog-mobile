@@ -17,10 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.swakarya.museumyog.app.component.SharedVariables.fullname
 import com.swakarya.museumyog.app.component.SharedVariables.password
 import com.swakarya.museumyog.app.component.SharedVariables.username
 import com.swakarya.museumyog.ui.theme.greyku
+import com.swakarya.museumyog.ui.theme.worksans
+
 @Preview
 @Composable
 fun FieldPassword() {
@@ -34,7 +37,9 @@ fun FieldPassword() {
             contentDescription = null)
         },
         onValueChange = { password = it },
-        placeholder = { Text(text = "Password") },
+        placeholder = { Text(text = "Password",
+            fontSize = 14.sp,
+            fontFamily = worksans) },
         visualTransformation = PasswordVisualTransformation()
     )
 }
@@ -48,7 +53,9 @@ fun FieldUsername() {
             .border(2.dp, greyku, RoundedCornerShape(20)),
         shape = RoundedCornerShape(20),
         onValueChange = { username = it },
-        placeholder = { Text(text = "Username") }
+        placeholder = { Text(text = "Username",
+                fontSize = 14.sp,
+            fontFamily = worksans) }
     )
 }
 @Composable
@@ -60,6 +67,8 @@ fun Fullname() {
             .border(2.dp, greyku, RoundedCornerShape(20)),
         shape = RoundedCornerShape(20),
         onValueChange = { fullname = it },
-        placeholder = { Text(text = "Username") }
+        placeholder = { Text(text = "Fullname",
+            fontSize = 14.sp,
+            fontFamily = worksans) }
     )
 }

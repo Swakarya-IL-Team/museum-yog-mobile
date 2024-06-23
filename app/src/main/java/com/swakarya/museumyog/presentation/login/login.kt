@@ -86,7 +86,7 @@ fun login(navController: NavHostController) {
             Text(text = " Ayo Lanjutkan Perjalanan Bersama Kami!",
                 fontFamily = worksans,
                 fontSize = 12.sp)
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(15.dp))
             FieldUsername()
             Spacer(modifier = Modifier.height(8.dp))
             FieldPassword()
@@ -102,7 +102,7 @@ fun login(navController: NavHostController) {
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(5.dp))
+            Spacer(modifier = Modifier.height(1.dp))
             Button(onClick = { if (username.isEmpty() || password.isEmpty()){
                                  Toast.makeText(context, "username atau password belum terisis", Toast.LENGTH_SHORT).show()
                              } else {navController.navigate(route = "home")}
@@ -125,30 +125,44 @@ fun login(navController: NavHostController) {
                     fontFamily = worksansbold
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             Text(text = "Atau masuk dengan")
-            Row(modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalAlignment = Alignment.CenterVertically){
-                Image(painter = painterResource(id = R.drawable.google),
-                    contentDescription ="foto gugel",
-                    modifier = Modifier.size(150.dp)
-                        .padding(bottom = 60.dp))
-                Image(painter = painterResource(id = R.drawable.facebook),
-                    contentDescription ="foto facebook",
-                    modifier = Modifier.size(150.dp)
-                        .padding(bottom = 60.dp))
+        }
+        Box(modifier = Modifier.fillMaxSize(),
+            Alignment.TopCenter){
+            Column {
+                Spacer(modifier = Modifier.height(710.dp))
+                Row() {
+                    TextButton(onClick = { /*TODO*/ }) {
+                        Image(painter = painterResource(id = R.drawable.google),
+                            contentDescription =null,
+                            modifier = Modifier
+                                .size(height = 42.dp, width = 127.dp))
+                    }
+                    Spacer(modifier = Modifier.width(10.dp))
+                    TextButton(onClick = { /*TODO*/ }) {
+                        Image(painter = painterResource(id = R.drawable.facebook),
+                            contentDescription =null ,
+                            modifier = Modifier
+                                .size(height = 42.dp, width = 147.dp))
+                    }
+                }
             }
         }
         Box(modifier = Modifier.fillMaxSize(),
             Alignment.TopCenter){
             Column {
-                Spacer(modifier = Modifier.height(790.dp))
-                Row (verticalAlignment = Alignment.CenterVertically){
-                    Text(text = "Belum punya akun?")
+                Spacer(modifier = Modifier.height(760.dp))
+                Row (verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center){
+                    Text(text = "Belum punya akun?",
+                        fontSize = 14.sp,
+                        fontFamily = worksans)
                     TextButton(onClick = { navController.navigate("singup") }) {
                         Text(text = "Daftar sekarang",
                             color = greenku,
+                            fontSize = 14.sp,
+                            fontFamily = worksans,
                             textDecoration = TextDecoration.Underline)
                     }
                 }

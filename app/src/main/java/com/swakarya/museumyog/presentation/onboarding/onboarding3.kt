@@ -65,7 +65,7 @@ fun onboarding3(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopStart){
         Column {
-            Spacer(modifier = Modifier.height(90.dp))
+            Spacer(modifier = Modifier.height(80.dp))
             Image(painter = painterResource(id = R.drawable.pohon2),
                 contentDescription ="pohon",
                 modifier = Modifier
@@ -124,7 +124,7 @@ fun onboarding3(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopCenter) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Spacer(modifier = Modifier.height(600.dp))
+            Spacer(modifier = Modifier.height(590.dp))
             Text(
                 text = "Selamat Datang di MuseumYog! ",
                 fontSize = 20.sp,
@@ -144,7 +144,7 @@ fun onboarding3(navController: NavHostController) {
             {
                 Text(text = "Siap!")
             }
-            Spacer(modifier = Modifier.height(50.dp))
+            Spacer(modifier = Modifier.height(40.dp))
             Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
@@ -170,12 +170,14 @@ fun onboarding3(navController: NavHostController) {
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = "CopyRight By Swakarya 2024",
+                fontSize = 14.sp,
                 color = greyku,
                 fontFamily = worksans
             )
             Spacer(modifier = Modifier.height(2.dp))
             Text(
                 text = "Version 1.0.0",
+                fontSize = 14.sp,
                 color = greyku,
                 fontFamily = worksans
             )

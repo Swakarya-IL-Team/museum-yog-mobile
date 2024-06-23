@@ -105,8 +105,8 @@ fun listPayment(
                     ) {
                         Text(
                             text = name[itemIndex!!],
-                            fontFamily = worksansbold,
-                            fontSize = 18.sp
+                            fontFamily = worksanssemibold,
+                            fontSize = 16.sp
                         )
                     }
                 },
@@ -451,7 +451,7 @@ fun listPayment(
                             }
                         })
             }
-            Spacer(modifier = Modifier.height(150.dp))
+            Spacer(modifier = Modifier.height(110.dp))
             Text(
                 text = "Jumlah Tiket",
                 fontFamily = worksanssemibold,
