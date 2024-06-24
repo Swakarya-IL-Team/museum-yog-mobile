@@ -18,12 +18,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.presentation.splash.splashScreen
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
@@ -137,7 +139,7 @@ fun onboarding3(navController: NavHostController) {
                 fontFamily = worksans
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = { navController.navigate("login")},
+            Button(onClick = { navController.navigate("login") },
                 colors = ButtonDefaults.buttonColors(greenku),
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier.size(width = 350.dp, height = 50.dp))

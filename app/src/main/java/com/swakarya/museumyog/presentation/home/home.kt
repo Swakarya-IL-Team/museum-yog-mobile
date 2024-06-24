@@ -53,7 +53,6 @@ import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.BottomBar
 import com.swakarya.museumyog.app.component.SharedVariables.fullname
-import com.swakarya.museumyog.app.component.SharedVariables.username
 import com.swakarya.museumyog.data.model.imageId
 import com.swakarya.museumyog.data.model.imageMuseum
 import com.swakarya.museumyog.data.model.nameMuseum

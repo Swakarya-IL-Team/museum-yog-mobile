@@ -1,13 +1,15 @@
 package com.swakarya.museumyog.navigation
 
 import android.annotation.SuppressLint
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.swakarya.museumyog.app.component.SharedVariables.username
+import com.swakarya.museumyog.app.component.SharedVariables.email
+import com.swakarya.museumyog.app.component.SharedVariables.fullname
 import com.swakarya.museumyog.data.model.imageMuseum
 import com.swakarya.museumyog.data.model.nameMuseum
 import com.swakarya.museumyog.data.model.rateMuseum
@@ -36,8 +38,8 @@ import com.swakarya.museumyog.presentation.onboarding.onboarding2
 import com.swakarya.museumyog.presentation.onboarding.onboarding3
 import com.swakarya.museumyog.presentation.splash.splashScreen
 import com.swakarya.museumyog.presentation.ReviewUsers.ReviewUsers
+import com.swakarya.museumyog.presentation.login.LoginViewModel
 import com.swakarya.museumyog.presentation.tiket.tiket
-
 
 @SuppressLint("ComposableDestinationInComposeScope")
 @Composable
@@ -50,8 +52,7 @@ fun Navigation() {
         composable(route="splash"){
             splashScreen(navController)
         }
-
-        composable(route = "login") {
+        composable("login") {
             login(navController)
         }
         composable(route = "singup") {
@@ -89,7 +90,7 @@ fun Navigation() {
         }
         composable(route="home"){
             HomePage(
-                text = "$username",
+                text = "$fullname",
                 onTextChange = {},
                 placeHolder = "Mau ke Museum apa ?",
                 onCloseClicked = {},

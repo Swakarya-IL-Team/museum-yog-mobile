@@ -43,7 +43,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.SharedVariables.fullname
-import com.swakarya.museumyog.app.component.SharedVariables.username
+import com.swakarya.museumyog.app.component.SharedVariables.email
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.green5
 import com.swakarya.museumyog.ui.theme.greenku
@@ -158,8 +158,8 @@ fun EditProfileMenu(modifier: Modifier = Modifier, navController: NavHostControl
                 fontSize = 14.sp
             )
             OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
+                value = email,
+                onValueChange = { email = it },
                 label = {
                     Text(
                         "Ketik disini",

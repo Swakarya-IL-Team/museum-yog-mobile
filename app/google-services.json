@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "648458681946",
+    "firebase_url": "https://museumyog-175c9-default-rtdb.firebaseio.com",
+    "project_id": "museumyog-175c9",
+    "storage_bucket": "museumyog-175c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648458681946:android:b6b260266c6bf63cb0a263",
+        "android_client_info": {
+          "package_name": "com.swakarya.museumyog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHNCjhtCxU5bhAz44BKG6mbbG3QPPwH_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

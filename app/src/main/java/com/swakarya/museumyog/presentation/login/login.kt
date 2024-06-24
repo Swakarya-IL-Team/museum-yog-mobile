@@ -21,6 +21,12 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,23 +36,28 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.FieldPassword
 import com.swakarya.museumyog.app.component.FieldUsername
+import com.swakarya.museumyog.app.component.SharedVariables.email
 import com.swakarya.museumyog.app.component.SharedVariables.password
-import com.swakarya.museumyog.app.component.SharedVariables.username
-import com.swakarya.museumyog.presentation.splash.splashScreen
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
+import kotlinx.coroutines.launch
 
 @Composable
 fun login(navController: NavHostController) {
+    val viewModel: LoginViewModel = hiltViewModel()
+    val coroutineScope = rememberCoroutineScope()
+    val state = viewModel.state.collectAsState(initial = null)
     val context = LocalContext.current
+
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopCenter){
         Image(painter = painterResource(id = R.drawable.laki_dan_backgroud),
@@ -103,10 +114,25 @@ fun login(navController: NavHostController) {
                 }
             }
             Spacer(modifier = Modifier.height(1.dp))
-            Button(onClick = { if (username.isEmpty() || password.isEmpty()){
-                                 Toast.makeText(context, "username atau password belum terisis", Toast.LENGTH_SHORT).show()
-                             } else {navController.navigate(route = "home")}
-                             } ,
+            Button(onClick = { coroutineScope.launch {
+                if(email.isBlank() || password.isBlank()){
+                   Toast.makeText(
+                       context,
+                       "Email dan Password harus di isi",
+                       Toast.LENGTH_SHORT
+                   )
+                       .show()
+                }else{
+                    viewModel.loginUser(email,password){
+                        navController.navigate("home"){
+                            popUpTo("login")
+                            { inclusive = true }
+                        }
+                        email = ""
+                        password = ""
+                    }
+                }
+            } } ,
                 colors = ButtonDefaults.buttonColors(greenku),
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier.size(width = 350.dp, height = 60.dp))
@@ -114,8 +140,7 @@ fun login(navController: NavHostController) {
                 Text(text = "Masuk")
             }
             Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = { navController.navigate(route = "home")
-                             username = ""},
+            Button(onClick = {navController.navigate("home") },
                 border = BorderStroke(2.dp, color = greenku),
                 colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black),
                 shape = RoundedCornerShape(10.dp),

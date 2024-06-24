@@ -102,8 +102,6 @@ fun listpayment2(
                             text = name[itemIndex!!],
                             fontFamily = worksanssemibold,
                             fontSize = 16.sp,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
                         )
                     }
                 },

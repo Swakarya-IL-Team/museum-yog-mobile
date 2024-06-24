@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.swakarya.museumyog.app.component.SharedVariables.fullname
 import com.swakarya.museumyog.app.component.SharedVariables.password
-import com.swakarya.museumyog.app.component.SharedVariables.username
+import com.swakarya.museumyog.app.component.SharedVariables.email
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
 
@@ -47,12 +47,12 @@ fun FieldPassword() {
 @Composable
 fun FieldUsername() {
     OutlinedTextField(
-        value = username,
+        value = email,
         modifier = Modifier
             .size(width = 350.dp, height = 60.dp)
             .border(2.dp, greyku, RoundedCornerShape(20)),
         shape = RoundedCornerShape(20),
-        onValueChange = { username = it },
+        onValueChange = { email = it },
         placeholder = { Text(text = "Username",
                 fontSize = 14.sp,
             fontFamily = worksans) }

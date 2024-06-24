@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greyku
@@ -31,7 +32,23 @@ import kotlinx.coroutines.delay
 fun splashScreen(navController: NavController){
     LaunchedEffect(key1 = true) {
         delay(1000)
-        navController.navigate("onboarding1")
+        try {
+            val currentUser = FirebaseAuth.getInstance().currentUser
+            if (currentUser?.email.isNullOrEmpty()) {
+                navController.navigate("onboarding1") {
+                    popUpTo("splash")
+                    { inclusive = true }
+                }
+            } else {
+                navController.navigate("home") {
+                    popUpTo("splash")
+                    { inclusive = true }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // Optionally, log the error or show a Toast message
+        }
     }
     Column {
         Box(modifier = Modifier

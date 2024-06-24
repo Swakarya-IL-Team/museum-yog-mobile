@@ -40,10 +40,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.BottomBar
 import com.swakarya.museumyog.app.component.SharedVariables.fullname
-import com.swakarya.museumyog.app.component.SharedVariables.username
+import com.swakarya.museumyog.app.component.SharedVariables.email
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 
 var notificationSwitchState by mutableStateOf(false)
@@ -85,7 +86,7 @@ fun ProfileMenu(
                     Text(
                         modifier = Modifier
                             .padding(top = 12.dp),
-                        text = "$fullname",
+                        text = "User Fullname", // Replace this with your user's fullname variable
                         color = Color(0xfff2f2f2),
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Normal,
@@ -121,8 +122,8 @@ fun ProfileMenu(
                         IconWithSwitch(
                             text = "Notifikasi",
                             icon = painterResource(id = R.drawable.icon_notification),
-                            isChecked = notificationSwitchState,
-                            onCheckedChange = { isChecked -> notificationSwitchState = isChecked }
+                            isChecked = false, // Replace with your switch state variable
+                            onCheckedChange = { /* Handle switch state change */ }
                         )
                         Spacer(modifier = Modifier.height(18.dp))
                         IconWithText(
@@ -132,9 +133,6 @@ fun ProfileMenu(
                             route = "editbahasa",
                             navController = navController
                         )
-//                            onClick = {
-//
-//                            }
 
                         Spacer(modifier = Modifier.height(18.dp))
                     }
@@ -184,19 +182,22 @@ fun ProfileMenu(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(top = 17.dp, bottom = 17.dp)
-                            .clickable { }
                     ) {
                         IconWithText(
                             text = "Keluar",
                             icon = painterResource(id = R.drawable.icon_leave),
                             textColor = Color(0xFFC57557),
                             route = "login",
-                            navController = navController
+                            navController = navController,
+                            onClick = {
+                                FirebaseAuth.getInstance().signOut()
+                                navController.navigate("login") {
+                                    popUpTo("profil") {
+                                        inclusive = true
+                                    }
+                                }
+                            }
                         )
-//                            onClick = {
-//
-//                            }
-
                     }
                 }
             }
@@ -210,11 +211,18 @@ fun IconWithText(
     text: String,
     icon: Painter,
     textColor: Color,
-    route : String,
-    navController: NavController
+    route: String? = null,
+    navController: NavController,
+    onClick: (() -> Unit)? = null // Add this parameter
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable {navController.navigate(route) }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.clickable {
+            onClick?.invoke()
+            route?.let {
+                navController.navigate(it)
+            }
+        }
     ) {
         Image(
             painter = icon,
@@ -265,7 +273,14 @@ fun IconWithSwitch(
         )
     }
 }
-
+fun logout(navController: NavController) {
+    FirebaseAuth.getInstance().signOut()
+    navController.navigate("login") {
+        popUpTo("profil") {
+            inclusive = true
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable

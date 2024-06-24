@@ -1,4 +1,5 @@
 package com.swakarya.museumyog.presentation.singup
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,14 +16,18 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
@@ -30,17 +35,23 @@ import com.swakarya.museumyog.app.component.FieldPassword
 import com.swakarya.museumyog.app.component.FieldUsername
 import com.swakarya.museumyog.app.component.Fullname
 import com.swakarya.museumyog.app.component.SharedVariables.password
-import com.swakarya.museumyog.app.component.SharedVariables.username
+import com.swakarya.museumyog.app.component.SharedVariables.email
+import com.swakarya.museumyog.app.component.SharedVariables.fullname
+import com.swakarya.museumyog.presentation.login.LoginViewModel
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.coklatku
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
 import com.swakarya.museumyog.ui.theme.worksanssemibold
+import kotlinx.coroutines.launch
+
 
 @Composable
 fun singUp(navController: NavHostController){
-
+    val coroutineScope = rememberCoroutineScope()
+    val viewModel: LoginViewModel = hiltViewModel()
+    val context = LocalContext.current
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopCenter){
         Image(painter = painterResource(id = R.drawable.perempuan_dan_background),
@@ -87,9 +98,25 @@ fun singUp(navController: NavHostController){
             Spacer(modifier = Modifier.height(10.dp))
             FieldPassword()
             Spacer(modifier = Modifier.height(30.dp))
-            Button(onClick = {  navController.navigate("login")
-                username = ""
-                password = ""},
+            Button(onClick = {
+                coroutineScope.launch {
+                if (fullname.isBlank()|| email.isBlank()|| password.isBlank()){
+                    Toast.makeText(
+                        context,
+                        "Field masih kosong!!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }else {
+                    viewModel.registerUser(email, password) {
+                        navController.navigate("login") {
+                            popUpTo("login")
+                            { inclusive = true }
+                        }
+                        email =""
+                        password =""
+                    }
+                }
+            }},
                 colors = ButtonDefaults.buttonColors(greenku),
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier.size(width = 350.dp, height = 60.dp))
@@ -134,7 +161,7 @@ fun singUp(navController: NavHostController){
                     fontFamily = worksans,
                     fontSize = 14.sp)
                 TextButton(onClick = { navController.navigate("login")
-                username = ""
+                email = ""
                 password = ""}) {
                     Text(text = "Masuk",
                         color = greenku,

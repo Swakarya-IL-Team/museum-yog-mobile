@@ -41,9 +41,11 @@ object SharedVariables {
     var bankpay by mutableStateOf(false)
     val SelectedDate = mutableStateOf(LocalDate.now())
     val date = mutableStateOf(LocalDate.now())
-    var username by mutableStateOf("")
+    var email by mutableStateOf("")
     var password by mutableStateOf("")
     var fullname by mutableStateOf("")
     var terdekat by mutableStateOf(false)
+    var passwordConfirm by mutableStateOf("")
+    var isRegistering by  mutableStateOf(false)
 }
 
