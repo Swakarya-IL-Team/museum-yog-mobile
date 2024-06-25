@@ -100,23 +100,22 @@ fun singUp(navController: NavHostController){
             Spacer(modifier = Modifier.height(30.dp))
             Button(onClick = {
                 coroutineScope.launch {
-                if (fullname.isBlank()|| email.isBlank()|| password.isBlank()){
-                    Toast.makeText(
-                        context,
-                        "Field masih kosong!!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }else {
-                    viewModel.registerUser(email, password) {
-                        navController.navigate("login") {
-                            popUpTo("login")
-                            { inclusive = true }
+                    if (fullname.isBlank() || email.isBlank() || password.isBlank()) {
+                        Toast.makeText(
+                            context,
+                            "Field masih kosong!!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        viewModel.registerUser(email, password) {
+                            navController.navigate("login") {
+                                popUpTo("signup") { inclusive = true }
+                            }
+                            email = ""
+                            password = ""
                         }
-                        email =""
-                        password =""
                     }
-                }
-            }},
+                }},
                 colors = ButtonDefaults.buttonColors(greenku),
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier.size(width = 350.dp, height = 60.dp))

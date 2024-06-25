@@ -86,7 +86,7 @@ fun ProfileMenu(
                     Text(
                         modifier = Modifier
                             .padding(top = 12.dp),
-                        text = "User Fullname", // Replace this with your user's fullname variable
+                        text = "$fullname",
                         color = Color(0xfff2f2f2),
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Normal,

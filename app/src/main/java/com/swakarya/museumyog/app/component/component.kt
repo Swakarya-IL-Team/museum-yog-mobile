@@ -53,7 +53,7 @@ fun FieldUsername() {
             .border(2.dp, greyku, RoundedCornerShape(20)),
         shape = RoundedCornerShape(20),
         onValueChange = { email = it },
-        placeholder = { Text(text = "Username",
+        placeholder = { Text(text = "Email",
                 fontSize = 14.sp,
             fontFamily = worksans) }
     )
