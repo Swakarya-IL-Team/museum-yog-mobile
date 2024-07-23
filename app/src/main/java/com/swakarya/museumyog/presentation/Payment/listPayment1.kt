@@ -125,7 +125,7 @@ fun listPayment(
             )
         }
     ) {
-        Column {
+        Column(modifier = Modifier.padding(bottom = 100.dp)) {
             Box(modifier = Modifier.fillMaxWidth()) {
                 Row(
                     modifier = Modifier
@@ -142,28 +142,19 @@ fun listPayment(
                         )
 
                     }
-                    TextButton(onClick = { navController.navigate("pay2/$itemIndex") }) {
-                        Text(
-                            text = "Paket",
-                            fontFamily = worksans,
-                            color = greyku
-                        )
-
-                    }
                 }
                 Divider(
                     color = greyku, thickness = 1.dp,
                     modifier = Modifier.offset(x = 0.dp, y = 100.dp)
                 )
-                Image(
-                    painter = painterResource(id = R.drawable.line),
-                    contentDescription = "",
+                Divider(
+                    color = greenku,
                     modifier = Modifier
-                        .offset(x = 63.dp, y = 52.dp)
-                        .size(100.dp)
+                        .offset(x = 120.dp, y = 100.dp)
+                        .size(width = 150.dp, height = 3.dp)
                 )
             }
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(45.dp))
             Text(
                 text = "Mau berkunjung waktu apa?",
                 fontFamily = worksansbold,
@@ -253,55 +244,58 @@ fun listPayment(
                     )
                 }
                 Spacer(modifier = Modifier.width(125.dp))
-                Image(painter = painterResource(id = R.drawable.minusbutton),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(35.dp)
-                        .clickable {
-                            if ((anak != 0) and (weekend)) {
-                                anak--
-                                total -= wekndanak
-                            } else if ((anak != 0) and (!weekend)) {
-                                anak--
-                                total -= wekndaysanak
-                            } else {
-                                anak = 0
-                            }
-                        })
-                Card(
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.White
-                    ),
-                    border = BorderStroke(1.dp, Color.Black),
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .size(height = 35.dp, width = 50.dp),
-                    shape = RoundedCornerShape(5.dp)
-                ) {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxSize()
+                Row(verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(1.dp)) {
+                    Image(painter = painterResource(id = R.drawable.minusbutton),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(35.dp)
+                            .clickable {
+                                if ((anak != 0) and (weekend)) {
+                                    anak--
+                                    total -= wekndanak
+                                } else if ((anak != 0) and (!weekend)) {
+                                    anak--
+                                    total -= wekndaysanak
+                                } else {
+                                    anak = 0
+                                }
+                            })
+                    Card(
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color.White
+                        ),
+                        border = BorderStroke(1.dp, Color.Black),
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .size(height = 35.dp, width = 50.dp),
+                        shape = RoundedCornerShape(5.dp)
                     ) {
-                        Text(
-                            text = "$anak",
-                            fontSize = 25.sp
-                        )
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            Text(
+                                text = "$anak",
+                                fontSize = 25.sp
+                            )
+                        }
                     }
+                    Image(painter = painterResource(id = R.drawable.plusbutton),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(35.dp)
+                            .clickable {
+                                if (weekend) {
+                                    anak++
+                                    total += wekndanak
+                                } else if (!weekend) {
+                                    anak++
+                                    total += wekndaysanak
+                                }
+                            })
                 }
-                Image(painter = painterResource(id = R.drawable.plusbutton),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(35.dp)
-                        .clickable {
-                            if (weekend) {
-                                anak++
-                                total += wekndanak
-                            } else if (!weekend) {
-                                anak++
-                                total += wekndaysanak
-                            }
-                        })
             }
             Row(
                 modifier = Modifier
@@ -330,55 +324,59 @@ fun listPayment(
                     )
                 }
                 Spacer(modifier = Modifier.width(75.dp))
-                Image(painter = painterResource(id = R.drawable.minusbutton),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(35.dp)
-                        .clickable {
-                            if ((mhs != 0) and (weekend)) {
-                                mhs--
-                                total -= wekndmhs
-                            } else if ((mhs != 0) and (!weekend)) {
-                                mhs--
-                                total -= wekndaysmhs
-                            } else {
-                                mhs = 0
-                            }
-                        })
-                Card(
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.White
-                    ),
-                    border = BorderStroke(1.dp, Color.Black),
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .size(height = 35.dp, width = 50.dp),
-                    shape = RoundedCornerShape(5.dp)
-                ) {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxSize()
+                Row(verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(1.dp)) {
+                    Image(painter = painterResource(id = R.drawable.minusbutton),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(35.dp)
+                            .clickable {
+                                if ((mhs != 0) and (weekend)) {
+                                    mhs--
+                                    total -= wekndmhs
+                                } else if ((mhs != 0) and (!weekend)) {
+                                    mhs--
+                                    total -= wekndaysmhs
+                                } else {
+                                    mhs = 0
+                                }
+                            })
+                    Card(
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color.White
+                        ),
+                        border = BorderStroke(1.dp, Color.Black),
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .size(height = 35.dp, width = 50.dp),
+                        shape = RoundedCornerShape(5.dp)
                     ) {
-                        Text(
-                            text = "$mhs",
-                            fontSize = 25.sp
-                        )
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            Text(
+                                text = "$mhs",
+                                fontSize = 25.sp
+                            )
+                        }
                     }
+                    Image(painter = painterResource(id = R.drawable.plusbutton),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(35.dp)
+                            .clickable {
+                                if (weekend) {
+                                    mhs++
+                                    total += wekndmhs
+                                } else if (!weekend) {
+                                    mhs++
+                                    total += wekndaysmhs
+                                }
+                            })
                 }
-                Image(painter = painterResource(id = R.drawable.plusbutton),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(35.dp)
-                        .clickable {
-                            if (weekend) {
-                                mhs++
-                                total += wekndmhs
-                            } else if (!weekend) {
-                                mhs++
-                                total += wekndaysmhs
-                            }
-                        })
+
             }
             Row(
                 modifier = Modifier
@@ -403,64 +401,69 @@ fun listPayment(
                     )
                 }
                 Spacer(modifier = Modifier.width(155.dp))
-                Image(painter = painterResource(id = R.drawable.minusbutton),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(35.dp)
-                        .clickable {
-                            if ((dewasa != 0) and (weekend)) {
-                                dewasa--
-                                total -= weknddewasa
-                            } else if ((dewasa != 0) and (!weekend)) {
-                                dewasa--
-                                total -= wekndaysdewasa
-                            } else {
-                                dewasa = 0
-                            }
-                        })
-                Card(
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.White
-                    ),
-                    border = BorderStroke(1.dp, Color.Black),
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .size(height = 35.dp, width = 50.dp),
-                    shape = RoundedCornerShape(5.dp)
-                ) {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxSize()
+                Row(verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(1.dp)) {
+                    Image(painter = painterResource(id = R.drawable.minusbutton),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(35.dp)
+                            .clickable {
+                                if ((dewasa != 0) and (weekend)) {
+                                    dewasa--
+                                    total -= weknddewasa
+                                } else if ((dewasa != 0) and (!weekend)) {
+                                    dewasa--
+                                    total -= wekndaysdewasa
+                                } else {
+                                    dewasa = 0
+                                }
+                            })
+                    Card(
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color.White
+                        ),
+                        border = BorderStroke(1.dp, Color.Black),
+                        modifier = Modifier
+                            .padding(4.dp)
+                            .size(height = 35.dp, width = 50.dp),
+                        shape = RoundedCornerShape(5.dp)
                     ) {
-                        Text(
-                            text = "$dewasa",
-                            fontSize = 25.sp
-                        )
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            Text(
+                                text = "$dewasa",
+                                fontSize = 25.sp
+                            )
+                        }
                     }
+                    Image(painter = painterResource(id = R.drawable.plusbutton),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(35.dp)
+                            .clickable {
+                                if (weekend) {
+                                    dewasa++
+                                    total += weknddewasa
+                                } else if (!weekend) {
+                                    dewasa++
+                                    total += wekndaysdewasa
+                                }
+                            })
                 }
-                Image(painter = painterResource(id = R.drawable.plusbutton),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(35.dp)
-                        .clickable {
-                            if (weekend) {
-                                dewasa++
-                                total += weknddewasa
-                            } else if (!weekend) {
-                                dewasa++
-                                total += wekndaysdewasa
-                            }
-                        })
+
             }
-            Spacer(modifier = Modifier.height(110.dp))
+            Spacer(modifier = Modifier.height(120.dp))
             Text(
                 text = "Jumlah Tiket",
                 fontFamily = worksanssemibold,
                 modifier = Modifier.padding(start = 16.dp)
             )
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(1.dp)
             ) {
                 Text(
                     text = "Total: ",

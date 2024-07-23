@@ -100,7 +100,7 @@ fun listpayment3(navController: NavHostController,
             }
             },
                 navigationIcon =  {
-                    IconButton(onClick = { navController.navigate("pay2/$itemIndex")}) {
+                    IconButton(onClick = { navController.navigate("pay1/$itemIndex")}) {
                         Icon(imageVector = Icons.Default.KeyboardArrowLeft,
                             contentDescription = "",
                             tint = greenku,
