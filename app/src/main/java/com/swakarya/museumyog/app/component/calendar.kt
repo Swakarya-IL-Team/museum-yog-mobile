@@ -24,7 +24,12 @@ import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import com.swakarya.museumyog.app.component.SharedVariables.SelectedDate
+import com.swakarya.museumyog.app.component.SharedVariables.anak
 import com.swakarya.museumyog.app.component.SharedVariables.date
+import com.swakarya.museumyog.app.component.SharedVariables.dewasa
+import com.swakarya.museumyog.app.component.SharedVariables.mhs
+import com.swakarya.museumyog.app.component.SharedVariables.total
+import com.swakarya.museumyog.app.component.SharedVariables.weekend
 import com.swakarya.museumyog.ui.theme.greenku
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -35,7 +40,16 @@ fun calender(
     value: LocalDate,
     onValueChange: (LocalDate) -> Unit
 ) {
-
+    fun checkIfWeekend(date: LocalDate) {
+        val isWeekend = date.dayOfWeek == java.time.DayOfWeek.SATURDAY || date.dayOfWeek == java.time.DayOfWeek.SUNDAY
+        if (weekend != isWeekend) {
+            weekend = isWeekend
+            total = 0
+            anak = 0
+            mhs =0
+            dewasa = 0
+        }
+    }
     val open = remember { mutableStateOf(false) }
     val customColors = lightColorScheme(
         primary = greenku,
@@ -59,6 +73,7 @@ fun calender(
             selection = CalendarSelection.Date(
                 selectedDate = SelectedDate.value
             ) { newDate ->
+                checkIfWeekend(newDate)
                 SelectedDate.value = newDate
             },
         )

@@ -34,6 +34,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,21 +51,26 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
+import com.swakarya.museumyog.app.component.SharedVariables
 import com.swakarya.museumyog.app.component.SharedVariables.anak
 import com.swakarya.museumyog.app.component.SharedVariables.dewasa
 import com.swakarya.museumyog.app.component.SharedVariables.mhs
 import com.swakarya.museumyog.app.component.SharedVariables.total
+import com.swakarya.museumyog.app.component.SharedVariables.weekend
 import com.swakarya.museumyog.app.component.SharedVariables.wekndanak
 import com.swakarya.museumyog.app.component.SharedVariables.wekndaysanak
 import com.swakarya.museumyog.app.component.SharedVariables.wekndaysdewasa
 import com.swakarya.museumyog.app.component.SharedVariables.wekndaysmhs
 import com.swakarya.museumyog.app.component.SharedVariables.weknddewasa
 import com.swakarya.museumyog.app.component.SharedVariables.wekndmhs
+import com.swakarya.museumyog.app.component.calender
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
 import com.swakarya.museumyog.ui.theme.worksanssemibold
+import java.time.DayOfWeek
+import java.time.LocalDate
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -74,9 +80,8 @@ fun listPayment(
     name: Array<String>,
     itemIndex: Int?
 ) {
-    var weekend by remember { mutableStateOf(false) }
-    val color = if (weekend) greenku else Color.Black
-    val color1 = if (weekend) Color.Black else greenku
+    var weekend = weekend
+
     Scaffold(
         bottomBar = {
             BottomAppBar {
@@ -164,49 +169,16 @@ fun listPayment(
                     .padding(start = 16.dp)
             )
             Spacer(modifier = Modifier.height(10.dp))
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceAround,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                OutlinedButton(
-                    onClick = {
-                        weekend = false
-                        total = 0
-                        anak = 0
-                        mhs = 0
-                        dewasa = 0
-                        total = 0
-                    },
-                    border = BorderStroke(1.dp, color1),
-                    shape = RoundedCornerShape(10.dp),
-                    modifier = Modifier.size(width = 150.dp, height = 60.dp)
-                ) {
-                    Text(
-                        text = "Weekdays\n(senin-jumat)",
-                        color = color1,
-                        textAlign = TextAlign.Center
-                    )
-                }
-                OutlinedButton(
-                    onClick = {
-                        weekend = true
-                        total = 0
-                        anak = 0
-                        mhs = 0
-                        dewasa = 0
-                        total = 0
-                    },
-                    border = BorderStroke(1.dp, color),
-                    shape = RoundedCornerShape(10.dp),
-                    modifier = Modifier.size(width = 150.dp, height = 60.dp)
-                ) {
-                    Text(
-                        text = "Weekends\n(Sabtu-Minggu)",
-                        color = color,
-                        textAlign = TextAlign.Center
-                    )
-                }
+            Text(text = "Tanggal Kunjungan",
+                fontFamily = worksansbold,
+                fontSize = 14.sp,
+                modifier = Modifier.padding(10.dp))
+            Box(modifier = Modifier.fillMaxWidth(),
+                Alignment.Center) {
+                calender(
+                    value = SharedVariables.date.value,
+                    onValueChange = { SharedVariables.date.value = it}
+                )
             }
             Spacer(modifier = Modifier.height(20.dp))
             Text(
@@ -455,7 +427,7 @@ fun listPayment(
                 }
 
             }
-            Spacer(modifier = Modifier.height(120.dp))
+            Spacer(modifier = Modifier.height(110.dp))
             Text(
                 text = "Jumlah Tiket",
                 fontFamily = worksanssemibold,
@@ -481,6 +453,7 @@ fun listPayment(
 
     }
 }
+
 @Preview
 @Composable
 fun ListPaymentPreview() {

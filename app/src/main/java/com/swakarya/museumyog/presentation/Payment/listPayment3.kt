@@ -124,18 +124,6 @@ fun listpayment3(navController: NavHostController,
 
                 }
                 item{
-
-                    Text(text = "Tanggal Kunjungan",
-                        fontFamily = worksansbold,
-                        fontSize = 14.sp,
-                        modifier = Modifier.padding(10.dp))
-                    Box(modifier = Modifier.fillMaxWidth(),
-                        Alignment.Center) {
-                        calender(
-                            value = SharedVariables.date.value,
-                            onValueChange = { SharedVariables.date.value = it}
-                        )
-                    }
                     Spacer(modifier = Modifier.height(20.dp))
                     Row(modifier = Modifier.padding(10.dp)) {
                         Text(text = "Total",
