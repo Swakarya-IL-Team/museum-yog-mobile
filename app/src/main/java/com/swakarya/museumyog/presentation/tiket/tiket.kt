@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,6 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,7 +48,8 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 fun tiket(navController: NavHostController,
           name : Array<String>,
           itemIndex: Int?) {
-    Box(modifier = Modifier.fillMaxSize(),
+    Box(modifier = Modifier.fillMaxSize()
+        .padding(1.dp),
         Alignment.TopCenter){
         Column {
             Box(modifier = Modifier
@@ -98,13 +101,12 @@ fun tiket(navController: NavHostController,
                     .height(1.dp)
                     .width(300.dp))
         }
-        Column(modifier = Modifier.offset(x = 0.dp, y = 450.dp),
+        Column(modifier = Modifier.offset(x = 0.dp, y = 430.dp)
+            .padding(1.dp),
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "XYZ-123",
-                fontFamily = worksansbold,
-                fontSize = 40.sp,
-                color = coklatku,
-                textAlign = TextAlign.Center)
+            Image(painter = painterResource(id = R.drawable.barcode),
+                contentDescription ="Barcode",
+                modifier = Modifier.size(height = 90.dp, width = 150.dp))
             Row(verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 Icon(painter = painterResource(id = R.drawable.ic_time),
@@ -140,7 +142,8 @@ fun tiket(navController: NavHostController,
         Button(onClick = { navController.navigate(route = "home") },
             modifier = Modifier
                 .size(width = 350.dp, height = 60.dp)
-                .offset(x = 0.dp, y = 770.dp),
+                .offset(x = 0.dp, y = 770.dp)
+                .padding(1.dp),
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(greenku)) {
             Text(text = "Selesai",

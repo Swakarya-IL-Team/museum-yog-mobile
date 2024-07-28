@@ -61,7 +61,6 @@ import com.swakarya.museumyog.data.model.museumBookingDateHistory
 import com.swakarya.museumyog.data.model.museumBookingDateTestimony
 import com.swakarya.museumyog.data.model.nameMuseum
 import com.swakarya.museumyog.data.model.nameMuseumOrderHistory
-import com.swakarya.museumyog.data.model.nameMuseumTestimony
 import com.swakarya.museumyog.data.model.nameOrderMuseum
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
@@ -114,7 +113,8 @@ fun RiwayatKunjungan(navController: NavController) {
                         itemIndex = index,
                         painter = imageOrderMuseum,
                         tittle = nameOrderMuseum,
-                        dateOrderMuseum = dateOrderMuseum
+                        dateOrderMuseum = dateOrderMuseum,
+                        navController = navController
                     )
                 }
                 val ItemMuseumTestimony = imageMuseumTestimony.size

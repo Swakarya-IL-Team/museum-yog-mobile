@@ -50,7 +50,6 @@ import com.swakarya.museumyog.app.component.BottomBar
 import com.swakarya.museumyog.data.model.dateOrderMuseum
 import com.swakarya.museumyog.data.model.imageOrderMuseum
 import com.swakarya.museumyog.data.model.nameOrderMuseum
-import com.swakarya.museumyog.presentation.Payment.listPayment
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.orenku
@@ -103,7 +102,8 @@ fun AktifKunjungan(navController: NavController) {
                         itemIndex = index,
                         painter = imageOrderMuseum,
                         tittle = nameOrderMuseum,
-                        dateOrderMuseum = dateOrderMuseum
+                        dateOrderMuseum = dateOrderMuseum,
+                        navController = navController
                     )
                 }
 
@@ -187,7 +187,8 @@ fun ColumnMuseumAktif(
     itemIndex: Int,
     painter: Array<Int>,
     tittle: Array<String>,
-    dateOrderMuseum: Array<String>
+    dateOrderMuseum: Array<String>,
+    navController: NavController
 ) {
     Card(
         modifier = Modifier
@@ -243,7 +244,7 @@ fun ColumnMuseumAktif(
                     )
                 }
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("tiket/$itemIndex") },
                     modifier = Modifier
                         .heightIn(30.dp),
                     colors = ButtonDefaults.buttonColors(greenku),
