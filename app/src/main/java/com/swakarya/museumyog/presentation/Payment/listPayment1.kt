@@ -43,7 +43,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -79,7 +78,9 @@ fun listPayment(
     val color1 = if (weekend) Color.Black else greenku
     Scaffold(
         bottomBar = {
-            BottomAppBar {
+            BottomAppBar(
+                containerColor = Color.Transparent
+            ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
@@ -468,7 +469,7 @@ fun listPayment(
                     modifier = Modifier.padding(start = 16.dp)
                 )
                 Text(
-                    text = "Rp.$total",
+                    text = "Rp$total",
                     fontFamily = worksansbold,
                     fontSize = 20.sp
                 )

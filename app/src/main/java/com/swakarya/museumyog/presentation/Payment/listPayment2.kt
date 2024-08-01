@@ -3,8 +3,6 @@ package com.swakarya.museumyog.presentation.Payment
 import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,8 +37,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -73,7 +69,9 @@ fun listpayment2(
     val color1 = if (checked1) greenku else greyku
     Scaffold(
         bottomBar = {
-            BottomAppBar {
+            BottomAppBar(
+                containerColor = Color.Transparent
+            ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
@@ -157,7 +155,8 @@ fun listpayment2(
                 )
             }
             Spacer(modifier = Modifier.height(10.dp))
-            Column(modifier = Modifier.verticalScroll(rememberScrollState())
+            Column(modifier = Modifier
+                .verticalScroll(rememberScrollState())
                 .padding(bottom = 90.dp)) {
                 Text(
                     text = "Pilih Paket Wisata",
@@ -226,7 +225,7 @@ fun listpayment2(
                         )
                         Spacer(modifier = Modifier.height(10.dp))
                         Text(
-                            text = "Rp " + "$family" + "/Pack",
+                            text = "Rp" + "$family" + "/Pack",
                             fontFamily = worksansbold,
                             color = greenku,
                             fontSize = 16.sp
@@ -270,7 +269,7 @@ fun listpayment2(
                             fontSize = 12.sp
                         )
                         Text(
-                            text = "Rp " + "$family" + "/Pack",
+                            text = "Rp" + "$family" + "/Pack",
                             fontFamily = worksansbold,
                             color = greenku,
                             fontSize = 16.sp
@@ -278,16 +277,22 @@ fun listpayment2(
 
                     }
                 }
-                Text(
-                    text = "Total",
-                    fontFamily = worksansbold,
-                    modifier = Modifier.padding(10.dp)
-                )
-                Text(
-                    text = "Total Rp ${SharedVariables.total}",
-                    fontFamily = worksansbold,
-                    modifier = Modifier.padding(10.dp)
-                )
+                Row(
+                    modifier = Modifier.padding(top = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "Total: ",
+                        fontFamily = worksanssemibold,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                    Text(
+                        text = "Rp${SharedVariables.total}",
+                        fontFamily = worksansbold,
+                        fontSize = 20.sp
+                    )
+                }
+
             }
         }
     }

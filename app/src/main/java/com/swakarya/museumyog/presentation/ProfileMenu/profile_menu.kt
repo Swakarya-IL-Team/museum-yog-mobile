@@ -44,7 +44,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.BottomBar
 import com.swakarya.museumyog.app.component.SharedVariables.fullname
-import com.swakarya.museumyog.app.component.SharedVariables.email
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 
 var notificationSwitchState by mutableStateOf(false)
@@ -122,8 +121,8 @@ fun ProfileMenu(
                         IconWithSwitch(
                             text = "Notifikasi",
                             icon = painterResource(id = R.drawable.icon_notification),
-                            isChecked = false, // Replace with your switch state variable
-                            onCheckedChange = { /* Handle switch state change */ }
+                            isChecked = notificationSwitchState,
+                            onCheckedChange = { newValue -> notificationSwitchState = newValue }
                         )
                         Spacer(modifier = Modifier.height(18.dp))
                         IconWithText(

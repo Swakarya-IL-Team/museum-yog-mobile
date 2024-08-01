@@ -2,7 +2,6 @@ package com.swakarya.museumyog.presentation.informasikoleksi
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -24,6 +22,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -38,25 +39,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.komen
 import com.swakarya.museumyog.app.component.nama
 import com.swakarya.museumyog.app.component.rating
 import com.swakarya.museumyog.app.component.tanggal
 import com.swakarya.museumyog.component.ImageSliderWithIndicator
 import com.swakarya.museumyog.data.model.imageMuseum
-import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.abuku
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.worksans
-import com.swakarya.museumyog.ui.theme.worksansbold
 import com.swakarya.museumyog.ui.theme.worksansmedium
 import com.swakarya.museumyog.ui.theme.worksanssemibold
 import com.swakarya.museumyog.ui.theme.yellowku
@@ -70,6 +65,27 @@ fun review(photos: Array<Int> ,
            itemIndex: Int?,
            navController: NavHostController) {
     Scaffold(
+        bottomBar = {
+            BottomAppBar(
+                containerColor = Color.Transparent
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Button(
+                        onClick = { navController.navigate(route = "pay1/$itemIndex")},
+                        colors = ButtonDefaults.buttonColors(greenku),
+                        shape = RoundedCornerShape(10.dp),
+                        modifier = Modifier.size(width = 350.dp, height = 60.dp)
+                    ) {
+                        Text(text = "Pesan Tiket")
+                    }
+
+                }
+            }
+        }
     ) {
         Box {
             ImageSliderWithIndicator(imageMuseum = imageMuseum,
@@ -183,7 +199,7 @@ fun review(photos: Array<Int> ,
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Text(
-                                text = "3 Ulasan",
+                                text = "2 Ulasan",
                                 fontFamily = worksansmedium,
                                 color = abuku
                             )
@@ -205,7 +221,7 @@ fun review(photos: Array<Int> ,
                             modifier = Modifier.fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            LazyColumn() {
+                            LazyColumn(modifier = Modifier.padding(bottom = 86.dp)) {
                                 val ItemCount = nama.size
                                 items(ItemCount) { item ->
                                     ColumnItem2(

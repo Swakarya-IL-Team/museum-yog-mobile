@@ -3,6 +3,7 @@ package com.swakarya.museumyog.presentation.PaymentMethod
 import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -36,15 +37,18 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.app.component.SharedVariables.bankpay
 import com.swakarya.museumyog.app.component.SharedVariables.pay
 import com.swakarya.museumyog.app.component.SharedVariables.total1
@@ -53,90 +57,129 @@ import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)@Composable
-fun method(navController: NavHostController,
-           itemIndex: Int?){
-    val colorboxots = if(bankpay) greyku else greenku
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun method(
+    navController: NavHostController,
+    itemIndex: Int?
+) {
+    var isClicked by remember { mutableStateOf(false) }
+
     Scaffold(
         bottomBar = {
             BottomAppBar {
-                Row(modifier = Modifier.fillMaxWidth(),
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center) {
-                    Button(onClick = { navController.navigate("pay3/$itemIndex") },
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Button(
+                        onClick = { navController.navigate("pay3/$itemIndex") },
                         colors = ButtonDefaults.buttonColors(greenku),
                         shape = RoundedCornerShape(10.dp),
-                        modifier = Modifier.size(width = 350.dp, height = 60.dp)) {
-                        Text(text ="Pilih pembayaran")
+                        modifier = Modifier.size(width = 350.dp, height = 60.dp)
+                    ) {
+                        Text(text = "Pilih pembayaran")
                     }
 
                 }
             }
         },
         topBar = {
-            TopAppBar(title = { Box(modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center){
-                Text(text = "Metode Pembayaran",
-                    fontFamily = worksansbold,
-                    fontSize = 20.sp)
-            }
-            },
-                navigationIcon =  {
-                    IconButton(onClick = { navController.navigate("pay3")}) {
-                        Icon(imageVector = Icons.Default.KeyboardArrowLeft,
+            TopAppBar(
+                title = {
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Metode Pembayaran",
+                            fontFamily = worksansbold,
+                            fontSize = 20.sp
+                        )
+                    }
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.navigate("pay3/$itemIndex") }) {
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowLeft,
                             contentDescription = "",
                             tint = greenku,
-                            modifier = Modifier.size(30.dp))
+                            modifier = Modifier.size(30.dp)
+                        )
                     }
-                },)
+                },
+            )
         }
-    ){
-        Column(verticalArrangement = Arrangement.Center,
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 90.dp, bottom = 90.dp)) {
-            LazyColumn(contentPadding = PaddingValues(20.dp),
+                .padding(top = 90.dp, bottom = 90.dp)
+        ) {
+            LazyColumn(
+                contentPadding = PaddingValues(20.dp),
                 state = rememberLazyListState()
             ) {
-                item{
-                    Text(text = "On The Spot",
+                item {
+                    Text(
+                        text = "On The Spot",
                         fontFamily = worksansbold,
-                        fontSize = 14.sp)
+                        fontSize = 14.sp
+                    )
                     Spacer(modifier = Modifier.height(20.dp))
-                    Box(modifier = Modifier
-                        .size(width = 400.dp, height = 100.dp)
-                        .border(
-                            BorderStroke(width = 1.dp, color = colorboxots),
-                            shape = RoundedCornerShape(20)
-                        )
-                        .clickable {bankpay = false
-                            pay = true},
-                        Alignment.Center
-                    ){
-                        Column (horizontalAlignment = Alignment.CenterHorizontally){
-                            Text(text = "Rp"+"$total1",
+                    Box(
+                        modifier = Modifier
+                            .size(width = 400.dp, height = 100.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                            .border(
+                                BorderStroke(width = 1.dp, color = if (isClicked) greenku else greyku),
+                                shape = RoundedCornerShape(20)
+                            )
+                            .clickable {
+                                isClicked = !isClicked
+                                bankpay = false
+                                pay = true
+                            }
+                            .background(color = if (isClicked) greenku else Color.Transparent),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text(
+                                text = "Rp" + "$total1",
                                 fontFamily = worksansbold,
                                 fontSize = 20.sp,
-                                color = colorboxots )
-                            Text(text = "(Bayar di tempat)",
+                                color = if (isClicked) Color.White else greyku
+                            )
+                            Text(
+                                text = "(Bayar di tempat)",
                                 fontFamily = worksans,
                                 fontSize = 12.sp,
-                                color = colorboxots )
+                                color = if (isClicked) Color.White else greyku
+                            )
                         }
                     }
                     Spacer(modifier = Modifier.height(30.dp))
-                    Text(text = "Transfer Bank/M-Banking",
+                    Text(
+                        text = "Transfer Bank/M-Banking",
                         fontFamily = worksansbold,
-                        fontSize = 14.sp)
-                    Text(text = "Pembayaran cepat dan mudah",
+                        fontSize = 14.sp
+                    )
+                    Text(
+                        text = "Pembayaran cepat dan mudah",
                         fontFamily = worksans,
-                        fontSize = 12.sp)
+                        fontSize = 12.sp
+                    )
                     Spacer(modifier = Modifier.height(20.dp))
                 }
-                items(getDummybankList(),key = {it.id}){ bank ->
-                    Itembank(gambar = bank.gambar,
-                        navController = navController)
+                items(getDummybankList(), key = { it.id }) { bank ->
+                    Itembank(
+                        gambar = bank.gambar,
+                        navController = navController
+                    )
                 }
 
             }
@@ -146,16 +189,19 @@ fun method(navController: NavHostController,
 }
 
 @Composable
-fun Itembank(gambar: Int,
-             navController: NavHostController) {
-    val colorboxbank = if(bankpay) greenku else greyku
-    Card(modifier = Modifier
-        .padding(10.dp)
-        .wrapContentSize()
-        ,colors = CardDefaults.cardColors(
+fun Itembank(
+    gambar: Int,
+    navController: NavHostController
+) {
+    val colorboxbank = if (bankpay) greenku else greyku
+    Card(
+        modifier = Modifier
+            .padding(10.dp)
+            .wrapContentSize(), colors = CardDefaults.cardColors(
             containerColor = Color.White
         ),
-        elevation = CardDefaults.cardElevation(10.dp)){
+        elevation = CardDefaults.cardElevation(10.dp)
+    ) {
         Box(modifier = Modifier
             .fillMaxWidth()
             .border(
@@ -163,18 +209,27 @@ fun Itembank(gambar: Int,
                 shape = RoundedCornerShape(20)
             )
             .padding(10.dp)
-            .clickable {pay = true
-            bankpay = true}) {
-            Image(painter = painterResource(id = gambar),
-                contentDescription ="",
-                modifier = Modifier.size(83.dp))
-            Icon(imageVector = Icons.Default.KeyboardArrowRight,
-                contentDescription ="" ,
-                modifier = Modifier.size(30.dp)
+            .clickable {
+                pay = true
+                bankpay = true
+            }) {
+            Image(
+                painter = painterResource(id = gambar),
+                contentDescription = "",
+                modifier = Modifier.size(83.dp)
+            )
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowRight,
+                contentDescription = "",
+                modifier = Modifier
+                    .size(30.dp)
                     .offset(x = 280.dp, y = 25.dp),
-                tint = greenku)
+                tint = greenku
+            )
         }
 
     }
 
 }
+
+

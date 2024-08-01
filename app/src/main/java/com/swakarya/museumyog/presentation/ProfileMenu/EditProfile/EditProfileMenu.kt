@@ -2,11 +2,12 @@ package com.swakarya.museumyog.presentation.ProfileMenu.EditProfile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -42,8 +43,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
-import com.swakarya.museumyog.app.component.SharedVariables.fullname
 import com.swakarya.museumyog.app.component.SharedVariables.email
+import com.swakarya.museumyog.app.component.SharedVariables.fullname
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.green5
 import com.swakarya.museumyog.ui.theme.greenku
@@ -232,20 +233,26 @@ fun EditProfileMenu(modifier: Modifier = Modifier, navController: NavHostControl
                 shape = RoundedCornerShape(8.dp)
             )
 
-            Spacer(modifier = Modifier.height(120.dp))
 
-            Button(
-                onClick = { /*TODO*/ },
-                modifier = Modifier.fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(greenku),
-                shape = RoundedCornerShape(8.dp)
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.SpaceEvenly
             ) {
-                Text(
-                    text = "Simpan",
-                    fontFamily = worksansmedium,
-                    fontSize = 16.sp
-                )
+                Button(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(greenku),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Text(
+                        text = "Simpan",
+                        fontFamily = worksansmedium,
+                        fontSize = 16.sp,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+                }
             }
+
 
         }
 

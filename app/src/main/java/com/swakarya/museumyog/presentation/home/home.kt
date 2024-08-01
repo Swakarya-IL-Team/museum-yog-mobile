@@ -52,7 +52,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.BottomBar
-import com.swakarya.museumyog.app.component.SharedVariables.fullname
+import com.swakarya.museumyog.app.component.SharedVariables
 import com.swakarya.museumyog.data.model.imageId
 import com.swakarya.museumyog.data.model.imageMuseum
 import com.swakarya.museumyog.data.model.nameMuseum
@@ -61,7 +61,6 @@ import com.swakarya.museumyog.data.model.placeMuseum
 import com.swakarya.museumyog.data.model.rangeMuseum
 import com.swakarya.museumyog.data.model.rateMuseum
 import com.swakarya.museumyog.data.model.visitorMuseum
-import com.swakarya.museumyog.presentation.Payment.listpayment2
 import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.green10
 import com.swakarya.museumyog.ui.theme.greenku
@@ -102,7 +101,7 @@ fun HomePage(
                         fontSize = 14.sp,
                         color = Color.White
                     )
-                    Text(text = "$fullname",
+                    Text(text = "${SharedVariables.fullname}",
                         fontFamily = worksanssemibold,
                         fontSize = 20.sp,
                         color = Color.White)
@@ -338,7 +337,8 @@ fun ColumnMuseum(
                     .size(width = 132.dp, height = 111.dp)
                     .clip(RoundedCornerShape(8.dp))
                     .background(Color.LightGray)
-                    .clickable {navController.navigate(route = "informasi/$itemIndex")
+                    .clickable {
+                        navController.navigate(route = "informasi/$itemIndex")
                     }
             ) {
                 Image(

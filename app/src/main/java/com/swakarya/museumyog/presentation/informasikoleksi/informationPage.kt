@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -52,8 +51,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
-import com.swakarya.museumyog.app.component.gambar
-import com.swakarya.museumyog.app.component.rating
 import com.swakarya.museumyog.app.component.tittle
 import com.swakarya.museumyog.component.ImageSliderWithIndicator
 import com.swakarya.museumyog.data.model.imageMuseum
@@ -62,6 +59,7 @@ import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
 import com.swakarya.museumyog.ui.theme.worksanssemibold
 import com.swakarya.museumyog.ui.theme.yellowku
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 
@@ -73,7 +71,10 @@ fun informationpage(photos: Array<Int> ,
     navController: NavHostController) {
     Scaffold(
         bottomBar = {
-            BottomAppBar {
+            BottomAppBar(
+                modifier = Modifier.background(Color.Transparent),
+                containerColor = Color.Transparent
+            ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
@@ -409,29 +410,29 @@ fun informationpage(photos: Array<Int> ,
                                                 .fillMaxWidth()
                                                 .size(200.dp)
                                         )
-                                        Text(
-                                            text = "Terdekat Dari ini",
-                                            fontFamily = worksansbold
-                                        )
-                                        Spacer(modifier = Modifier.height(12.dp))
+//                                        Text(
+//                                            text = "Terdekat Dari ini",
+//                                            fontFamily = worksansbold
+//                                        )
+//                                        Spacer(modifier = Modifier.height(12.dp))
 
                                     }
 
                                 }
                             }
-                            item {
-                                LazyRow {
-                                    val indexitem = gambar.size
-                                    items(indexitem) { item ->
-                                        RowItem(
-                                            itemIndex = item,
-                                            painter = gambar,
-                                            judul = tittle,
-                                            ratings = rating
-                                        )
-                                    }
-                                }
-                            }
+//                            item {
+//                                LazyRow {
+//                                    val indexitem = gambar.size
+//                                    items(indexitem) { item ->
+//                                        RowItem(
+//                                            itemIndex = item,
+//                                            painter = gambar,
+//                                            judul = tittle,
+//                                            ratings = rating
+//                                        )
+//                                    }
+//                                }
+//                            }
 
                         }
 

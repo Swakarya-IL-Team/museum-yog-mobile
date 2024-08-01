@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -44,6 +43,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -67,165 +67,239 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun listpayment3(navController: NavHostController,
-                 itemIndex: Int?) {
-    val colorbutton = if(pay) greenku else greyku
-    val textbank = if(bankpay)"Tranfer Bank" else "OTS"
-    val textcolor = if(pay) Color.White else orenku
-    val boxcolor = if(pay) orenku else Color.White
+fun listpayment3(
+    navController: NavHostController,
+    itemIndex: Int?
+) {
+    val colorbutton = if (pay) greenku else greyku
+    val textbank = if (bankpay) "Tranfer Bank" else "OTS"
+    val textcolor = if (pay) Color.White else orenku
+    val boxcolor = if (pay) orenku else Color.White
     total1 = total + admin
     Scaffold(
         bottomBar = {
-            BottomAppBar {
-                Row(modifier = Modifier.fillMaxWidth(),
+            BottomAppBar(
+                containerColor = Color.Transparent
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center) {
-                    Button(onClick = { if(pay)navController.navigate("va/$itemIndex")
-                    else navController.navigate("pay3/$itemIndex") },
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Button(
+                        onClick = {
+                            if (pay) navController.navigate("tiketOTS/$itemIndex")
+                            else navController.navigate("pay3/$itemIndex")
+                        },
                         colors = ButtonDefaults.buttonColors(colorbutton),
                         shape = RoundedCornerShape(10.dp),
-                        modifier = Modifier.size(width = 350.dp, height = 60.dp)) {
-                        Text(text ="Pesan")
+                        modifier = Modifier.size(width = 350.dp, height = 60.dp)
+                    ) {
+                        Text(text = "Pesan")
                     }
 
                 }
             }
         },
         topBar = {
-            TopAppBar(title = { Box(modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center){
-                Text(text = "Konfirmasi Pemesanan",
-                    fontFamily = worksansbold,
-                    fontSize = 18.sp)
-            }
-            },
-                navigationIcon =  {
-                    IconButton(onClick = { navController.navigate("pay2/$itemIndex")}) {
-                        Icon(imageVector = Icons.Default.KeyboardArrowLeft,
+            TopAppBar(
+                title = {
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Konfirmasi Pemesanan",
+                            fontFamily = worksansbold,
+                            fontSize = 18.sp
+                        )
+                    }
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.navigate("pay1/$itemIndex") }) {
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowLeft,
                             contentDescription = "",
                             tint = greenku,
-                            modifier = Modifier.size(30.dp))
+                            modifier = Modifier.size(30.dp)
+                        )
                     }
-                },)
+                },
+            )
         }
-    ){
-        Column(verticalArrangement = Arrangement.Center,
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 40.dp, bottom = 90.dp)) {
-            LazyColumn(contentPadding = PaddingValues(20.dp),
-                state = rememberLazyListState()) {
-                items(getDummyList().filter { it.banyak > 0},key = {it.id}){ tiket->
+                .padding(top = 40.dp, bottom = 90.dp)
+        ) {
+            LazyColumn(
+                contentPadding = PaddingValues(20.dp),
+                state = rememberLazyListState()
+            ) {
+                items(getDummyList().filter { it.banyak > 0 }, key = { it.id }) { tiket ->
                     ItemList(
                         judul = tiket.title,
                         banyak = tiket.banyak,
                         ket = tiket.ket,
-                        item = itemIndex)
+                        item = itemIndex
+                    )
 
                 }
-                item{
+                item {
 
-                    Text(text = "Tanggal Kunjungan",
+                    Text(
+                        text = "Tanggal Kunjungan",
                         fontFamily = worksansbold,
                         fontSize = 14.sp,
-                        modifier = Modifier.padding(10.dp))
-                    Box(modifier = Modifier.fillMaxWidth(),
-                        Alignment.Center) {
+                        modifier = Modifier.padding(vertical = 24.dp)
+                    )
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        Alignment.Center
+                    ) {
                         calender(
                             value = SharedVariables.date.value,
-                            onValueChange = { SharedVariables.date.value = it}
+                            onValueChange = { SharedVariables.date.value = it }
                         )
                     }
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Row(modifier = Modifier.padding(10.dp)) {
-                        Text(text = "Total",
+                    Spacer(modifier = Modifier.height(29.dp))
+                    Row {
+                        Text(
+                            text = "Total:",
                             fontFamily = worksansbold,
-                            fontSize = 14.sp)
-                        Box(modifier = Modifier.fillMaxWidth(),
-                            Alignment.CenterEnd){
-                            Text(text = "$total",
+                            fontSize = 14.sp
+                        )
+                        Box(
+                            modifier = Modifier.fillMaxWidth(),
+                            Alignment.CenterEnd
+                        ) {
+                            Text(
+                                text = "Rp$total",
                                 fontFamily = worksansbold,
-                                fontSize = 14.sp)
+                                fontSize = 14.sp
+                            )
                         }
                     }
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(text = "Voucher",
+                    Spacer(modifier = Modifier.height(29.dp))
+                    Row(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Voucher",
                             fontFamily = worksansbold,
                             fontSize = 14.sp,
-                            modifier = Modifier.padding(10.dp))
-                        Spacer(modifier = Modifier.width(80.dp))
+                        )
                         voucher()
                     }
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(text = "Metode Pembayaran:",
+                    Spacer(modifier = Modifier.height(29.dp))
+                    Row(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Metode Pembayaran:",
                             fontFamily = worksansbold,
                             fontSize = 14.sp,
-                            modifier = Modifier.padding(10.dp))
-                        Spacer(modifier = Modifier.width(65.dp))
+                        )
                         Box(modifier = Modifier
                             .size(width = 150.dp, height = 40.dp)
                             .border(
-                                BorderStroke(width = 2.dp, color = orenku),
-                                shape = RoundedCornerShape(20)
+                                BorderStroke(
+                                    1.dp,
+                                    SolidColor(orenku)
+                                ),
+                                RoundedCornerShape(12.dp)
                             )
-                            .background(boxcolor)
+                            .background(boxcolor, RoundedCornerShape(12.dp))
                             .clickable { navController.navigate("method/$itemIndex") }
-                        ){
-                            Box(modifier = Modifier.fillMaxSize().padding(start = 5.dp),
-                                Alignment.CenterStart){
-                                Text(text = "$textbank",
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(start = 8.dp),
+                                Alignment.CenterStart
+                            ) {
+                                Text(
+                                    text = "$textbank",
                                     fontFamily = worksans,
                                     fontSize = 14.sp,
-                                    color = textcolor)
+                                    color = textcolor
+                                )
                             }
-                            Box(modifier = Modifier.fillMaxSize().padding(end = 2.dp),
-                                Alignment.CenterEnd){
-                                Icon(imageVector = Icons.Default.KeyboardArrowRight,
-                                    contentDescription ="",
-                                    tint = textcolor)
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(end = 8.dp),
+                                Alignment.CenterEnd
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.KeyboardArrowRight,
+                                    contentDescription = "",
+                                    tint = textcolor
+                                )
                             }
 
                         }
                     }
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Divider(color = Color.Gray, thickness = 1.dp)
-                    Row(modifier = Modifier.padding(10.dp)) {
-                        Text(text = "Order Subtotal",
-                            fontFamily = worksansbold,
-                            fontSize = 14.sp)
-                        Box(modifier = Modifier.fillMaxWidth(),
-                            Alignment.CenterEnd){
-                            Text(text = "$total",
-                                fontFamily = worksansbold,
-                                fontSize = 14.sp)
-                        }
+                    Row(
+                        modifier = Modifier
+                            .padding(top = 16.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Order Subtotal",
+                            fontFamily = worksans,
+                            fontSize = 14.sp
+                        )
+                        Text(
+                            text = "Rp$total",
+                            fontFamily = worksans,
+                            fontSize = 14.sp
+                        )
                     }
-                    Row(modifier = Modifier.padding(10.dp)) {
-                        Text(text = "Biaya Admin",
-                            fontFamily = worksansbold,
-                            fontSize = 14.sp)
-                        Box(modifier = Modifier.fillMaxWidth(),
-                            Alignment.CenterEnd){
-                            Text(text = "$admin",
-                                fontFamily = worksansbold,
-                                fontSize = 14.sp)
-                        }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Biaya Admin",
+                            fontFamily = worksans,
+                            fontSize = 14.sp
+                        )
+                        Text(
+                            text = "Rp$admin",
+                            fontFamily = worksans,
+                            fontSize = 14.sp
+                        )
                     }
-                    Spacer(modifier = Modifier.height(50.dp))
-                    Row(modifier = Modifier.padding(10.dp)) {
-                        Text(text = "Total Harga",
+                    Spacer(modifier = Modifier.height(29.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Total Harga:",
                             fontFamily = worksansbold,
                             fontSize = 16.sp,
-                            color = greenku)
-                        Box(modifier = Modifier.fillMaxWidth(),
-                            Alignment.CenterEnd) {
-                            Text(text = "$total1",
-                                fontFamily = worksansbold,
-                                fontSize = 16.sp,
-                                color = greenku)
-                        }
+                            color = greenku
+                        )
+                        Text(
+                            text = "Rp$total1",
+                            fontFamily = worksansbold,
+                            fontSize = 16.sp,
+                            color = greenku
+                        )
                     }
                 }
             }
@@ -241,46 +315,66 @@ fun ItemList(
     banyak: Int,
     ket: String,
     item: Int?
-    ) {
-    Card(modifier = Modifier
-        .padding(10.dp)
-        .wrapContentSize()
-        ,colors = CardDefaults.cardColors(
+) {
+    Card(
+        modifier = Modifier
+            .padding(top = 16.dp)
+            .wrapContentSize(), colors = CardDefaults.cardColors(
             containerColor = Color.White
-        ),
-        elevation = CardDefaults.cardElevation(10.dp)){
+        )
+    ) {
         Box(
             modifier = Modifier
                 .clip(TicketShape())
                 .background(Color.Transparent)
                 .size(width = 400.dp, height = 123.dp)
-                .border(3.dp, greenku, TicketShape())
-        ){
-            Text(text = "Tiket",
+                .border(
+                    BorderStroke(
+                        1.dp,
+                        SolidColor(greenku)
+                    ),
+                    RoundedCornerShape(12.dp)
+                )
+                .border(1.dp, greenku, TicketShape())
+        ) {
+            Text(
+                text = "Tiket",
                 modifier = Modifier
                     .offset(x = 0.dp, y = 50.dp)
                     .rotate(-90f),
                 fontFamily = worksansbold,
                 color = greenku,
-                fontSize = 14.sp)
-            Column(modifier = Modifier
-                .offset(x = 120.dp, y = 20.dp)
-                .fillMaxWidth()) {
-                Text(text = nameMuseum[item!!],
+                fontSize = 14.sp
+            )
+            Column(
+                modifier = Modifier
+                    .offset(x = 120.dp, y = 20.dp)
+                    .fillMaxWidth()
+            ) {
+                Text(
+                    text = nameMuseum[item!!],
                     fontFamily = worksansbold,
-                    fontSize = 14.sp)
-                Text(text = ket,
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(end = 116.dp)
+                )
+                Text(
+                    text = ket,
                     fontFamily = worksans,
                     color = greenku,
-                    fontSize = 12.sp)
-                Text(text = judul,
+                    fontSize = 12.sp
+                )
+                Text(
+                    text = judul,
                     fontFamily = worksans,
                     color = greenku,
-                    fontSize = 12.sp)
-                Text(text = "x$banyak",
+                    fontSize = 12.sp
+                )
+                Text(
+                    text = "x$banyak",
                     fontFamily = worksans,
                     color = greenku,
-                    fontSize = 12.sp)
+                    fontSize = 12.sp
+                )
             }
 
         }

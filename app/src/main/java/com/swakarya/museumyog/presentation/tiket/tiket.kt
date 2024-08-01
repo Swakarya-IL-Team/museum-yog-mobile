@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
-import com.swakarya.museumyog.data.model.imageMuseum
+import com.swakarya.museumyog.app.component.SharedVariables
 import com.swakarya.museumyog.data.model.nameMuseum
 import com.swakarya.museumyog.ui.theme.coklatku
 import com.swakarya.museumyog.ui.theme.greenku
@@ -44,8 +44,8 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 
 @Composable
 fun tiket(navController: NavHostController,
-          name : Array<String>,
-          itemIndex: Int?) {
+             name : Array<String>,
+             itemIndex: Int?) {
     Box(modifier = Modifier.fillMaxSize(),
         Alignment.TopCenter){
         Column {
@@ -72,7 +72,7 @@ fun tiket(navController: NavHostController,
             tint = Color.White)
         Column(modifier = Modifier.offset(x = 0.dp, y = 180.dp),
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Rp. 17.000",
+            Text(text = "Rp" + "${SharedVariables.total1}",
                 fontFamily = worksansbold,
                 fontSize = 35.sp,
                 color = greenku)

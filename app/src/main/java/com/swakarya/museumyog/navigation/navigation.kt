@@ -1,20 +1,16 @@
 package com.swakarya.museumyog.navigation
 
 import android.annotation.SuppressLint
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.swakarya.museumyog.app.component.SharedVariables.email
 import com.swakarya.museumyog.app.component.SharedVariables.fullname
 import com.swakarya.museumyog.data.model.imageMuseum
 import com.swakarya.museumyog.data.model.nameMuseum
 import com.swakarya.museumyog.data.model.rateMuseum
-import com.swakarya.museumyog.presentation.login.login
-import com.swakarya.museumyog.presentation.home.HomePage
 import com.swakarya.museumyog.presentation.ListMuseum.ListMuseum
 import com.swakarya.museumyog.presentation.Notifikasi.NotificationScreen
 import com.swakarya.museumyog.presentation.Payment.VA
@@ -27,19 +23,21 @@ import com.swakarya.museumyog.presentation.ProfileMenu.EditProfile.EditProfileMe
 import com.swakarya.museumyog.presentation.ProfileMenu.KebijakanPrivasi.KebijakanPrivasi
 import com.swakarya.museumyog.presentation.ProfileMenu.ProfileMenu
 import com.swakarya.museumyog.presentation.ProfileMenu.PusatBantuan.PusatBantuanScreen
+import com.swakarya.museumyog.presentation.ReviewUsers.ReviewUsers
+import com.swakarya.museumyog.presentation.home.HomePage
 import com.swakarya.museumyog.presentation.informasikoleksi.informationkoleksi
 import com.swakarya.museumyog.presentation.informasikoleksi.informationpage
 import com.swakarya.museumyog.presentation.informasikoleksi.review
 import com.swakarya.museumyog.presentation.kunjungan.AktifKunjungan
 import com.swakarya.museumyog.presentation.kunjungan.RiwayatKunjungan
-import com.swakarya.museumyog.presentation.singup.singUp
+import com.swakarya.museumyog.presentation.login.login
 import com.swakarya.museumyog.presentation.onboarding.onboarding1
 import com.swakarya.museumyog.presentation.onboarding.onboarding2
 import com.swakarya.museumyog.presentation.onboarding.onboarding3
+import com.swakarya.museumyog.presentation.singup.singUp
 import com.swakarya.museumyog.presentation.splash.splashScreen
-import com.swakarya.museumyog.presentation.ReviewUsers.ReviewUsers
-import com.swakarya.museumyog.presentation.login.LoginViewModel
 import com.swakarya.museumyog.presentation.tiket.tiket
+import com.swakarya.museumyog.presentation.tiket.tiketOTS
 
 @SuppressLint("ComposableDestinationInComposeScope")
 @Composable
@@ -223,6 +221,17 @@ fun Navigation() {
                 }
             )) {index ->
             tiket(navController,
+                name = nameMuseum,
+                itemIndex = index.arguments?.getInt("index")
+            )
+        }
+        composable(route = "tiketOTS/{index}",
+            arguments = listOf(
+                navArgument(name = "index"){
+                    type = NavType.IntType
+                }
+            )) {index ->
+            tiketOTS(navController,
                 name = nameMuseum,
                 itemIndex = index.arguments?.getInt("index")
             )

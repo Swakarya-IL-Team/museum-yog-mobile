@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -22,6 +21,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -37,18 +39,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.deskripsi
 import com.swakarya.museumyog.app.component.judulkoleksi
 import com.swakarya.museumyog.app.component.koleksi
 import com.swakarya.museumyog.component.ImageSliderWithIndicator
 import com.swakarya.museumyog.data.model.imageMuseum
-import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
@@ -65,6 +63,27 @@ fun informationkoleksi(photos: Array<Int> ,
                        itemIndex: Int?,
                        navController: NavHostController) {
     Scaffold(
+        bottomBar = {
+            BottomAppBar(
+                containerColor = Color.Transparent
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Button(
+                        onClick = { navController.navigate(route = "pay1/$itemIndex")},
+                        colors = ButtonDefaults.buttonColors(greenku),
+                        shape = RoundedCornerShape(10.dp),
+                        modifier = Modifier.size(width = 350.dp, height = 60.dp)
+                    ) {
+                        Text(text = "Pesan Tiket")
+                    }
+
+                }
+            }
+        }
     ) {
         Box {
             ImageSliderWithIndicator(imageMuseum = imageMuseum,
@@ -175,7 +194,7 @@ fun informationkoleksi(photos: Array<Int> ,
                         modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        LazyColumn() {
+                        LazyColumn(modifier = Modifier.padding(bottom = 80.dp)) {
                             val ItemCount = koleksi.size
                             items(ItemCount) { item ->
                                 Spacer(modifier = Modifier.height(28.dp))
@@ -223,7 +242,8 @@ fun ColumnItem(
         Spacer(modifier = Modifier.height(6.dp))
         Text(
             text = describe[itemIndex],
-            fontFamily = worksans
+            fontFamily = worksans,
         )
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
