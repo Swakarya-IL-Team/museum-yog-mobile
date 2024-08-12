@@ -49,21 +49,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
-import com.swakarya.museumyog.app.component.komen
-import com.swakarya.museumyog.app.component.nama
+import com.swakarya.museumyog.app.component.SharedVariables
 import com.swakarya.museumyog.component.ImageSliderWithIndicator
 import com.swakarya.museumyog.component.StarRatingBar
-import com.swakarya.museumyog.app.component.rating
-import com.swakarya.museumyog.app.component.tanggal
-import com.swakarya.museumyog.data.model.imageMuseum
-import com.swakarya.museumyog.domain.model.ImageMuseum.images
-import com.swakarya.museumyog.ui.theme.MuseumYogTheme
 import com.swakarya.museumyog.ui.theme.abuku
 import com.swakarya.museumyog.ui.theme.green10
 import com.swakarya.museumyog.ui.theme.greenku
@@ -73,32 +65,33 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 import com.swakarya.museumyog.ui.theme.worksansmedium
 import com.swakarya.museumyog.ui.theme.worksanssemibold
 import com.swakarya.museumyog.ui.theme.yellowku
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
-
 @Composable
-fun ReviewUsers(photos: Array<Int> ,
-                name : Array<String>,
-                rate : Array<String>,
-                itemIndex: Int?,
-                navController: NavHostController) {
-    var text by remember {
-        mutableStateOf("")
-    }
-    var reviewRating by remember {
-        mutableStateOf(1f)
-    }
-    var showDialog by remember {
-        mutableStateOf(false)
-    }
+fun ReviewUsers(
+    itemIndex: Int?,
+    navController: NavHostController
+) {
+    var text by remember { mutableStateOf("") }
+    var reviewRating by remember { mutableStateOf(1f) }
+    var showDialog by remember { mutableStateOf(false) }
+
+    val visit = itemIndex?.let { SharedVariables.activeVisits[it] }
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val formattedDate = visit?.date?.let { LocalDate.parse(it, DateTimeFormatter.ISO_DATE).format(formatter) }
 
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
         Box {
-            ImageSliderWithIndicator(imageMuseum = imageMuseum,
-                itemIndex)
+            visit?.let {
+                ImageSliderWithIndicator(
+                    imageResList = listOf(visit.imageRes)
+                )
+            }
             Box {
                 IconButton(
                     modifier = Modifier.padding(start = 20.dp, top = 20.dp),
@@ -115,7 +108,6 @@ fun ReviewUsers(photos: Array<Int> ,
                             tint = greenku
                         )
                     }
-
                 }
             }
             Card(
@@ -133,10 +125,11 @@ fun ReviewUsers(photos: Array<Int> ,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = name[itemIndex!!],
+                            text = visit?.name ?: "",
                             fontFamily = worksanssemibold,
                             overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier
+                                .weight(1f)
                                 .padding(end = 8.dp)
                         )
                         Row(
@@ -150,11 +143,10 @@ fun ReviewUsers(photos: Array<Int> ,
                             )
                             Spacer(modifier = Modifier.width(2.dp))
                             Text(
-                                text = "5.0",
+                                text = visit?.let { SharedVariables.testimonials.find { it.name == visit.name }?.rating?.toString() ?: "0.0" } ?: "0.0",
                                 fontFamily = worksanssemibold,
                             )
                         }
-
                     }
 
                     Spacer(modifier = Modifier.height(30.dp))
@@ -212,7 +204,7 @@ fun ReviewUsers(photos: Array<Int> ,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
-                            text = "3 Ulasan",
+                            text = "${SharedVariables.testimonials.size} Ulasan",
                             fontFamily = worksansmedium,
                             color = abuku
                         )
@@ -229,24 +221,18 @@ fun ReviewUsers(photos: Array<Int> ,
                             )
                         }
                     }
-
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Column(
                     modifier = Modifier
-                        .fillMaxSize(), // Add verticalScroll modifier
+                        .fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-
-
-                    val itemCount = nama.size
+                    val itemCount = SharedVariables.testimonials.size
                     for (item in 0 until itemCount) {
                         ColumnItem2(
                             itemIndex = item,
-                            name = nama,
-                            date = tanggal,
-                            rate = rating,
-                            coment = komen
+                            testimonials = SharedVariables.testimonials
                         )
                     }
 
@@ -264,7 +250,6 @@ fun ReviewUsers(photos: Array<Int> ,
                             reviewRating = it
                         }
                     )
-
                 }
                 Spacer(modifier = Modifier.height(28.dp))
 
@@ -299,7 +284,17 @@ fun ReviewUsers(photos: Array<Int> ,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 16.dp),
-                        onClick = { showDialog = showDialog.not() },
+                        onClick = {
+                            SharedVariables.testimonials.add(
+                                SharedVariables.Testimonial(
+                                    name = visit?.name ?: "",
+                                    date = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                                    rating = reviewRating,
+                                    comment = text
+                                )
+                            )
+                            showDialog = true
+                        },
                         shape = RoundedCornerShape(8.dp),
                         colors = ButtonDefaults.buttonColors(greenku)
                     ) {
@@ -312,10 +307,7 @@ fun ReviewUsers(photos: Array<Int> ,
                     }
                 }
             }
-
         }
-
-
     }
 
     if (showDialog) {
@@ -352,7 +344,7 @@ fun ReviewUsers(photos: Array<Int> ,
                 ) {
                     TextButton(
                         modifier = Modifier,
-                        onClick = { navController.navigate("review/$itemIndex") },
+                        onClick = { navController.navigate("reviewUser/$itemIndex") },
                         shape = RoundedCornerShape(8.dp),
                         colors = ButtonDefaults.buttonColors(greenku)
                     ) {
@@ -363,22 +355,21 @@ fun ReviewUsers(photos: Array<Int> ,
                         )
                     }
                 }
-
             },
             shape = RoundedCornerShape(8.dp)
         )
     }
-
 }
 
 @Composable
 fun ColumnItem2(
     itemIndex: Int,
-    name: Array<String>,
-    date: Array<String>,
-    rate: Array<String>,
-    coment: Array<String>
+    testimonials: List<SharedVariables.Testimonial>
 ) {
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val testimonial = testimonials[itemIndex]
+    val formattedDate = LocalDate.parse(testimonial.date, DateTimeFormatter.ISO_DATE).format(formatter)
+
     Column {
         Card(
             modifier = Modifier
@@ -398,7 +389,7 @@ fun ColumnItem2(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = name[itemIndex],
+                    text = testimonial.name,
                     fontFamily = worksansmedium,
                 )
                 OutlinedCard(
@@ -413,7 +404,7 @@ fun ColumnItem2(
                         )
                         Text(
                             modifier = Modifier.padding(end = 8.dp),
-                            text = rate[itemIndex],
+                            text = testimonial.rating.toString(),
                             fontFamily = worksansmedium
                         )
                     }
@@ -422,20 +413,16 @@ fun ColumnItem2(
 
             Text(
                 modifier = Modifier.padding(start = 20.dp),
-                text = date[itemIndex],
+                text = formattedDate,
                 fontFamily = worksans,
                 color = Color.Black.copy(alpha = 0.5f)
             )
             Spacer(modifier = Modifier.height(13.dp))
             Text(
                 modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
-                text = coment[itemIndex],
+                text = testimonial.comment,
                 fontFamily = worksans,
             )
-
-
         }
     }
-
-
 }

@@ -63,20 +63,24 @@ import com.swakarya.museumyog.ui.theme.worksansbold
 @Composable
 fun method(
     navController: NavHostController,
-    itemIndex: Int?
+    itemIndex: Int?,
+    name: String,
+    image: Int,
 ) {
     var isClicked by remember { mutableStateOf(false) }
 
     Scaffold(
         bottomBar = {
-            BottomAppBar {
+            BottomAppBar(
+                containerColor = Color.Transparent
+            ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Button(
-                        onClick = { navController.navigate("pay3/$itemIndex") },
+                        onClick = { navController.navigate("pay3/$itemIndex/$name/$image") },
                         colors = ButtonDefaults.buttonColors(greenku),
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier.size(width = 350.dp, height = 60.dp)
@@ -102,7 +106,7 @@ fun method(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate("pay3/$itemIndex") }) {
+                    IconButton(onClick = { navController.navigate("pay3/$itemIndex/$name/$image") }) {
                         Icon(
                             imageVector = Icons.Default.KeyboardArrowLeft,
                             contentDescription = "",
@@ -231,5 +235,3 @@ fun Itembank(
     }
 
 }
-
-

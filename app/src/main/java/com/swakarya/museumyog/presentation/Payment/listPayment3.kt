@@ -57,19 +57,21 @@ import com.swakarya.museumyog.app.component.TicketShape
 import com.swakarya.museumyog.app.component.calender
 import com.swakarya.museumyog.app.component.getDummyList
 import com.swakarya.museumyog.app.component.voucher
-import com.swakarya.museumyog.data.model.nameMuseum
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku
 import com.swakarya.museumyog.ui.theme.orenku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
+import java.time.format.DateTimeFormatter
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun listpayment3(
     navController: NavHostController,
-    itemIndex: Int?
+    itemIndex: Int?,
+    name: String,
+    image: Int,
 ) {
     val colorbutton = if (pay) greenku else greyku
     val textbank = if (bankpay) "Tranfer Bank" else "OTS"
@@ -88,8 +90,26 @@ fun listpayment3(
                 ) {
                     Button(
                         onClick = {
-                            if (pay) navController.navigate("tiketOTS/$itemIndex")
-                            else navController.navigate("pay3/$itemIndex")
+                            if (pay) {
+                                val selectedDate = SharedVariables.date.value
+                                val expiryDate = selectedDate.plusDays(5)
+                                val formattedExpiryDate = expiryDate.format(DateTimeFormatter.ISO_DATE)
+
+                                val newVisit = SharedVariables.Visit(
+                                    name = name,
+                                    date = selectedDate.toString(),
+                                    imageRes = image,
+                                    expiryDate = formattedExpiryDate
+                                )
+
+                                if (!SharedVariables.activeVisits.any { it.name == newVisit.name && it.date == newVisit.date && it.imageRes == newVisit.imageRes }) {
+                                    SharedVariables.activeVisits.add(newVisit)
+                                }
+
+                                navController.navigate("tiketOTS/$itemIndex/$name/${selectedDate.toString()}/$image")
+                            } else {
+                                navController.navigate("pay3/$itemIndex/$name/$image")
+                            }
                         },
                         colors = ButtonDefaults.buttonColors(colorbutton),
                         shape = RoundedCornerShape(10.dp),
@@ -116,7 +136,7 @@ fun listpayment3(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate("pay1/$itemIndex") }) {
+                    IconButton(onClick = { navController.navigate("pay1/$itemIndex/$name/$image") }) {
                         Icon(
                             imageVector = Icons.Default.KeyboardArrowLeft,
                             contentDescription = "",
@@ -143,12 +163,10 @@ fun listpayment3(
                         judul = tiket.title,
                         banyak = tiket.banyak,
                         ket = tiket.ket,
-                        item = itemIndex
+                        name = name
                     )
-
                 }
                 item {
-
                     Text(
                         text = "Tanggal Kunjungan",
                         fontFamily = worksansbold,
@@ -216,7 +234,7 @@ fun listpayment3(
                                 RoundedCornerShape(12.dp)
                             )
                             .background(boxcolor, RoundedCornerShape(12.dp))
-                            .clickable { navController.navigate("method/$itemIndex") }
+                            .clickable { navController.navigate("method/$itemIndex/$name/$image") }
                         ) {
                             Box(
                                 modifier = Modifier
@@ -314,7 +332,7 @@ fun ItemList(
     judul: String,
     banyak: Int,
     ket: String,
-    item: Int?
+    name: String
 ) {
     Card(
         modifier = Modifier
@@ -352,7 +370,7 @@ fun ItemList(
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = nameMuseum[item!!],
+                    text = name,
                     fontFamily = worksansbold,
                     fontSize = 14.sp,
                     modifier = Modifier.padding(end = 116.dp)
@@ -376,8 +394,6 @@ fun ItemList(
                     fontSize = 12.sp
                 )
             }
-
         }
     }
-
 }

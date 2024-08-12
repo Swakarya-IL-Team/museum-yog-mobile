@@ -8,9 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.swakarya.museumyog.app.component.SharedVariables.fullname
-import com.swakarya.museumyog.data.model.imageMuseum
 import com.swakarya.museumyog.data.model.nameMuseum
-import com.swakarya.museumyog.data.model.rateMuseum
 import com.swakarya.museumyog.presentation.ListMuseum.ListMuseum
 import com.swakarya.museumyog.presentation.Notifikasi.NotificationScreen
 import com.swakarya.museumyog.presentation.Payment.VA
@@ -25,9 +23,9 @@ import com.swakarya.museumyog.presentation.ProfileMenu.ProfileMenu
 import com.swakarya.museumyog.presentation.ProfileMenu.PusatBantuan.PusatBantuanScreen
 import com.swakarya.museumyog.presentation.ReviewUsers.ReviewUsers
 import com.swakarya.museumyog.presentation.home.HomePage
-import com.swakarya.museumyog.presentation.informasikoleksi.informationkoleksi
-import com.swakarya.museumyog.presentation.informasikoleksi.informationpage
-import com.swakarya.museumyog.presentation.informasikoleksi.review
+import com.swakarya.museumyog.presentation.informasikoleksi.InformationKoleksi.InformationKoleksi
+import com.swakarya.museumyog.presentation.informasikoleksi.InformationPage.InformationPage
+import com.swakarya.museumyog.presentation.informasikoleksi.InformationReview.ReviewPage
 import com.swakarya.museumyog.presentation.kunjungan.AktifKunjungan
 import com.swakarya.museumyog.presentation.kunjungan.RiwayatKunjungan
 import com.swakarya.museumyog.presentation.login.login
@@ -47,7 +45,7 @@ fun Navigation() {
         navController = navController,
         startDestination = "splash"
     ) {
-        composable(route="splash"){
+        composable(route = "splash") {
             splashScreen(navController)
         }
         composable("login") {
@@ -66,176 +64,230 @@ fun Navigation() {
             onboarding3(navController)
         }
 
-        composable(route = "method/{index}",
+        composable(route = "method/{index}/{name}/{image}",
             arguments = listOf(
-                navArgument(name = "index"){
+                navArgument(name = "index") {
                     type = NavType.IntType
-                }
-            )) {index ->
-            method(navController,
-                itemIndex = index.arguments?.getInt("index")
+                },
+                navArgument(name = "name") {
+                    type = NavType.StringType
+                },
+                navArgument(name = "image") {
+                    type = NavType.IntType
+                },
+            )) { entry ->
+            val name = entry.arguments?.getString("name") ?: ""
+            val image = entry.arguments?.getInt("image") ?: 0
+            method(
+                navController,
+                itemIndex = entry.arguments?.getInt("index"),
+                name = name,
+                image = image,
             )
         }
         composable(route = "va/{index}",
             arguments = listOf(
-                navArgument(name = "index"){
+                navArgument(name = "index") {
                     type = NavType.IntType
                 }
-            )) {index ->
-            VA(navController,
+            )) { index ->
+            VA(
+                navController,
                 itemIndex = index.arguments?.getInt("index")
             )
         }
-        composable(route="home"){
+        composable(route = "home") {
             HomePage(
                 text = "$fullname",
                 onTextChange = {},
                 placeHolder = "Mau ke Museum apa ?",
                 onCloseClicked = {},
                 onMicClicked = {},
-                navController = navController)
+                navController = navController
+            )
 
-    }
-        composable(route="listMuseum"){
+        }
+        composable(route = "listMuseum") {
             ListMuseum(
                 navController = navController,
                 onSearchTextChange = {},
                 placeHolder = "Mau ke Museum apa ?"
             )
         }
-        composable(route="riwayatkunjungan"){
-            RiwayatKunjungan(navController =navController )
+        composable(route = "riwayatkunjungan") {
+            RiwayatKunjungan(navController = navController)
         }
-        composable(route="aktifkunjungan"){
-            AktifKunjungan(navController =navController )
+        composable(route = "aktifkunjungan") {
+            AktifKunjungan(navController = navController)
         }
         composable(route = "koleksi/{index}",
             arguments = listOf(
-                navArgument(name = "index"){
+                navArgument(name = "index") {
                     type = NavType.IntType
                 }
-            )) {index ->
-            informationkoleksi(photos = imageMuseum,
-                name = nameMuseum,
-                rate = rateMuseum,
+            )) { index ->
+            InformationKoleksi(
                 itemIndex = index.arguments?.getInt("index"),
-                navController
+                navController = navController
             )
         }
         composable(route = "informasi/{index}",
             arguments = listOf(
-                navArgument(name = "index"){
+                navArgument(name = "index") {
                     type = NavType.IntType
                 }
-            )) {index ->
-            informationpage(
-                photos = imageMuseum,
-                name = nameMuseum,
-                rate = rateMuseum,
+            )) { index ->
+            InformationPage(
                 itemIndex = index.arguments?.getInt("index"),
-                navController
+                navController = navController
             )
         }
         composable(route = "review/{index}",
             arguments = listOf(
-                navArgument(name = "index"){
+                navArgument(name = "index") {
                     type = NavType.IntType
                 }
-            )) {index ->
-            review(photos = imageMuseum,
-                name = nameMuseum,
-                rate = rateMuseum,
+            )) { index ->
+            ReviewPage(
                 itemIndex = index.arguments?.getInt("index"),
-                navController
+                navController = navController
             )
         }
-        composable(route = "pay1/{index}",
+        composable(route = "pay1/{index}/{name}/{image}",
             arguments = listOf(
-                navArgument(name = "index"){
+                navArgument(name = "index") {
                     type = NavType.IntType
-                }
-            )) {index ->
-            listPayment(navController,
-                name = nameMuseum,
-                itemIndex = index.arguments?.getInt("index")
-            )
-        }
-        composable(route = "pay2/{index}",
-            arguments = listOf(
-                navArgument(name = "index"){
+                },
+                navArgument(name = "name") {
+                    type = NavType.StringType
+                },
+                navArgument(name = "image") {
                     type = NavType.IntType
-                }
-            )) {index ->
-            listpayment2(navController,
-                name = nameMuseum,
-                itemIndex = index.arguments?.getInt("index")
-            )
-        }
-        composable(route = "pay3/{index}",
-            arguments = listOf(
-                navArgument(name = "index"){
-                    type = NavType.IntType
-                }
-            )) {index ->
-            listpayment3(navController,
-                itemIndex = index.arguments?.getInt("index")
+                },
+
+            )) { entry ->
+            val name = entry.arguments?.getString("name") ?: ""
+            val image = entry.arguments?.getInt("image") ?: 0
+
+            listPayment(
+                navController = navController,
+                name = name,
+                itemIndex = entry.arguments?.getInt("index"),
+                image = image,
+
             )
         }
 
-        composable(route="profil"){
-            ProfileMenu(navController =navController )
+        composable(route = "pay2/{index}/{name}/{image}",
+            arguments = listOf(
+                navArgument(name = "index") {
+                    type = NavType.IntType
+                },
+                navArgument(name = "name") {
+                    type = NavType.StringType
+                },
+                navArgument(name = "image") {
+                    type = NavType.IntType
+                },
+
+            )) { entry ->
+            val name = entry.arguments?.getString("name") ?: ""
+            val image = entry.arguments?.getInt("image") ?: 0
+            listpayment2(
+                navController = navController,
+                name = name,
+                itemIndex = entry.arguments?.getInt("index"),
+                image = image,
+
+            )
         }
-        composable(route="bantuan"){
-            PusatBantuanScreen(navController =navController )
+
+        composable(route = "pay3/{index}/{name}/{image}",
+            arguments = listOf(
+                navArgument(name = "index") {
+                    type = NavType.IntType
+                },
+                navArgument(name = "name") {
+                    type = NavType.StringType
+                },
+                navArgument(name = "image") {
+                    type = NavType.IntType
+                },
+            )) { entry ->
+            val name = entry.arguments?.getString("name") ?: ""
+            val image = entry.arguments?.getInt("image") ?: 0
+
+            listpayment3(
+                navController = navController,
+                name = name,
+                itemIndex = entry.arguments?.getInt("index"),
+                image = image,
+            )
         }
-        composable(route="privasi"){
-            KebijakanPrivasi(navController =navController )
+        composable(route = "profil") {
+            ProfileMenu(navController = navController)
         }
-        composable(route="edit"){
-            EditProfileMenu(navController =navController )
+        composable(route = "bantuan") {
+            PusatBantuanScreen(navController = navController)
         }
-        composable(route="editbahasa"){
-            EditBahasa(navController =navController )
+        composable(route = "privasi") {
+            KebijakanPrivasi(navController = navController)
         }
-        composable(route="notif"){
-            NotificationScreen(navController =navController )
+        composable(route = "edit") {
+            EditProfileMenu(navController = navController)
+        }
+        composable(route = "editbahasa") {
+            EditBahasa(navController = navController)
+        }
+        composable(route = "notif") {
+            NotificationScreen(navController = navController)
         }
         composable(route = "reviewUser/{index}",
             arguments = listOf(
-                navArgument(name = "index"){
+                navArgument(name = "index") {
                     type = NavType.IntType
                 }
-            )) {index ->
+            )) { index ->
             ReviewUsers(
-                photos = imageMuseum,
-                name = nameMuseum,
-                rate = rateMuseum,
                 itemIndex = index.arguments?.getInt("index"),
-                navController
+                navController = navController
             )
         }
         composable(route = "tiket/{index}",
             arguments = listOf(
-                navArgument(name = "index"){
+                navArgument(name = "index") {
                     type = NavType.IntType
                 }
-            )) {index ->
-            tiket(navController,
+            )) { index ->
+            tiket(
+                navController,
                 name = nameMuseum,
                 itemIndex = index.arguments?.getInt("index")
             )
         }
-        composable(route = "tiketOTS/{index}",
+        composable(
+            route = "tiketOTS/{itemIndex}/{name}/{selectedDate}/{image}",
             arguments = listOf(
-                navArgument(name = "index"){
-                    type = NavType.IntType
-                }
-            )) {index ->
-            tiketOTS(navController,
-                name = nameMuseum,
-                itemIndex = index.arguments?.getInt("index")
+                navArgument("itemIndex") { type = NavType.IntType },
+                navArgument("name") { type = NavType.StringType },
+                navArgument("selectedDate") { type = NavType.StringType },
+                navArgument("image") { type = NavType.IntType }
             )
-        }
+        ) { backStackEntry ->
+            val itemIndex = backStackEntry.arguments?.getInt("itemIndex")
+            val name = backStackEntry.arguments?.getString("name")
+            val selectedDate = backStackEntry.arguments?.getString("selectedDate")
+            val image = backStackEntry.arguments?.getInt("image")
 
+            if (name != null && selectedDate != null && image != null) {
+                tiketOTS(
+                    navController = navController,
+                    name = name,
+                    itemIndex = itemIndex,
+                    selectedDate = selectedDate,
+                    image = image
+                )
+            }
+        }
     }
 }

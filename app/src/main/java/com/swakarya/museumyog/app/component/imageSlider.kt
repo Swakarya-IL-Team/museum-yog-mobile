@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -50,10 +51,10 @@ fun Indicator(active: Boolean, onClick: () -> Unit) {
 }
 
 @Composable
-fun ImageSliderWithIndicator(imageMuseum: Array<Int>,
-                             itemIndex: Int?) {
+fun ImageSliderWithIndicator(imageResList: List<Int>) {
     val currentIndex = remember { mutableStateOf(0) }
     val lastSwipeTime = remember { mutableStateOf(0L) }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -73,7 +74,7 @@ fun ImageSliderWithIndicator(imageMuseum: Array<Int>,
                         }
                     } else {
                         // Dragging left
-                        if (currentIndex.value < imageMuseum.size - 1) {
+                        if (currentIndex.value < imageResList.size - 1) {
                             currentIndex.value += 1
                             lastSwipeTime.value = currentTime
                         }
@@ -81,18 +82,19 @@ fun ImageSliderWithIndicator(imageMuseum: Array<Int>,
                 }
             }
     ) {
-        ImageSliderItem(imageRes = imageMuseum[itemIndex!!])
-    }
-    Row(
-        modifier = Modifier
-            .padding(top = 163.dp, start = 170.dp, bottom = 550.dp)
-    ) {
-        imageMuseum.forEachIndexed { index, _ ->
-            Indicator(active = index == currentIndex.value) {
-                currentIndex.value = index
-            }
-            if (index < imageMuseum.size - 1) {
-                Spacer(modifier = Modifier.width(5.dp))
+        ImageSliderItem(imageRes = imageResList[currentIndex.value])
+        Row(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(16.dp)
+        ) {
+            imageResList.forEachIndexed { index, _ ->
+                Indicator(active = index == currentIndex.value) {
+                    currentIndex.value = index
+                }
+                if (index < imageResList.size - 1) {
+                    Spacer(modifier = Modifier.width(5.dp))
+                }
             }
         }
     }

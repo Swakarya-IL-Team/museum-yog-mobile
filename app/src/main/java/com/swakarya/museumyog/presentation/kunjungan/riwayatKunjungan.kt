@@ -19,8 +19,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -32,10 +30,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,25 +40,12 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.BottomBar
-import com.swakarya.museumyog.data.model.dateOrderMuseum
-import com.swakarya.museumyog.data.model.imageMuseum
-import com.swakarya.museumyog.data.model.imageMuseumOrderHistory
-import com.swakarya.museumyog.data.model.imageMuseumTestimony
-import com.swakarya.museumyog.data.model.imageOrderMuseum
-import com.swakarya.museumyog.data.model.museumBookingDateHistory
-import com.swakarya.museumyog.data.model.museumBookingDateTestimony
-import com.swakarya.museumyog.data.model.nameMuseum
-import com.swakarya.museumyog.data.model.nameMuseumOrderHistory
-import com.swakarya.museumyog.data.model.nameMuseumTestimony
-import com.swakarya.museumyog.data.model.nameOrderMuseum
-import com.swakarya.museumyog.ui.theme.MuseumYogTheme
+import com.swakarya.museumyog.app.component.SharedVariables
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.greyku1
 import com.swakarya.museumyog.ui.theme.orenku
@@ -71,18 +53,26 @@ import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
 import com.swakarya.museumyog.ui.theme.worksansmedium
 import com.swakarya.museumyog.ui.theme.worksanssemibold
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RiwayatKunjungan(navController: NavController) {
-    var activeCount by remember {
-        mutableStateOf(0)
+    val currentDate = LocalDate.now()
+    val historyVisits = remember {
+        SharedVariables.activeVisits.filter {
+            LocalDate.parse(it.expiryDate, DateTimeFormatter.ISO_DATE).isBefore(currentDate)
+        }
     }
+
     Scaffold(
         topBar = {
             TopAppBar(title = {
                 Box(
-                    modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 24.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -106,42 +96,14 @@ fun RiwayatKunjungan(navController: NavController) {
                     .verticalScroll(rememberScrollState())
                     .padding(top = 90.dp)
             ) {
-
-                val ItemMuseumAktif = imageOrderMuseum.size
-                activeCount = ItemMuseumAktif
-                for (index in 0 until 0) {
-                    ColumnMuseumAktif(
+                for ((index, visit) in historyVisits.withIndex()) {
+                    ColumnRiwayatMuseum(
+                        visit = visit,
                         itemIndex = index,
-                        painter = imageOrderMuseum,
-                        tittle = nameOrderMuseum,
-                        dateOrderMuseum = dateOrderMuseum
-                    )
-                }
-                val ItemMuseumTestimony = imageMuseumTestimony.size
-                for (index in 0 until ItemMuseumTestimony) {
-                    ColumnTestimonyMuseum(
-                        itemIndex = index,
-                        painter = imageMuseum,
-                        tittle = nameMuseum,
-                        museumBookingHistory = museumBookingDateTestimony,
                         navController = navController
                     )
                 }
-
-                val ItemMuseumHistory = imageMuseumOrderHistory.size
-                for (index in 0 until ItemMuseumHistory) {
-                    ColumnRiwayatMuseum(
-                        itemIndex = index,
-                        painter = imageMuseumOrderHistory,
-                        tittle = nameMuseumOrderHistory,
-                        museumBookingHistory = museumBookingDateHistory
-                    )
-                }
-
-
             }
-
-
 
             Column(
                 modifier = Modifier
@@ -167,7 +129,7 @@ fun RiwayatKunjungan(navController: NavController) {
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = "$activeCount",
+                                text = "${SharedVariables.activeVisits.filter { LocalDate.parse(it.expiryDate, DateTimeFormatter.ISO_DATE).isAfter(LocalDate.now()) }.size}",
                                 fontFamily = worksansbold,
                                 fontSize = 12.sp,
                                 color = Color.White
@@ -194,9 +156,8 @@ fun RiwayatKunjungan(navController: NavController) {
                         }
                         Image(
                             painter = painterResource(id = R.drawable.line),
-                            contentDescription = "",
-
-                            )
+                            contentDescription = ""
+                        )
                     }
 
                 }
@@ -205,24 +166,19 @@ fun RiwayatKunjungan(navController: NavController) {
                     color = Color.Gray, thickness = 1.dp
                 )
             }
-
-
         }
-
-
-
-
-
     }
 }
 
 @Composable
 fun ColumnRiwayatMuseum(
+    visit: SharedVariables.Visit,
     itemIndex: Int,
-    painter: Array<Int>,
-    tittle: Array<String>,
-    museumBookingHistory: Array<String>
+    navController: NavController
 ) {
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val formattedOrderDate = LocalDate.parse(visit.date, DateTimeFormatter.ISO_DATE).format(formatter)
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -242,7 +198,7 @@ fun ColumnRiwayatMuseum(
                     .clip(RoundedCornerShape(8.dp))
             ) {
                 Image(
-                    painter = painterResource(id = painter[itemIndex]),
+                    painter = painterResource(id = visit.imageRes),
                     contentDescription = "Image Museum",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -256,7 +212,7 @@ fun ColumnRiwayatMuseum(
             ) {
                 Text(
                     modifier = Modifier.padding(start = 14.dp),
-                    text = tittle[itemIndex],
+                    text = visit.name,
                     fontFamily = worksanssemibold,
                     fontSize = 14.sp
                 )
@@ -277,101 +233,7 @@ fun ColumnRiwayatMuseum(
                             .rotate(90f)
                     )
                     Text(
-                        text = museumBookingDateHistory[itemIndex],
-                        fontFamily = worksans,
-                        fontSize = 12.sp,
-                        color = greyku1
-                    )
-                }
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    TextButton(onClick = { }) {
-                        Text(
-                            text = "Lihat Riwayat Kunjungan",
-                            fontFamily = worksansmedium,
-                            fontSize = 12.sp,
-                            color = greenku
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Icon(
-                            imageVector = Icons.Default.ArrowForward,
-                            contentDescription = "Ikon Panah Kanan",
-                            tint = greenku,
-                            modifier = Modifier.size(15.dp)
-                        )
-                    }
-                }
-
-            }
-        }
-    }
-}
-
-@Composable
-fun ColumnTestimonyMuseum(
-    itemIndex: Int,
-    painter: Array<Int>,
-    tittle: Array<String>,
-    museumBookingHistory: Array<String>,
-    navController: NavController
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .padding(bottom = 16.dp),
-        colors = CardDefaults.cardColors(Color.White),
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
-        ) {
-            Box(
-                modifier = Modifier
-                    .padding(horizontal = 5.dp, vertical = 3.dp)
-                    .size(width = 132.dp, height = 111.dp)
-                    .clip(RoundedCornerShape(8.dp))
-            ) {
-                Image(
-                    painter = painterResource(id = painter[itemIndex]),
-                    contentDescription = "Image Museum",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    colorFilter = ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })
-                )
-            }
-
-            Column(
-                modifier = Modifier.padding(start = 14.dp),
-                horizontalAlignment = Alignment.Start
-            ) {
-                Text(
-                    text = tittle[itemIndex],
-                    fontFamily = worksanssemibold,
-                    fontSize = 14.sp
-                )
-
-                Row(
-                    modifier = Modifier.padding(top = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "Selesai",
-                        fontFamily = worksansmedium,
-                        fontSize = 12.sp,
-                        color = greyku1
-                    )
-                    Divider(
-                        modifier = Modifier
-                            .width(12.dp)
-                            .rotate(90f)
-                    )
-                    Text(
-                        text = museumBookingDateHistory[itemIndex],
+                        text = formattedOrderDate,
                         fontFamily = worksans,
                         fontSize = 12.sp,
                         color = greyku1
@@ -382,7 +244,7 @@ fun ColumnTestimonyMuseum(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     OutlinedButton(
-                        onClick = {navController.navigate(route = "reviewUser/$itemIndex") },
+                        onClick = { navController.navigate(route = "reviewUser/$itemIndex") },
                         modifier = Modifier
                             .padding(bottom = 6.dp)
                             .heightIn(30.dp),
@@ -407,12 +269,5 @@ fun ColumnTestimonyMuseum(
 
             }
         }
-    }
-}
-@Preview
-@Composable
-private fun riwayat() {
-    MuseumYogTheme {
-        RiwayatKunjungan(navController = rememberNavController())
     }
 }

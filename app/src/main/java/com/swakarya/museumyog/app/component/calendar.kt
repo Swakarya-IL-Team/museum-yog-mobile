@@ -19,15 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
-import com.swakarya.museumyog.app.component.SharedVariables.SelectedDate
-import com.swakarya.museumyog.app.component.SharedVariables.date
 import com.swakarya.museumyog.ui.theme.greenku
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -60,9 +57,9 @@ fun calender(
 
                 ),
             selection = CalendarSelection.Date(
-                selectedDate = SelectedDate.value
+                selectedDate = value
             ) { newDate ->
-                SelectedDate.value = newDate
+                onValueChange(newDate)
             },
         )
         }
@@ -77,22 +74,13 @@ fun calender(
                 SolidColor(greenku)
             ),
                 RoundedCornerShape(12.dp))
-            .clickable { //Click event
+            .clickable {
                 open.value = true
             },
         trailingIcon = { Icon(imageVector = Icons.Default.KeyboardArrowDown, contentDescription = null) },
-        enabled = false,// <- Add this to make click event work
-        value = SelectedDate.value.format(DateTimeFormatter.ISO_DATE),
+        enabled = false,
+        value = value.format(DateTimeFormatter.ISO_DATE),
         onValueChange = {},
-    )
-}
-
-@Preview
-@Composable
-fun CustomDatePickerPreview(){
-    calender(
-        value = date.value,
-        onValueChange = {date.value = it}
     )
 }
 

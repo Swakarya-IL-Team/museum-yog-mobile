@@ -43,11 +43,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.SharedVariables.anak
 import com.swakarya.museumyog.app.component.SharedVariables.dewasa
@@ -70,12 +68,14 @@ import com.swakarya.museumyog.ui.theme.worksanssemibold
 @Composable
 fun listPayment(
     navController: NavHostController,
-    name: Array<String>,
-    itemIndex: Int?
+    name: String,
+    itemIndex: Int?,
+    image: Int
 ) {
     var weekend by remember { mutableStateOf(false) }
     val color = if (weekend) greenku else Color.Black
     val color1 = if (weekend) Color.Black else greenku
+
     Scaffold(
         bottomBar = {
             BottomAppBar(
@@ -87,14 +87,13 @@ fun listPayment(
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Button(
-                        onClick = { navController.navigate("pay3/$itemIndex") },
+                        onClick = { navController.navigate("pay3/$itemIndex/$name/$image") },
                         colors = ButtonDefaults.buttonColors(greenku),
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier.size(width = 350.dp, height = 60.dp)
                     ) {
                         Text(text = "Pesan Tiket")
                     }
-
                 }
             }
         },
@@ -106,10 +105,9 @@ fun listPayment(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = name[itemIndex!!],
+                            text = name,
                             fontFamily = worksanssemibold,
-                            fontSize = 16.sp,
-
+                            fontSize = 16.sp
                         )
                     }
                 },
@@ -135,21 +133,19 @@ fun listPayment(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    TextButton(onClick = { navController.navigate("pay1/$itemIndex") }) {
+                    TextButton(onClick = { navController.navigate("pay1/$itemIndex/$name/$image") }) {
                         Text(
                             text = "Tiket Satuan",
                             fontFamily = worksansbold,
                             color = greenku
                         )
-
                     }
-                    TextButton(onClick = { navController.navigate("pay2/$itemIndex") }) {
+                    TextButton(onClick = { navController.navigate("pay2/$itemIndex/$name/$image") }) {
                         Text(
                             text = "Paket",
                             fontFamily = worksans,
                             color = greyku
                         )
-
                     }
                 }
                 Divider(
@@ -469,22 +465,11 @@ fun listPayment(
                     modifier = Modifier.padding(start = 16.dp)
                 )
                 Text(
-                    text = "Rp$total",
+                    text = "Rp.$total",
                     fontFamily = worksansbold,
                     fontSize = 20.sp
                 )
             }
-
         }
-
     }
-}
-@Preview
-@Composable
-fun ListPaymentPreview() {
-    listPayment(
-        navController = rememberNavController(),
-        name = arrayOf("Payment 1"),
-        itemIndex = 0
-    )
 }

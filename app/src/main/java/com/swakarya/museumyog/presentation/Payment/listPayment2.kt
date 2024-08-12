@@ -37,11 +37,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.CircularCheckbox
 import com.swakarya.museumyog.app.component.SharedVariables
@@ -62,8 +60,9 @@ import com.swakarya.museumyog.ui.theme.worksanssemibold
 @Composable
 fun listpayment2(
     navController: NavHostController,
-    name: Array<String>,
-    itemIndex: Int?
+    name: String,
+    itemIndex: Int?,
+    image: Int
 ) {
     val color = if (checked) greenku else greyku
     val color1 = if (checked1) greenku else greyku
@@ -78,7 +77,7 @@ fun listpayment2(
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Button(
-                        onClick = { navController.navigate("pay3/$itemIndex") },
+                        onClick = { navController.navigate("pay3/$itemIndex/$name/$image") },
                         colors = ButtonDefaults.buttonColors(greenku),
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier.size(width = 350.dp, height = 60.dp)
@@ -97,14 +96,14 @@ fun listpayment2(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = name[itemIndex!!],
+                            text = name,
                             fontFamily = worksanssemibold,
-                            fontSize = 16.sp,
+                            fontSize = 16.sp
                         )
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate("pay1/$itemIndex") }) {
+                    IconButton(onClick = { navController.navigate("pay1/$itemIndex/$name/$image") }) {
                         Icon(
                             imageVector = Icons.Default.KeyboardArrowLeft,
                             contentDescription = "",
@@ -125,7 +124,7 @@ fun listpayment2(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    TextButton(onClick = { navController.navigate("pay1/$itemIndex") }) {
+                    TextButton(onClick = { navController.navigate("pay1/$itemIndex/$name/$image") }) {
                         Text(
                             text = "Tiket Satuan",
                             fontFamily = worksansbold,
@@ -133,7 +132,7 @@ fun listpayment2(
                         )
 
                     }
-                    TextButton(onClick = { navController.navigate("pay2/$itemIndex") }) {
+                    TextButton(onClick = { navController.navigate("pay2/$itemIndex/$name/$image") }) {
                         Text(
                             text = "Paket",
                             fontFamily = worksans,
@@ -297,14 +296,3 @@ fun listpayment2(
         }
     }
 }
-
-@Preview
-@Composable
-private fun ListPaymentPreview2() {
-    listpayment2(
-        navController = rememberNavController(),
-        name = arrayOf("Museum Keraton Ngayogyakarta"),
-        itemIndex = 0
-    )
-}
-

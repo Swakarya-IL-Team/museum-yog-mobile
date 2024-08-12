@@ -8,7 +8,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -40,6 +39,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,23 +53,15 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.PopUpMenuContent
-import com.swakarya.museumyog.data.model.imageMuseum
-import com.swakarya.museumyog.data.model.nameMuseum
-import com.swakarya.museumyog.data.model.placeMuseum
-import com.swakarya.museumyog.data.model.rangeMuseum
-import com.swakarya.museumyog.data.model.rateMuseum
-import com.swakarya.museumyog.data.model.visitorMuseum
-import com.swakarya.museumyog.ui.theme.MuseumYogTheme
+import com.swakarya.museumyog.data.local.entity.Museum
 import com.swakarya.museumyog.ui.theme.green10
 import com.swakarya.museumyog.ui.theme.greenku
-import com.swakarya.museumyog.ui.theme.yellowku
 import com.swakarya.museumyog.ui.theme.worksans
 import com.swakarya.museumyog.ui.theme.worksansbold
 import com.swakarya.museumyog.ui.theme.worksansmedium
@@ -84,6 +76,7 @@ fun ListMuseum(
     onSearchTextChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     placeHolder: String,
+    viewModel: ListMuseumViewModel = hiltViewModel()
 ) {
     val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
@@ -230,45 +223,29 @@ fun ListMuseum(
                     )
                 }
             }
-            val ItemLazyCount = imageMuseum.size
-            LazyColumn(
-                modifier = Modifier.fillMaxWidth(),
-                contentPadding = PaddingValues(start = 16.dp)
-            ) {
-                items(ItemLazyCount) { item ->
+            val museums by viewModel.museums.collectAsState()
+            LazyColumn {
+                items(museums.size) { index ->
+                    val museum = museums[index]
                     ColumnMuseum(
-                        itemIndex = item,
-                        painter = imageMuseum,
-                        tittle = nameMuseum,
-                        rangeMuseum = rangeMuseum,
-                        placeMuseum = placeMuseum,
-                        rateMuseum = rateMuseum,
-                        visitorMuseum = visitorMuseum,
+                        museum = museum,
                         navController = navController
                     )
                 }
             }
-
         }
     }
-
 }
 
 @Composable
 fun ColumnMuseum(
-    itemIndex: Int,
-    painter: Array<Int>,
-    tittle: Array<String>,
-    rangeMuseum: Array<String>,
-    placeMuseum: Array<String>,
-    rateMuseum: Array<String>,
-    visitorMuseum: Array<String>,
+    museum: Museum,
     navController: NavHostController
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(end = 16.dp, bottom = 16.dp),
+            .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
         colors = CardDefaults.cardColors(Color.White),
         elevation = CardDefaults.cardElevation(2.dp)
     ) {
@@ -281,15 +258,17 @@ fun ColumnMuseum(
                     .size(width = 132.dp, height = 111.dp)
                     .clip(RoundedCornerShape(8.dp))
                     .background(Color.LightGray)
-                    .clickable { navController.navigate(route = "informasi/$itemIndex") }
+                    .clickable { navController.navigate(route = "informasi/${museum.id}") }
             ) {
-                Image(
-                    painter = painterResource(id = painter[itemIndex]),
-                    contentDescription = "",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxSize()
-                )
+                if (museum.imageList.isNotEmpty()) {
+                    Image(
+                        painter = painterResource(id = museum.imageList[0]),
+                        contentDescription = "",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
+                }
             }
 
             Column(
@@ -297,7 +276,7 @@ fun ColumnMuseum(
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(
-                    text = tittle[itemIndex],
+                    text = museum.name,
                     fontFamily = worksanssemibold,
                     fontSize = 12.sp
                 )
@@ -310,13 +289,13 @@ fun ColumnMuseum(
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = rangeMuseum[itemIndex],
+                        text = museum.range,
                         fontFamily = worksans,
                         fontSize = 10.sp
                     )
                 }
                 Text(
-                    text = placeMuseum[itemIndex],
+                    text = museum.place,
                     fontFamily = worksansmedium,
                     fontSize = 10.sp
                 )
@@ -337,13 +316,13 @@ fun ColumnMuseum(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = rateMuseum[itemIndex],
+                            text = museum.rate,
                             fontFamily = worksans,
                             fontSize = 10.sp
                         )
                     }
                     Text(
-                        text = visitorMuseum[itemIndex],
+                        text = museum.visitor,
                         fontFamily = worksans,
                         fontSize = 10.sp,
                         modifier = Modifier.padding(end = 5.dp)
@@ -352,18 +331,4 @@ fun ColumnMuseum(
             }
         }
     }
-
 }
-
-@Preview
-@Composable
-fun ListMusuemPreview() {
-    MuseumYogTheme {
-        ListMuseum(
-            navController = rememberNavController(),
-            onSearchTextChange = {},
-            placeHolder = "Mau ke Museum apa ?",
-        )
-    }
-}
-

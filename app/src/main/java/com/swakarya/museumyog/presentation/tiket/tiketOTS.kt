@@ -30,14 +30,11 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.swakarya.museumyog.R
 import com.swakarya.museumyog.app.component.SharedVariables
-import com.swakarya.museumyog.data.model.nameMuseum
 import com.swakarya.museumyog.ui.theme.coklatku
 import com.swakarya.museumyog.ui.theme.greenku
 import com.swakarya.museumyog.ui.theme.jogja
@@ -50,14 +47,16 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun tiketOTS(
     navController: NavHostController,
-    name: Array<String>,
-    itemIndex: Int?
+    name: String,
+    itemIndex: Int?,
+    selectedDate: String,
+    image: Int
 ) {
-    val parsedDate =
-        LocalDate.parse(SharedVariables.date.value.toString(), DateTimeFormatter.ISO_DATE)
+    val parsedDate = LocalDate.parse(selectedDate, DateTimeFormatter.ISO_DATE)
     val formattedOrderDate = parsedDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
     val expiryDate = parsedDate.plusDays(5)
     val formattedExpiryDate = expiryDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
@@ -82,8 +81,7 @@ fun tiketOTS(
             Image(
                 painter = painterResource(id = R.drawable.tiket),
                 contentDescription = "",
-                modifier = Modifier
-                    .fillMaxSize(),
+                modifier = Modifier.fillMaxSize(),
                 alignment = Alignment.TopCenter
             )
             Column(
@@ -108,7 +106,7 @@ fun tiketOTS(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = name[itemIndex!!],
+                    text = name,
                     fontFamily = worksansbold,
                     fontSize = 20.sp,
                     color = Color.Black,
@@ -116,7 +114,7 @@ fun tiketOTS(
                     modifier = Modifier.padding(horizontal = 40.dp)
                 )
                 Text(
-                    text = "Tanggal Pemesanan: $formattedOrderDate",
+                    text = "Tanggal Kunjungan: $formattedOrderDate",
                     fontFamily = worksans,
                     fontSize = 10.sp,
                     color = Color.Black,
@@ -183,7 +181,7 @@ fun tiketOTS(
                         .width(300.dp)
                 )
                 Text(
-                    text = "Berikan kode ini ke petugas museum sesuai jadwal kunjungan,apabila lewat dari jadwal, maka kode akan kadaluarsa otomatis.",
+                    text = "Berikan barcode ini ke petugas museum sesuai jadwal kunjungan,apabila lewat dari jadwal, maka kode akan kadaluarsa otomatis.",
                     fontSize = 10.sp,
                     fontFamily = worksans,
                     textAlign = TextAlign.Center,
@@ -200,7 +198,9 @@ fun tiketOTS(
                     Image(
                         painter = painterResource(id = R.drawable.tanaman_tiket),
                         contentDescription = "tanaman3",
-                        modifier = Modifier.size(30.dp).graphicsLayer { scaleX = -1f }
+                        modifier = Modifier
+                            .size(30.dp)
+                            .graphicsLayer { scaleX = -1f }
                     )
                     Text(
                         text = "Sampai Bertemu \n di Museum!",
@@ -224,7 +224,18 @@ fun tiketOTS(
             verticalArrangement = Arrangement.Bottom
         ) {
             Button(
-                onClick = { navController.navigate(route = "home") },
+                onClick = {
+                    val visit = SharedVariables.Visit(
+                        name = name,
+                        date = selectedDate,
+                        imageRes = image,
+                        expiryDate = formattedExpiryDate
+                    )
+                    if (!SharedVariables.activeVisits.any { it.name == visit.name && it.date == visit.date && it.imageRes == visit.imageRes }) {
+                        SharedVariables.activeVisits.add(visit)
+                    }
+                    navController.navigate("aktifKunjungan")
+                },
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(greenku),
                 modifier = Modifier
@@ -239,16 +250,5 @@ fun tiketOTS(
             }
         }
     }
-
 }
 
-@Preview
-@Composable
-fun prevvvOTS() {
-    val index = 3
-    tiket(
-        navController = rememberNavController(),
-        name = nameMuseum,
-        itemIndex = index
-    )
-}
